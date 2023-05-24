@@ -10,7 +10,7 @@ Vibesphere is a Spotify song recommender application that is aimed at music love
 ### Minimal Requirements:
 - Search a song in Spotify API
   - Basic input textbook/form
-  - API call to Spotify backend to get user's Spotify results
+  - API call to Spotify backend to get the user's song in the form of Spotify results
 - Return a list of songs from Spotify API matching search
   - Show a list of songs that match entered characters
   - Should be able to select one of those songs
