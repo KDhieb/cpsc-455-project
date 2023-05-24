@@ -32,5 +32,6 @@ Vibesphere is a Spotify song recommender application that is aimed at music love
 - User authentication/user profiles
 - Search API call on each character entered (or wait a few ms or seconds) - prepopulate search results
 
-<img width="1092" alt="home_prototype" src="https://github.com/KDhieb/cpsc-455-project/assets/75541965/08ce75ca-b5b8-479e-a69f-5b3cd86baf0b">
+<img width="1136" alt="home_prototype" src="https://github.com/KDhieb/cpsc-455-project/assets/75541965/d76e2977-5641-4afe-8f38-2cf16a859444">
+
 <img width="1110" alt="scoreboard_prototype" src="https://github.com/KDhieb/cpsc-455-project/assets/75541965/81c6d252-2cd0-47f8-8740-78e00a38d212">
