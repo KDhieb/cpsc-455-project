@@ -1,6 +1,8 @@
 # cpsc-455-project
 The main repo for our CPSC 455 project
 
+Group Members: Amy Chen, Jerome Ting, Khalid Dhieb, Parmvir Shergill, Richard Chen
+
 # Project Progress 1 - Vibesphere
 
 ## Project Description:
