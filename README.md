@@ -4,7 +4,7 @@ The main repo for our CPSC 455 project
 # Project Progress 1 - Vibesphere
 
 ## Project Description:
-Vibesphere is a Spotify song recommender application that is aimed at music lovers who want to discover new, but similar music to the songs they already like. It will store user inputed songs, retrieved results from the Spotify API, and recommended songs that will be delivered to our users. Users will be able to like songs, view history of previous songs inputted and share these songs and the recommendations with their friends. Some additional functionality given time constraints, will include public playlists, a user profile, and recommendations based on entire playlists instead of individual songs.
+Vibesphere is a Spotify song recommender application that is aimed at music lovers who want to discover new, but similar music to the songs they already like. It will store user inputted songs, retrieve results from the Spotify API, and recommend songs that will be delivered to our users. Users will be able to like songs, view history of previous songs inputted, then share these songs and the recommendations with their friends. Some additional functionality, given time constraints, will include: public playlists, a user profile, and recommendations based on entire playlists instead of individual songs.
 
 ## Project Task Requirements:
 ### Minimal Requirements:
