@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField, Button, Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { searchSong } from "../actions";
+import { songSearch } from "../slices/songSearchSlice";
 import SearchIcon from '@mui/icons-material/Search';
 
 function Search() {
@@ -19,7 +19,7 @@ function Search() {
                     <TextField id="outlined-basic" variant="outlined" size="small" value={songName} onChange={e => setSongName(e.target.value)}/>
                 </Grid>
                 <Grid>
-                    <Button variant="contained" color="success" onClick={() => dispatch(searchSong(songName))} endIcon={<SearchIcon />}>Search</Button>
+                    <Button variant="contained" color="success" onClick={() => dispatch(songSearch(songName))} endIcon={<SearchIcon />}>Search</Button>
                 </Grid>
             </Grid>
         </>

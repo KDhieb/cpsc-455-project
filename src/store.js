@@ -9,9 +9,11 @@
 
 // if we want to use @reduxjs/toolkit
 import { configureStore } from '@reduxjs/toolkit';
+import songSearchReducer from './slices/songSearchSlice';
 
 const store = configureStore({
     reducer: {
+        songSearch: songSearchReducer,
         // add reducers here
     },
 });
