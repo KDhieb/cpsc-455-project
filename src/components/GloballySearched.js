@@ -1,6 +1,6 @@
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
-
+import MusicPlayer from "./MusicPlayer";
 import sampleSongs from "../sample/sample";
 
 export default function GloballySearched({ songsPerGroup }) {
@@ -51,8 +51,8 @@ function SongGroup({ songs }) {
 
 function Song({ song }) {
   const songClickRedirect = () => {
-    const url = song.external_urls.spotify;
-    window.open(url, "_blank", "noreferrer");
+    // const url = song.external_urls.spotify;
+    // window.open(url, "_blank", "noreferrer");
   };
 
   return (
@@ -64,6 +64,7 @@ function Song({ song }) {
         src={song.album.images[0].url}
         alt='album cover'
       />
+      <MusicPlayer url={song.preview_url} />
       {/* ADD LOCATION */}
       <p>{`📍 Canada`}</p>
     </div>

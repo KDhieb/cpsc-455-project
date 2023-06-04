@@ -112,6 +112,8 @@
   word-wrap: normal;
   width: 200px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .carousel-song:hover {
@@ -126,4 +128,11 @@
 
 .carousel-song-artist {
   color: gray;
+}
+
+.music-player-button {
+  padding: "20px";
+  width: "5px";
+  height: "5px";
+  margin-left: "62px";
 }
