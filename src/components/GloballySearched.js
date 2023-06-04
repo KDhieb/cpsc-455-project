@@ -1,32 +1,66 @@
-import { useDispatch } from "react-redux";
-
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 
 import sampleSongs from "../sample/sample";
 
-export default function GloballySearched() {
+export default function GloballySearched({ songsPerGroup }) {
   var songs = sampleSongs.tracks.items;
 
+  const nGroups = Math.ceil(songs.length / 3);
+
+  const songGroups = [];
+
+  for (let i = 0; i < nGroups; i++) {
+    songGroups.push([]);
+    for (let j = i * songsPerGroup; j < (i + 1) * songsPerGroup; j++) {
+      if (j < songs.length) {
+        songGroups[i].push(songs[j]);
+      }
+    }
+  }
+
   return (
-    <div id='carousel'>
-      <Carousel animation='slide' indicators={true} duration={500}>
-        {songs.map((song, i) => (
-          <Song key={i} song={song} />
-        ))}
-      </Carousel>
+    <div className='carousel-container'>
+      <h3 className='carousel-title'>Songs Searched for Globally</h3>
+      <div id='carousel'>
+        <Carousel
+          animation='slide'
+          indicators={false}
+          duration={500}
+          autoPlay={true}
+        >
+          {songGroups.map((group, i) => {
+            return <SongGroup key={i} songs={group} />;
+          })}
+          {}
+        </Carousel>
+      </div>
     </div>
+  );
+}
+
+function SongGroup({ songs }) {
+  return (
+    <Paper className='carousel-song-group'>
+      {songs.map((song, i) => {
+        return <Song key={i} song={song} />;
+      })}
+    </Paper>
   );
 }
 
 function Song({ song }) {
   return (
-    <Paper>
-      <h2>{song.name}</h2>
-      <img src={song.img} />
-      <p>{`Pin Icon - ${song.location}`}</p>
-
-      {/* <Button className='song-button'></Button> */}
-    </Paper>
+    <div className='carousel-song'>
+      <p className='carousel-song-title'>{song.name}</p>
+      <p className='carousel-song-artist'>{song.artists[0].name}</p>
+      <img
+        className='carousel-image'
+        src={song.album.images[0].url}
+        alt='album cover'
+      />
+      {/* ADD LOCATION */}
+      <p>{`📍 Canada`}</p>
+    </div>
   );
 }

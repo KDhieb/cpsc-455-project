@@ -84,9 +84,39 @@
 }
 
 #carousel {
-  /* display: block; */
   width: 80%;
-  /* border: 1px solid black; */
-  /* max-width: 80%; */
   margin: auto;
+}
+
+.carousel-container {
+  width: 100%;
+}
+
+.carousel-title {
+  margin-left: 12%;
+}
+
+.carousel-image {
+  width: 100px;
+  height: 100px;
+}
+
+.carousel-song-group {
+  display: flex;
+  justify-content: left;
+}
+
+.carousel-song {
+  word-wrap: normal;
+  width: 30%;
+  margin: 20px;
+}
+
+.carousel-song-title {
+  height: 40px;
+  font-size: 16px;
+}
+
+.carousel-song-artist {
+  color: gray;
 }
