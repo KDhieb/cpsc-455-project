@@ -6,7 +6,7 @@ import sampleSongs from "../sample/sample";
 export default function GloballySearched({ songsPerGroup }) {
   var songs = sampleSongs.tracks.items;
 
-  const nGroups = Math.ceil(songs.length / 3);
+  const nGroups = Math.floor(songs.length / 3);
 
   const songGroups = [];
 
@@ -50,8 +50,13 @@ function SongGroup({ songs }) {
 }
 
 function Song({ song }) {
+  const songClickRedirect = () => {
+    const url = song.external_urls.spotify;
+    window.open(url, "_blank", "noreferrer");
+  };
+
   return (
-    <div className='carousel-song'>
+    <div className='carousel-song' onClick={songClickRedirect}>
       <p className='carousel-song-title'>{song.name}</p>
       <p className='carousel-song-artist'>{song.artists[0].name}</p>
       <img

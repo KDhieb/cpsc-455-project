@@ -6,7 +6,7 @@ export const Home = () => {
     <>
       <h1>Home</h1>
       <Search />
-      <GloballySearched songsPerGroup={3} />
+      <GloballySearched songsPerGroup={4} />
     </>
   );
 };
