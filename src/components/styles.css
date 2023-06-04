@@ -115,6 +115,7 @@
 .carousel-song-title {
   height: 40px;
   font-size: 16px;
+  overflow: hidden;
 }
 
 .carousel-song-artist {
