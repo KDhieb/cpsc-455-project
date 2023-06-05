@@ -1,0 +1,19 @@
+.liked-song-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.liked-song-card-container img {
+    width: 150px
+}
+
+.song-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 25px
+}

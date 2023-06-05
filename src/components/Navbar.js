@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import "./styles.css"
+import "../styling/navbar.css"
 
 const Navbar = () => {
     return (
@@ -9,13 +9,13 @@ const Navbar = () => {
                         Vibesphere
                     </NavLink>
                 </div>
-                <NavLink to="/scoreboard" activeClassName="active">
+                <NavLink to="/scoreboard" activeclassname="active">
                     Scoreboard
                 </NavLink>
-                <NavLink to="/about" activeClassName="active">
+                <NavLink to="/about" activeclassname="active">
                     About
                 </NavLink>
-                <NavLink to="/" activeClassName="active-home">
+                <NavLink to="/" activeclassname="active-home">
                     Home
                 </NavLink>
             </nav>
