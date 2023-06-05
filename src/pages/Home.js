@@ -1,5 +1,5 @@
-import GloballySearched from "../GloballySearched";
-import Search from "../Search";
+import GloballySearched from "../components/GloballySearched";
+import Search from "../components/Search";
 
 export const Home = () => {
   return (

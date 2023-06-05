@@ -12,6 +12,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Slider from '@mui/material/Slider';
 import {useState} from "react";
 import {styled} from "@mui/material";
+import "../styling/aboutUsCard.css";
 
 // based on https://mui.com/material-ui/react-card/ control UI card example
 export default function AboutUsCard({developer}) {
@@ -52,7 +53,7 @@ export default function AboutUsCard({developer}) {
 
     return (
         <div className="about-us-card">
-        <Card sx={{ display: 'flex' , background: 'darkgray', width: 'fit-content'}}>
+        <Card sx={{ display: 'flex' , background: 'darkgray', width: 'fit-content' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="div" variant="h5">
