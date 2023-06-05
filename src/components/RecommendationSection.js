@@ -9,24 +9,12 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { useSelector } from "react-redux";
 
 export default function RecommendationSection() {
   // https://mui.com/material-ui/react-list/
   // https://codesandbox.io/s/nd1qej?file=/demo.js:1912-1922
-  const songs = [
-    {
-      id: "id1",
-      imageUrl: "https://dummyimage.com/50",
-      songName: "SongName1",
-      artistName: "ArtistName1",
-    },
-    {
-      id: "id2",
-      imageUrl: "https://dummyimage.com/50",
-      songName: "SongName2",
-      artistName: "ArtistName2",
-    },
-  ];
+  const songs = useSelector((state) => state.recommendedSongs.current);
   return (
     <Box display="flex" justifyContent="center">
       <ThemeProvider
