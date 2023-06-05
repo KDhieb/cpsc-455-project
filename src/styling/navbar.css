@@ -37,3 +37,43 @@
     color: white;
     background-color: black;
 }
+
+.about-us-card {
+    padding: 15px;
+    width: fit-content;
+}
+
+.about {
+    margin:0;
+    padding: 0;
+    text-align: center;
+}
+
+.about-us-card-container {
+    display:flex;
+    flex-wrap: wrap;
+    width: fit-content;
+}
+
+.about-us-detail-card {
+    padding: 15px;
+    border-radius: 10px;
+    background: lightblue;
+}
+
+.about-us-card-carousel {
+    border-radius: 10px;
+    padding: 15px;
+    background: #d3d3d3;
+    height: 100%;
+}
+
+.about-us-headers {
+    margin: 0;
+    padding: 0;
+}
+
+#vibe-sphere-description {
+    padding: 30px;
+    font-size: 18px;
+}
