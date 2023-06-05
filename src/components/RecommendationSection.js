@@ -8,7 +8,7 @@ import {
   Paper,
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export default function RecommendationSection() {
   // https://mui.com/material-ui/react-list/
@@ -16,13 +16,13 @@ export default function RecommendationSection() {
   const songs = [
     {
       id: "id1",
-      imageUrl: "https://dummyimage.com/300",
+      imageUrl: "https://dummyimage.com/50",
       songName: "SongName1",
       artistName: "ArtistName1",
     },
     {
       id: "id2",
-      imageUrl: "https://dummyimage.com/300",
+      imageUrl: "https://dummyimage.com/50",
       songName: "SongName2",
       artistName: "ArtistName2",
     },
@@ -39,8 +39,17 @@ export default function RecommendationSection() {
       >
         <Paper elevation={3} sx={{ borderRadius: 2, overflow: "hidden" }}>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{ width: "100%", maxWidth: "md", bgcolor: "background.paper" }}
           >
+            <ListItemText
+              sx={{ marginLeft: 2 }}
+              primary="You might like . . ."
+              primaryTypographyProps={{
+                fontSize: 20,
+                fontWeight: "medium",
+                letterSpacing: 0,
+              }}
+            />
             {songs.map((song) => (
               <ListItemButton
                 key={song.id}
@@ -59,8 +68,11 @@ export default function RecommendationSection() {
                     fontWeight: "medium",
                   }}
                 />
-                <IconButton onClick={() => console.log("clicked play")}>
-                  <PlayCircleOutlineIcon />
+                <IconButton
+                  onClick={() => console.log("clicked favourite")}
+                  sx={{ marginLeft: 2 }}
+                >
+                  <FavoriteBorderOutlinedIcon />
                 </IconButton>
               </ListItemButton>
             ))}
