@@ -1,12 +1,12 @@
-import Search from "../Search";
+import GloballySearched from "../components/GloballySearched";
+import Search from "../components/Search";
 
 export const Home = () => {
-    return (
-        <>
-            <h1>
-                Home
-            </h1>
-            <Search />
-        </>
-    )
+  return (
+    <>
+      <h1>Home</h1>
+      <Search />
+      <GloballySearched songsPerGroup={4} />
+    </>
+  );
 };

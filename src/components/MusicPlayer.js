@@ -1,9 +1,9 @@
 // Component to display playable music button
 
-import "./styles.css";
 import { IconButton } from "@mui/material";
 import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
+import "../styling/musicPlayer.css";
 
 export default function MusicPlayer({ url }) {
   const [paused, setPaused] = useState(true);

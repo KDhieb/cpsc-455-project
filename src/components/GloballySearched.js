@@ -2,6 +2,7 @@ import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import MusicPlayer from "./MusicPlayer";
 import sampleSongs from "../sample/sample";
+import "../styling/globallySearched.css";
 
 export default function GloballySearched({ songsPerGroup }) {
   var songs = sampleSongs.tracks.items;

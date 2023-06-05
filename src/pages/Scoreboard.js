@@ -12,7 +12,7 @@ export const Scoreboard = () => {
         <p>{SCOREBOARD_HEADERS.likes}</p>
       </div>
       {scoreboardTestData.map((song, index) => {
-        return <ScoreboardSongCard song={song} key={index} ranking={index} />;
+        return <ScoreboardSongCard song={song} key={index} ranking={index + 1} />;
       })}
     </div>
   );

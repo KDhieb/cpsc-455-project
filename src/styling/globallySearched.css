@@ -1,0 +1,46 @@
+#carousel {
+  width: 80%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.carousel-container {
+  width: 100%;
+}
+
+.carousel-title {
+  margin-left: 25%;
+}
+
+.carousel-image {
+  width: 150px;
+  height: 150px;
+}
+
+.carousel-song-group {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.carousel-song {
+  word-wrap: normal;
+  width: 200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-song:hover {
+  background-color: #d3d3d3;
+}
+
+.carousel-song-title {
+  height: 40px;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.carousel-song-artist {
+  color: gray;
+}
