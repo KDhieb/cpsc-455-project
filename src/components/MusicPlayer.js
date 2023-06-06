@@ -34,19 +34,32 @@ export default function MusicPlayer({ url, img, mini }) {
 
   return (
     <figure
+      className={
+        mini ? "music-player-container-mini" : "music-player-container"
+      }
       onMouseEnter={handleMouseEnterImage}
       onMouseLeave={handleMouseLeaveImage}
     >
-      <img className='carousel-image' src={img} alt='album cover' />
+      <img
+        className={mini ? "album-image-mini" : "album-image"}
+        src={img}
+        alt='album cover'
+      />
 
-      {buttonVisible || !paused ? (
-        <div className={"music-player-container"}>
-          <IconButton size='large' onClick={handleClick}>
+      {(buttonVisible || !paused) && url ? (
+        <div
+          className={
+            mini
+              ? "music-player-button-container-mini"
+              : "music-player-button-container"
+          }
+        >
+          <IconButton size={mini ? "small" : "large"} onClick={handleClick}>
             <audio ref={myRef} src={url} onEnded={handleSongEnded} />
             {paused ? (
-              <PlayCircle fontSize='large' />
+              <PlayCircle fontSize={mini ? "small" : "large"} />
             ) : (
-              <PauseCircle fontSize='large' />
+              <PauseCircle fontSize={mini ? "small" : "large"} />
             )}
           </IconButton>
         </div>

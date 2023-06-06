@@ -12,11 +12,6 @@
   margin-left: 25%;
 }
 
-.carousel-image {
-  width: 150px;
-  height: 150px;
-}
-
 .carousel-song-group {
   display: flex;
   justify-content: left;
