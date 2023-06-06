@@ -28,7 +28,7 @@ export default function GloballySearched({ songsPerGroup }) {
           animation='slide'
           indicators={false}
           duration={500}
-          autoPlay={false}
+          autoPlay={true}
         >
           {songGroups.map((group, i) => {
             return <SongGroup key={i} songs={group} />;
