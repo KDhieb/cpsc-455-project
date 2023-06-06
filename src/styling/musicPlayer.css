@@ -1,6 +1,39 @@
-.music-player-button {
-    padding: "20px";
-    width: "5px";
-    height: "5px";
-    margin-left: "62px";
-  }
+.music-player-container button {
+  visibility: visible;
+  padding: "20px";
+  width: "15px";
+  height: "5px";
+  margin-left: "62px";
+  color: green;
+}
+
+/* .music-player-button-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.music-player-button-hidden button {
+  display: none !important;
+  visibility: hidden !important;
+} */
+
+figure {
+  /* Required: */
+  position: relative;
+  /* Optional: */
+  width: 50%;
+  margin: 0 0;
+}
+
+.music-player-container {
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  margin-bottom: 35%;
+  position: absolute;
+  bottom: 10px;
+  margin-left: 45%;
+  width: 57px;
+  padding: 0px 0px;
+  background-color: white;
+  border-radius: 100%;
+}
