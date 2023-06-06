@@ -1,5 +1,5 @@
 import Carousel from "react-material-ui-carousel";
-import { Paper } from "@mui/material";
+import { Card, Paper } from "@mui/material";
 import sampleSongs from "../sample/sample";
 import "../styling/globallySearched.css";
 import PlayableAlbumCover from "./PlayableAlbumCover";
@@ -23,7 +23,7 @@ export default function GloballySearched({ songsPerGroup }) {
   return (
     <div className='carousel-container'>
       <h3 className='carousel-title'>Songs Searched for Globally</h3>
-      <div id='carousel'>
+      <Card id='carousel'>
         <Carousel
           animation='slide'
           indicators={false}
@@ -35,7 +35,7 @@ export default function GloballySearched({ songsPerGroup }) {
           })}
           {}
         </Carousel>
-      </div>
+      </Card>
     </div>
   );
 }

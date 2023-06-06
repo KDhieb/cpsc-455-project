@@ -67,8 +67,7 @@ export default function PlayableAlbumCover({
             <PauseCircle fontSize={mini ? "small" : "large"} />
           )}
         </IconButton>
-      ) : // </div>
-      null}
+      ) : null}
     </figure>
   );
 }
