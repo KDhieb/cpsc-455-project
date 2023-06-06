@@ -1,8 +1,8 @@
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
-import MusicPlayer from "./MusicPlayer";
 import sampleSongs from "../sample/sample";
 import "../styling/globallySearched.css";
+import PlayableAlbumCover from "./PlayableAlbumCover";
 
 export default function GloballySearched({ songsPerGroup }) {
   var songs = sampleSongs.tracks.items;
@@ -60,7 +60,7 @@ function Song({ song }) {
     <div className='carousel-song' onClick={songClickRedirect}>
       <p className='carousel-song-title'>{song.name}</p>
       <p className='carousel-song-artist'>{song.artists[0].name}</p>
-      <MusicPlayer
+      <PlayableAlbumCover
         url={song.preview_url}
         img={song.album.images[0].url}
         mini={false}

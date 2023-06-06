@@ -9,7 +9,7 @@ import "../styling/musicPlayer.css";
 // * @param {string} url - url of the song to be played (optional)
 // * @param {string} img - url of the image to be displayed
 // * @param {boolean} mini - whether the music player should be mini or not
-export default function MusicPlayer({ url, img, mini }) {
+export default function PlayableAlbumCover({ url, img, mini }) {
   const [paused, setPaused] = useState(true);
   const [buttonVisible, setButtonVisibility] = useState(false);
 
