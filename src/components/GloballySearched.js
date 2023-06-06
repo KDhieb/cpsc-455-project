@@ -28,7 +28,7 @@ export default function GloballySearched({ songsPerGroup }) {
           animation='slide'
           indicators={false}
           duration={500}
-          autoPlay={true}
+          autoPlay={false}
         >
           {songGroups.map((group, i) => {
             return <SongGroup key={i} songs={group} />;
@@ -60,13 +60,11 @@ function Song({ song }) {
     <div className='carousel-song' onClick={songClickRedirect}>
       <p className='carousel-song-title'>{song.name}</p>
       <p className='carousel-song-artist'>{song.artists[0].name}</p>
-      <img
-        className='carousel-image'
-        src={song.album.images[0].url}
-        alt='album cover'
+      <MusicPlayer
+        url={song.preview_url}
+        img={song.album.images[0].url}
+        mini={false}
       />
-      <MusicPlayer url={song.preview_url} />
-      {/* ADD LOCATION */}
       <p>{`📍 Canada`}</p>
     </div>
   );

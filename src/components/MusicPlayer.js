@@ -5,8 +5,10 @@ import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
 import "../styling/musicPlayer.css";
 
-export default function MusicPlayer({ url }) {
+export default function MusicPlayer({ url, img, mini }) {
   const [paused, setPaused] = useState(true);
+  const [buttonVisible, setButtonVisibility] = useState(false);
+
   const myRef = useRef();
 
   const handleClick = () => {
@@ -22,20 +24,33 @@ export default function MusicPlayer({ url }) {
     setPaused(!paused);
   };
 
+  const handleMouseEnterImage = () => {
+    setButtonVisibility(true);
+  };
+
+  const handleMouseLeaveImage = () => {
+    setButtonVisibility(false);
+  };
+
   return (
-    <IconButton
-      className='music-player-button'
-      // todo - fix stylesheet not being picked up
-      style={{
-        padding: "20px",
-        width: "5px",
-        height: "5px",
-        marginLeft: "62px",
-      }}
-      onClick={handleClick}
+    <figure
+      onMouseEnter={handleMouseEnterImage}
+      onMouseLeave={handleMouseLeaveImage}
     >
-      <audio ref={myRef} src={url} onEnded={handleSongEnded} />
-      {paused ? <PlayCircle /> : <PauseCircle />}
-    </IconButton>
+      <img className='carousel-image' src={img} alt='album cover' />
+
+      {buttonVisible || !paused ? (
+        <div className={"music-player-container"}>
+          <IconButton size='large' onClick={handleClick}>
+            <audio ref={myRef} src={url} onEnded={handleSongEnded} />
+            {paused ? (
+              <PlayCircle fontSize='large' />
+            ) : (
+              <PauseCircle fontSize='large' />
+            )}
+          </IconButton>
+        </div>
+      ) : null}
+    </figure>
   );
 }
