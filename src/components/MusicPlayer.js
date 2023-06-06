@@ -47,23 +47,23 @@ export default function MusicPlayer({ url, img, mini }) {
       />
 
       {(buttonVisible || !paused) && url ? (
-        <div
-          className={
-            mini
-              ? "music-player-button-container-mini"
-              : "music-player-button-container"
-          }
-        >
-          <IconButton size={mini ? "small" : "large"} onClick={handleClick}>
-            <audio ref={myRef} src={url} onEnded={handleSongEnded} />
-            {paused ? (
-              <PlayCircle fontSize={mini ? "small" : "large"} />
-            ) : (
-              <PauseCircle fontSize={mini ? "small" : "large"} />
-            )}
-          </IconButton>
-        </div>
-      ) : null}
+        // <div
+        //   className={
+        //     mini
+        //       ? "music-player-button-container-mini"
+        //       : "music-player-button-container"
+        //   }
+        // >
+        <IconButton size='large' onClick={handleClick}>
+          <audio ref={myRef} src={url} onEnded={handleSongEnded} />
+          {paused ? (
+            <PlayCircle fontSize='large' />
+          ) : (
+            <PauseCircle fontSize='large' />
+          )}
+        </IconButton>
+      ) : // </div>
+      null}
     </figure>
   );
 }
