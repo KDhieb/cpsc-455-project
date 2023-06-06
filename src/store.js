@@ -1,21 +1,13 @@
-// import {combineReducers, createStore} from "redux";
-//
-// const rootReducer = combineReducers({
-// });
-//
-// const store = createStore(rootReducer);
-//
-// export default store;
-
-// if we want to use @reduxjs/toolkit
-import { configureStore } from '@reduxjs/toolkit';
-import songSearchReducer from './slices/songSearchSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import songSearchReducer from "./slices/songSearchSlice";
+import recommendedSongsReducer from "./slices/recommendedSongsSlice";
 
 const store = configureStore({
-    reducer: {
-        songSearch: songSearchReducer,
-        // add reducers here
-    },
+  reducer: {
+    songSearch: songSearchReducer,
+    recommendedSongs: recommendedSongsReducer,
+    // add reducers here
+  },
 });
 
-export default store
+export default store;
