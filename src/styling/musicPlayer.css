@@ -1,65 +1,8 @@
-/* .music-player-container {
-  position: relative;
-  width: 50%;
-  margin: 0 0;
-}
-
-.music-player-container-mini {
-  position: relative;
-  width: 25%;
-  margin: 0 0;
-}
-
-.music-player-button-container button {
-  padding: "20px";
-  width: "15px";
-  height: "5px";
-  margin-left: "62px";
-  color: green;
-}
-
-.music-player-button-container {
-  justify-content: flex-start;
-  flex-flow: row nowrap;
-  margin-bottom: 35%;
-  position: absolute;
-  bottom: 10px;
-  margin-left: 45%;
-  width: 57px;
-  padding: 0px 0px;
-  background-color: white;
-  border-radius: 100%;
-}
-
-.music-player-button-container-mini {
-  justify-content: flex-start;
-  flex-flow: row nowrap;
-  position: absolute;
-  margin-top: -50px;
-  margin-left: 23px;
-  width: 30px;
-  padding: 0px 0px;
-  background-color: white;
-  border-radius: 100%;
-}
-
-.music-player-container-mini button {
-  width: "5px";
-  height: "5px";
-  margin-left: "62px";
-  color: green;
-} */
-
 .music-player-container {
   position: relative;
   width: 150px;
   height: 150px;
   max-width: 400px;
-}
-
-.music-player-container img {
-  width: 150px;
-  height: 150px;
 }
 
 .music-player-container button {
@@ -81,11 +24,6 @@
   width: 75px;
   height: 75px;
   max-width: 400px;
-}
-
-.music-player-container-mini img {
-  width: 75px;
-  height: 75px;
 }
 
 .music-player-container-mini button {

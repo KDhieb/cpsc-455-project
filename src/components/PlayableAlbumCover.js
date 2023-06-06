@@ -8,8 +8,14 @@ import "../styling/musicPlayer.css";
 // **
 // * @param {string} url - url of the song to be played (optional)
 // * @param {string} img - url of the image to be displayed
-// * @param {boolean} mini - whether the music player should be mini or not
-export default function PlayableAlbumCover({ url, img, mini }) {
+// * @param {boolean} mini - size of the button - true for mini, false for large
+// * @param {number} size - width/height of the album cover
+export default function PlayableAlbumCover({
+  url,
+  img,
+  mini = false,
+  size = 150,
+}) {
   const [paused, setPaused] = useState(true);
   const [buttonVisible, setButtonVisibility] = useState(false);
 
@@ -38,6 +44,7 @@ export default function PlayableAlbumCover({ url, img, mini }) {
 
   return (
     <figure
+      style={{ width: size, height: size }}
       className={
         mini ? "music-player-container-mini" : "music-player-container"
       }
@@ -45,18 +52,19 @@ export default function PlayableAlbumCover({ url, img, mini }) {
       onMouseLeave={handleMouseLeaveImage}
     >
       <img
+        style={{ width: size, height: size }}
         className={mini ? "album-image-mini" : "album-image"}
         src={img}
         alt='album cover'
       />
 
       {(buttonVisible || !paused) && url ? (
-        <IconButton size='large' onClick={handleClick}>
+        <IconButton size={mini ? "small" : "large"} onClick={handleClick}>
           <audio ref={myRef} src={url} onEnded={handleSongEnded} />
           {paused ? (
-            <PlayCircle fontSize='large' />
+            <PlayCircle fontSize={mini ? "small" : "large"} />
           ) : (
-            <PauseCircle fontSize='large' />
+            <PauseCircle fontSize={mini ? "small" : "large"} />
           )}
         </IconButton>
       ) : // </div>
