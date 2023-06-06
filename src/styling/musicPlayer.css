@@ -1,4 +1,4 @@
-.music-player-container {
+/* .music-player-container {
   position: relative;
   width: 50%;
   margin: 0 0;
@@ -48,14 +48,46 @@
   height: "5px";
   margin-left: "62px";
   color: green;
+} */
+
+.music-player-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  max-width: 400px;
 }
 
-.album-image {
+.music-player-container img {
   width: 150px;
   height: 150px;
 }
 
-.album-image-mini {
+.music-player-container button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: "20px";
+  color: green;
+}
+
+.music-player-container-mini {
+  position: relative;
   width: 75px;
   height: 75px;
+  max-width: 400px;
+}
+
+.music-player-container-mini img {
+  width: 75px;
+  height: 75px;
+}
+
+.music-player-container-mini button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: "20px";
+  color: green;
 }
