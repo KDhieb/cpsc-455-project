@@ -18,12 +18,25 @@ function Search() {
 
   const handleSearch = (e) => {
     setSongName(e.target.value);
-    if (e.target.value === "") {
+    if (isSearchResults) {
+      if (e.target.value === "") {
+        setDisplayResults(false);
+      } else {
+        // todo call api here to fetch songs
+        setDisplayResults(true);
+        setSongResults(songs);
+      }
+    } else {
+    }
+  };
+
+  const handleClickSearch = () => {
+    if (songName === "") {
       setDisplayResults(false);
     } else {
-      // todo call api here to fetch songs
-      setDisplayResults(true);
-      setSongResults(songs);
+      dispatch(songSearch(songName)); // decide if we want to use redux or not
+      // call search api again - edge case: searching after recommendation results have been displayed
+      setIsSearchResults(true);
     }
   };
 
@@ -59,7 +72,9 @@ function Search() {
           <Button
             variant='contained'
             color='success'
-            onClick={() => dispatch(songSearch(songName))}
+            onClick={() => {
+              handleClickSearch();
+            }}
             endIcon={<SearchIcon />}
           >
             Search

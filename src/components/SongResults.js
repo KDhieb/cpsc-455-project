@@ -25,8 +25,16 @@ export default function SongResults({
   // const songs = useSelector((state) => state.recommendedSongs.current);
   // const [isSearchResults, setIsSearchResults] = useState(true);
 
+  const [albumClicked, setAlbumClicked] = useState(false);
+
+  const handleAlbumClick = () => {
+    setAlbumClicked(true);
+  };
+
   const handleSongClick = (song) => {
-    if (isSearchResults) {
+    if (albumClicked) {
+      setAlbumClicked(false);
+    } else if (isSearchResults) {
       handleSongSelect(song); // or maybe use redux?
       // pass song into ML pipeline
     } else {
@@ -69,6 +77,7 @@ export default function SongResults({
                   url={song.preview_url}
                   size={50}
                   mini={true}
+                  albumClickedCallback={handleAlbumClick}
                 />
                 <ListItemText
                   className='results-list-item-text-name'

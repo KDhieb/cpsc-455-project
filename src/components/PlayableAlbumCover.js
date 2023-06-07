@@ -15,6 +15,7 @@ export default function PlayableAlbumCover({
   img,
   mini = false,
   size = 150,
+  albumClickedCallback = () => {},
 }) {
   const [paused, setPaused] = useState(true);
   const [buttonVisible, setButtonVisibility] = useState(false);
@@ -22,6 +23,7 @@ export default function PlayableAlbumCover({
   const myRef = useRef();
 
   const handleClick = () => {
+    albumClickedCallback();
     setPaused(!paused);
     if (paused) {
       myRef.current.play();
