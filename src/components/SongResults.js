@@ -13,7 +13,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import { useSelector } from "react-redux";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import "../styling/songResultList.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SongResults({
   isSearchResults,
@@ -21,26 +21,18 @@ export default function SongResults({
   handleSongSelect,
 }) {
   // https://mui.com/material-ui/react-list/
-  // https://codesandbox.io/s/nd1qej?file=/demo.js:1912-1922
-  // const songs = useSelector((state) => state.recommendedSongs.current);
-  // const [isSearchResults, setIsSearchResults] = useState(true);
 
-  const [albumClicked, setAlbumClicked] = useState(false);
+  const albumClickedRef = useRef(false);
 
   const handleAlbumClick = () => {
-    setAlbumClicked(true);
+    albumClickedRef.current = true;
   };
 
   const handleSongClick = (song) => {
-    if (albumClicked) {
-      setAlbumClicked(false);
-      setTimeout(() => {}, 0);
-    } else if (isSearchResults) {
-      handleSongSelect(song); // or maybe use redux?
-      // pass song into ML pipeline
+    if (albumClickedRef.current) {
+      albumClickedRef.current = false;
     } else {
-      alert("This is a recommended song: " + song.name);
-      // do something else
+      handleSongSelect(song);
     }
   };
 

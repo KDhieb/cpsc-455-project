@@ -42,9 +42,13 @@ function Search() {
   };
 
   const handleSongSelect = (song) => {
-    setIsSearchResults(false);
-    setSongResults(sample_recommended_songs);
-    alert("Song selected: " + song.name);
+    if (isSearchResults) {
+      setIsSearchResults(false);
+      setSongResults(sample_recommended_songs);
+      alert("Song selected: " + song.name);
+    } else {
+      alert("Recommended song selected: " + song.name);
+    }
   };
 
   return (
