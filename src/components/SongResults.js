@@ -2,7 +2,6 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  Avatar,
   IconButton,
   Box,
   Paper,
@@ -10,10 +9,10 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { useSelector } from "react-redux";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import "../styling/songResultList.css";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
+import { Favorite } from "@mui/icons-material";
 
 export default function SongResults({
   isSearchResults,
@@ -23,13 +22,21 @@ export default function SongResults({
   // https://mui.com/material-ui/react-list/
 
   const albumClickedRef = useRef(false);
+  const favoritedRef = useRef(false);
 
   const handleAlbumClick = () => {
     albumClickedRef.current = true;
   };
 
+  const handleFavorite = (song) => {
+    // todo add logic for favorite
+    favoritedRef.current = true;
+  };
+
   const handleSongClick = (song) => {
-    if (albumClickedRef.current) {
+    if (favoritedRef.current) {
+      favoritedRef.current = false;
+    } else if (albumClickedRef.current) {
       albumClickedRef.current = false;
     } else {
       handleSongSelect(song);
@@ -91,10 +98,16 @@ export default function SongResults({
                   }}
                 />
                 <IconButton
-                  onClick={() => console.log("clicked favourite")}
+                  onClick={(song) => {
+                    handleFavorite(song);
+                  }}
                   sx={{ marginLeft: 2 }}
                 >
-                  <FavoriteBorderOutlinedIcon />
+                  {favoritedRef.current ? (
+                    <Favorite />
+                  ) : (
+                    <FavoriteBorderOutlinedIcon />
+                  )}
                 </IconButton>
               </ListItemButton>
             ))}
