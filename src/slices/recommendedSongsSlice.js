@@ -8,12 +8,14 @@ const initialState = {
       imageUrl: "https://dummyimage.com/50",
       songName: "SongName1",
       artistName: "ArtistName1",
+      albumName: "AlbumName1",
     },
     {
       id: "id2",
       imageUrl: "https://dummyimage.com/50",
       songName: "SongName2",
       artistName: "ArtistName2",
+      albumName: "AlbumName2",
     },
   ],
   // historical - represents all the songs that have ever been recommended by the system in the current session
