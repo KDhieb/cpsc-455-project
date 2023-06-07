@@ -80,6 +80,7 @@ export default function SongResults({
                   albumClickedCallback={handleAlbumClick}
                 />
                 <ListItemText
+                  sx={{ minWidth: "35%", maxWidth: "35%" }}
                   className='results-list-item-text-name'
                   primary={song.name}
                   secondary={song.artists[0].name}
