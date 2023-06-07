@@ -9,8 +9,10 @@ const playableAlbumCoverSlice = createSlice({
   reducers: {
     checkForPlayingSong: (state, action) => {
       if (state.ref !== null && state.ref !== undefined) {
-        state.ref.pause();
-        state.callback();
+        if (state.ref !== action.payload.ref) {
+          state.ref.pause();
+          state.callback();
+        }
       }
       return { ref: action.payload.ref, callback: action.payload.callback };
     },
