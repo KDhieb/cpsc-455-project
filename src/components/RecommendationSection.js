@@ -10,13 +10,14 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useSelector } from "react-redux";
+import PlayableAlbumCover from "./PlayableAlbumCover";
 
 export default function RecommendationSection() {
   // https://mui.com/material-ui/react-list/
   // https://codesandbox.io/s/nd1qej?file=/demo.js:1912-1922
   const songs = useSelector((state) => state.recommendedSongs.current);
   return (
-    <Box display="flex" justifyContent="center">
+    <Box display='flex' justifyContent='center'>
       <ThemeProvider
         theme={createTheme({
           palette: {
@@ -31,7 +32,7 @@ export default function RecommendationSection() {
           >
             <ListItemText
               sx={{ marginLeft: 2 }}
-              primary="You might like . . ."
+              primary='You might like . . .'
               primaryTypographyProps={{
                 fontSize: 20,
                 fontWeight: "medium",
@@ -43,11 +44,7 @@ export default function RecommendationSection() {
                 key={song.id}
                 sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
               >
-                <Avatar
-                  sx={{ marginRight: 2 }}
-                  src={song.imageUrl}
-                  variant="square"
-                />
+                <PlayableAlbumCover img={song.imageUrl} size={50} mini={true} />
                 <ListItemText
                   primary={song.songName}
                   secondary={song.artistName}

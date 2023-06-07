@@ -1,3 +1,4 @@
+import PlayableAlbumCover from "./PlayableAlbumCover";
 import { makeStyles } from "@material-ui/core/styles";
 import { TableCell, TableRow } from "@material-ui/core";
 import { IMAGE_ALTS } from "../constants/constants";
@@ -15,10 +16,10 @@ export const ScoreboardSongCard = ({ song, ranking }) => {
     <TableRow>
       <TableCell>{ranking}</TableCell>
       <TableCell>
-        <img
-          className={classes.img}
-          src={song.albumCoverImg}
-          alt={IMAGE_ALTS.albumCover}
+        <PlayableAlbumCover
+          url={song.preview_url}
+          img={song.albumCoverImg}
+          mini={false}
         />
       </TableCell>
       <TableCell>

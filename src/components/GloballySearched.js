@@ -1,8 +1,8 @@
 import Carousel from "react-material-ui-carousel";
-import { Paper } from "@mui/material";
-import MusicPlayer from "./MusicPlayer";
+import { Card, Paper } from "@mui/material";
 import sampleSongs from "../sample/sample";
 import "../styling/globallySearched.css";
+import PlayableAlbumCover from "./PlayableAlbumCover";
 
 export default function GloballySearched({ songsPerGroup }) {
   var songs = sampleSongs.tracks.items;
@@ -23,7 +23,7 @@ export default function GloballySearched({ songsPerGroup }) {
   return (
     <div className='carousel-container'>
       <h3 className='carousel-title'>Songs Searched for Globally</h3>
-      <div id='carousel'>
+      <Card id='carousel'>
         <Carousel
           animation='slide'
           indicators={false}
@@ -35,7 +35,7 @@ export default function GloballySearched({ songsPerGroup }) {
           })}
           {}
         </Carousel>
-      </div>
+      </Card>
     </div>
   );
 }
@@ -60,13 +60,11 @@ function Song({ song }) {
     <div className='carousel-song' onClick={songClickRedirect}>
       <p className='carousel-song-title'>{song.name}</p>
       <p className='carousel-song-artist'>{song.artists[0].name}</p>
-      <img
-        className='carousel-image'
-        src={song.album.images[0].url}
-        alt='album cover'
+      <PlayableAlbumCover
+        url={song.preview_url}
+        img={song.album.images[0].url}
+        mini={false}
       />
-      <MusicPlayer url={song.preview_url} />
-      {/* ADD LOCATION */}
       <p>{`📍 Canada`}</p>
     </div>
   );
