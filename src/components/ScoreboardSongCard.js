@@ -1,5 +1,3 @@
-
-import "../styling/scoreboardSongCard.css";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import { makeStyles } from "@material-ui/core/styles";
 import { TableCell, TableRow } from "@material-ui/core";
