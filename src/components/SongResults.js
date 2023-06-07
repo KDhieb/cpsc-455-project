@@ -10,7 +10,6 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlayableAlbumCover from "./PlayableAlbumCover";
-import "../styling/songResultList.css";
 import { useRef } from "react";
 import { Favorite } from "@mui/icons-material";
 
@@ -56,11 +55,18 @@ export default function SongResults({
         <Paper
           className='results-container'
           elevation={3}
-          sx={{ borderRadius: 2, overflow: "hidden" }}
+          sx={{ borderRadius: 2, overflow: "hidden", margin: "10px 10px" }}
         >
           <List
             className='results-list'
-            sx={{ width: "100%", maxWidth: "md", bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              maxWidth: "md",
+              bgcolor: "background.paper",
+              maxHeight: "500px",
+              overflow: "hidden",
+              overflowY: "scroll",
+            }}
           >
             <ListSubheader sx={{ marginLeft: 2 }}>
               {isSearchResults ? "Search Results" : "You might like . . ."}
@@ -80,7 +86,13 @@ export default function SongResults({
                   albumClickedCallback={handleAlbumClick}
                 />
                 <ListItemText
-                  sx={{ minWidth: "35%", maxWidth: "35%" }}
+                  sx={{
+                    minWidth: "35%",
+                    maxWidth: "35%",
+                    margin: "0px 10px",
+                    wordWrap: "break-word",
+                    overflow: "hidden",
+                  }}
                   className='results-list-item-text-name'
                   primary={song.name}
                   secondary={song.artists[0].name}
@@ -91,6 +103,7 @@ export default function SongResults({
                 />
 
                 <ListItemText
+                  sx={{ margin: "0px 20px" }}
                   className='results-list-item-text-album'
                   primary={song.album.name}
                   primaryTypographyProps={{
