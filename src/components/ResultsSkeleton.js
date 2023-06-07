@@ -6,14 +6,23 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 
 export default function ResultsSkeleton({
   loading = true,
-  numberOfRows = 7,
+  numberOfRows = 6,
   displayText,
 }) {
   const cards = Array.from(new Array(numberOfRows)).map((_, index) => {});
   return (
     <>
-      <Card sx={{ maxWidth: 600, m: 2, margin: "auto" }}>
+      <Card
+        sx={{
+          maxWidth: "800px",
+          m: 2,
+          margin: "auto",
+          width: "95%",
+          height: "500px",
+        }}
+      >
         <CardHeader
+          sx={{ height: "20px" }}
           avatar={
             displayText ? (
               <p style={{ textAlign: "center" }}>{displayText}</p>
