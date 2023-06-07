@@ -26,6 +26,10 @@ function Search() {
         setDisplayResults(false);
       } else {
         // todo call api here to fetch songs
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
         setDisplayResults(true);
         setSongResults(sample_search_songs);
       }
@@ -37,9 +41,14 @@ function Search() {
     if (songName === "") {
       setDisplayResults(false);
     } else {
-      dispatch(songSearch(songName)); // decide if we want to use redux or not
-      // call search api again - edge case: searching after recommendation results have been displayed
       setIsSearchResults(true);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+      dispatch(songSearch(songName)); // decide if we want to use redux or not
+      setSongResults(sample_search_songs);
+      // call search api again - edge case: searching after recommendation results have been displayed
     }
   };
 
@@ -95,13 +104,13 @@ function Search() {
       </Grid>
 
       {loading ? (
-        // <Skeleton
-        //   className='results-skeleton'
-        //   variant='rectangular'
-        //   width={500}
-        //   height={500}
-        // ></Skeleton>
-        <ResultsSkeleton />
+        <>
+          <ResultsSkeleton
+            displayText={
+              isSearchResults ? "Searching..." : "Generating recommendations..."
+            }
+          />
+        </>
       ) : (
         displayResults && (
           <SongResults
