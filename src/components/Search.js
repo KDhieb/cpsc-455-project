@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { songSearch } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
-import sampleSongs from "../sample/sample";
+import { sample_1_songs, sample_2_songs } from "../sample/sample";
 
 function Search() {
   const [songName, setSongName] = useState("");
@@ -14,7 +14,8 @@ function Search() {
   const [displayResults, setDisplayResults] = useState(false);
   const [songResults, setSongResults] = useState([]);
 
-  const songs = sampleSongs.tracks.items;
+  const sample_search_songs = sample_1_songs.tracks.items;
+  const sample_recommended_songs = sample_2_songs.tracks.items;
 
   const handleSearch = (e) => {
     setSongName(e.target.value);
@@ -24,7 +25,7 @@ function Search() {
       } else {
         // todo call api here to fetch songs
         setDisplayResults(true);
-        setSongResults(songs);
+        setSongResults(sample_search_songs);
       }
     } else {
     }
@@ -42,6 +43,7 @@ function Search() {
 
   const handleSongSelect = (song) => {
     setIsSearchResults(false);
+    setSongResults(sample_recommended_songs);
     alert("Song selected: " + song.name);
   };
 

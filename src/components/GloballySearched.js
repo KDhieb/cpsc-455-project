@@ -1,11 +1,11 @@
 import Carousel from "react-material-ui-carousel";
 import { Card, Paper } from "@mui/material";
-import sampleSongs from "../sample/sample";
+import { sample_1_songs } from "../sample/sample";
 import "../styling/globallySearched.css";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 
 export default function GloballySearched({ songsPerGroup }) {
-  var songs = sampleSongs.tracks.items;
+  var songs = sample_1_songs.tracks.items;
 
   const nGroups = Math.floor(songs.length / 3);
 

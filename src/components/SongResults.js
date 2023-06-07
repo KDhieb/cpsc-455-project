@@ -34,6 +34,7 @@ export default function SongResults({
   const handleSongClick = (song) => {
     if (albumClicked) {
       setAlbumClicked(false);
+      setTimeout(() => {}, 0);
     } else if (isSearchResults) {
       handleSongSelect(song); // or maybe use redux?
       // pass song into ML pipeline
