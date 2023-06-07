@@ -5,6 +5,7 @@ import { songSearch } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
 import { sample_1_songs, sample_2_songs } from "../sample/sample";
+import ResultsSkeleton from "./ResultsSkeleton";
 
 function Search() {
   const [songName, setSongName] = useState("");
@@ -13,6 +14,7 @@ function Search() {
   const [isSearchResults, setIsSearchResults] = useState(true);
   const [displayResults, setDisplayResults] = useState(false);
   const [songResults, setSongResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const sample_search_songs = sample_1_songs.tracks.items;
   const sample_recommended_songs = sample_2_songs.tracks.items;
@@ -43,6 +45,10 @@ function Search() {
 
   const handleSongSelect = (song) => {
     if (isSearchResults) {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 4000);
       setIsSearchResults(false);
       setSongResults(sample_recommended_songs);
       alert("Song selected: " + song.name);
@@ -87,12 +93,23 @@ function Search() {
           </Button>
         </Grid>
       </Grid>
-      {displayResults && (
-        <SongResults
-          isSearchResults={isSearchResults}
-          songs={songResults}
-          handleSongSelect={handleSongSelect}
-        />
+
+      {loading ? (
+        // <Skeleton
+        //   className='results-skeleton'
+        //   variant='rectangular'
+        //   width={500}
+        //   height={500}
+        // ></Skeleton>
+        <ResultsSkeleton />
+      ) : (
+        displayResults && (
+          <SongResults
+            isSearchResults={isSearchResults}
+            songs={songResults}
+            handleSongSelect={handleSongSelect}
+          />
+        )
       )}
     </>
   );
