@@ -4,6 +4,8 @@ import { IconButton } from "@mui/material";
 import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
 import "../styling/musicPlayer.css";
+import { useDispatch } from "react-redux";
+import { checkForPlayingSong } from "../slices/PlayableAlbumCoverSlice";
 
 // **
 // * @param {string} url - url of the song to be played (optional)
@@ -21,11 +23,20 @@ export default function PlayableAlbumCover({
   const [buttonVisible, setButtonVisibility] = useState(false);
 
   const myRef = useRef();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     albumClickedCallback();
     setPaused(!paused);
     if (paused) {
+      dispatch(
+        checkForPlayingSong({
+          ref: myRef.current,
+          callback: () => {
+            setPaused(true);
+          },
+        })
+      );
       myRef.current.play();
     } else {
       myRef.current.pause();
