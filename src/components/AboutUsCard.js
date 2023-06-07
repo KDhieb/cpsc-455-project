@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,12 +11,13 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Slider from '@mui/material/Slider';
 import {useState} from "react";
-import {styled} from "@mui/material";
-import "../styling/aboutUsCard.css";
+import {Container, styled} from "@mui/material";
+import theme from "../styling/theme"
+import {ThemeProvider} from "@mui/material/styles";
 
 // based on https://mui.com/material-ui/react-card/ control UI card example
 export default function AboutUsCard({developer}) {
-    const theme = useTheme();
+    // const theme = useTheme();
 
     const [slideIndex, setSlideIndex] = useState(0);
 
@@ -52,8 +53,9 @@ export default function AboutUsCard({developer}) {
     }));
 
     return (
-        <div className="about-us-card">
-        <Card sx={{ display: 'flex' , background: 'darkgray', width: 'fit-content' }}>
+        <ThemeProvider theme={theme}>
+        <Container sx={{ padding: "10px", width: "fit-content"}}>
+            <Card sx={{ display: 'flex' , background: 'darkgray', width: 'fit-content' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="div" variant="h5">
@@ -88,12 +90,15 @@ export default function AboutUsCard({developer}) {
                 image={developer.img}
                 alt="placeholder album cover"
             />
-        </Card>
-            <div className='about-us-card-carousel'>
+            </Card>
+            <Card sx={{
+                padding: "15px",
+            }}>
                 {slideIndex === 0 && <h3>{developer.description}</h3>}
                 {slideIndex === 1 && <h3>{developer.linkedin}</h3>}
                 {slideIndex === 2 && <h3>placeholder 3</h3>}
-            </div>
-        </div>
+            </Card>
+        </Container>
+        </ThemeProvider>
     );
 }
