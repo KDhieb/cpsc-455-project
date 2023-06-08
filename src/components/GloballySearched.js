@@ -3,8 +3,6 @@ import { Card, Paper } from "@mui/material";
 import { sample_1_songs } from "../sample/sample";
 import "../styling/globallySearched.css";
 import PlayableAlbumCover from "./PlayableAlbumCover";
-import theme from "../styling/theme"
-import {ThemeProvider} from "@mui/material/styles";
 
 export default function GloballySearched({ songsPerGroup }) {
   var songs = sample_1_songs.tracks.items;
@@ -23,7 +21,6 @@ export default function GloballySearched({ songsPerGroup }) {
   }
 
   return (
-      <ThemeProvider theme={theme}>
     <div className='carousel-container'>
       <h3 className='carousel-title'>Songs Searched for Globally</h3>
       <Card id='carousel'>
@@ -40,7 +37,6 @@ export default function GloballySearched({ songsPerGroup }) {
         </Carousel>
       </Card>
     </div>
-      </ThemeProvider>
   );
 }
 

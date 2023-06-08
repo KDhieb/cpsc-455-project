@@ -2,14 +2,11 @@ import { developerData } from "../assets/data/developerData";
 import AboutUsCard from "../components/AboutUsCard";
 import "../styling/about.css";
 import {Container} from "@mui/material";
-import theme from "../styling/theme";
-import {ThemeProvider} from "@mui/material/styles";
 import {Typography} from "@material-ui/core";
 import Box from "@mui/material/Box";
 
 export const About = () => {
     return (
-        <ThemeProvider theme={theme}>
         <Container maxWidth="xl">
             <Typography variant="h4" align="center">
                 About Vibesphere
@@ -33,6 +30,5 @@ export const About = () => {
                 ))}
             </Box>
         </Container>
-        </ThemeProvider>
     )
 };

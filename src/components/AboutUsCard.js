@@ -13,11 +13,9 @@ import Slider from '@mui/material/Slider';
 import {useState} from "react";
 import {Container, styled} from "@mui/material";
 import theme from "../styling/theme"
-import {ThemeProvider} from "@mui/material/styles";
 
 // based on https://mui.com/material-ui/react-card/ control UI card example
 export default function AboutUsCard({developer}) {
-    // const theme = useTheme();
 
     const [slideIndex, setSlideIndex] = useState(0);
 
@@ -53,7 +51,6 @@ export default function AboutUsCard({developer}) {
     }));
 
     return (
-        <ThemeProvider theme={theme}>
         <Container sx={{ padding: "10px", width: "fit-content"}}>
             <Card sx={{ display: 'flex' , background: 'darkgray', width: 'fit-content' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -99,6 +96,5 @@ export default function AboutUsCard({developer}) {
                 {slideIndex === 2 && <h3>placeholder 3</h3>}
             </Card>
         </Container>
-        </ThemeProvider>
     );
 }

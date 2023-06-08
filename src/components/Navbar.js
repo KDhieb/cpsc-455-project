@@ -3,8 +3,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import {Typography} from "@material-ui/core";
-import {ThemeProvider} from "@mui/material/styles";
-import theme from "../styling/theme"
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
@@ -15,7 +13,6 @@ const Navbar = () => {
     ]
 
     return (
-        <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -30,7 +27,6 @@ const Navbar = () => {
                 </Toolbar>
         </AppBar>
         </Box>
-        </ThemeProvider>
     )
 }
 
