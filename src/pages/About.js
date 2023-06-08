@@ -1,6 +1,5 @@
 import { developerData } from "../assets/data/developerData";
 import AboutUsCard from "../components/AboutUsCard";
-import "../styling/about.css";
 import {Container} from "@mui/material";
 import {Typography} from "@material-ui/core";
 import Box from "@mui/material/Box";

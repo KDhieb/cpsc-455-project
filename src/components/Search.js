@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { TextField, Button, Grid } from "@mui/material";
+import {TextField, Button, Grid} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { songSearch } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
 import { sample_1_songs, sample_2_songs } from "../sample/sample";
 import ResultsSkeleton from "./ResultsSkeleton";
+import {ThemeProvider} from "@mui/material/styles";
+import {lightTheme} from "../styling/theme";
 
 function Search() {
   const [songName, setSongName] = useState("");
@@ -79,6 +81,7 @@ function Search() {
         </Grid>
         <Grid item p={3}>
           {/* Might switch this to MUI Autocomplete later */}
+          <ThemeProvider theme={lightTheme}>
           <TextField
             id='outlined-basic'
             variant='outlined'
@@ -88,6 +91,7 @@ function Search() {
               handleSearch(e);
             }}
           />
+          </ThemeProvider>
         </Grid>
         <Grid>
           <Button

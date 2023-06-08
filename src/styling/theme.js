@@ -7,4 +7,13 @@ const theme = createTheme({
         }
     });
 
-export default theme;
+const lightTheme = createTheme({
+    palette: {
+        mode: "light",
+    }
+})
+
+export {
+    theme,
+    lightTheme
+}

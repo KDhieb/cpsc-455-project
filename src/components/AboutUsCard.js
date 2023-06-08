@@ -12,7 +12,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Slider from '@mui/material/Slider';
 import {useState} from "react";
 import {Container, styled} from "@mui/material";
-import theme from "../styling/theme"
+import {theme} from "../styling/theme"
 
 // based on https://mui.com/material-ui/react-card/ control UI card example
 export default function AboutUsCard({developer}) {
