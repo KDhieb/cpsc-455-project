@@ -9,7 +9,7 @@ import {
   TableRow,
   Paper,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { SCOREBOARD_HEADERS } from "../constants/constants";
 import { scoreboardTestData } from "../assets/data/scoreboardTestData";
 import { ScoreboardSongCard } from "../components/ScoreboardSongCard";

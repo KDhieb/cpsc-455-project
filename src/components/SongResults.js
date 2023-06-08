@@ -7,7 +7,6 @@ import {
   Paper,
   ListSubheader,
 } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import { useRef } from "react";
@@ -44,14 +43,6 @@ export default function SongResults({
 
   return (
     <Box display='flex' justifyContent='center'>
-      <ThemeProvider
-        theme={createTheme({
-          palette: {
-            mode: "dark",
-            background: { paper: "rgb(5, 30, 52)" },
-          },
-        })}
-      >
         <Paper
           className='results-container'
           elevation={3}
@@ -127,7 +118,6 @@ export default function SongResults({
             ))}
           </List>
         </Paper>
-      </ThemeProvider>
     </Box>
   );
 }
