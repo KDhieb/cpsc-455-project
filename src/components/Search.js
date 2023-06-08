@@ -70,6 +70,7 @@ function Search() {
 
   return (
     <>
+    <ThemeProvider theme={lightTheme}>
       <Grid
         container
         direction='row'
@@ -81,7 +82,6 @@ function Search() {
         </Grid>
         <Grid item p={3}>
           {/* Might switch this to MUI Autocomplete later */}
-          <ThemeProvider theme={lightTheme}>
           <TextField
             id='outlined-basic'
             variant='outlined'
@@ -91,7 +91,6 @@ function Search() {
               handleSearch(e);
             }}
           />
-          </ThemeProvider>
         </Grid>
         <Grid>
           <Button
@@ -106,6 +105,7 @@ function Search() {
           </Button>
         </Grid>
       </Grid>
+    </ThemeProvider>
 
       {loading ? (
         <>
