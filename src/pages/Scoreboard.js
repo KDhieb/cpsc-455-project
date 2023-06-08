@@ -9,10 +9,12 @@ import {
   TableRow,
   Paper,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { SCOREBOARD_HEADERS } from "../constants/constants";
 import { scoreboardTestData } from "../assets/data/scoreboardTestData";
 import { ScoreboardSongCard } from "../components/ScoreboardSongCard";
+import {ThemeProvider} from "@mui/material/styles";
+import theme from "../styling/theme"
 
 const useStyles = makeStyles({
   tableContainer: {
@@ -29,6 +31,7 @@ export const Scoreboard = () => {
   const classes = useStyles();
 
   return (
+      <ThemeProvider theme={theme}>
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table>
         <TableHead>
@@ -64,5 +67,6 @@ export const Scoreboard = () => {
         </TableBody>
       </Table>
     </TableContainer>
+      </ThemeProvider>
   );
 };
