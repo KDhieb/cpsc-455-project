@@ -9,7 +9,7 @@ import {
   TableRow,
   Paper,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { SCOREBOARD_HEADERS } from "../constants/constants";
 import { scoreboardTestData } from "../assets/data/scoreboardTestData";
 import { ScoreboardSongCard } from "../components/ScoreboardSongCard";
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
   },
   boldHeader: {
     fontWeight: "bold",
+    color: "white"
   },
 });
 
@@ -45,7 +46,12 @@ export const Scoreboard = () => {
             </TableCell>
             <TableCell>
               <Typography className={classes.boldHeader}>
-                {SCOREBOARD_HEADERS.nameArtist}
+                {SCOREBOARD_HEADERS.name}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography className={classes.boldHeader}>
+                {SCOREBOARD_HEADERS.artist}
               </Typography>
             </TableCell>
             <TableCell>
