@@ -15,7 +15,7 @@ const styles = {
   },
   carouselSongGroup: {
     display: "flex",
-    justifyContent: "left",
+    justifyContent: "space-around",
   },
   carouselSong: {
     "&:hover": { backgroundColor: "#193044" },
