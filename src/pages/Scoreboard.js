@@ -22,6 +22,7 @@ const useStyles = makeStyles({
   },
   boldHeader: {
     fontWeight: "bold",
+    color: "white"
   },
 });
 

@@ -66,7 +66,7 @@ export default function GloballySearched() {
 
   return (
     <div>
-      <Typography noWrap={true} align='center' variant='h5'>
+      <Typography noWrap={true} align='center' variant='h5' style={{ margin: "25px" }}>
         Songs Searched for Globally
       </Typography>
       <Card sx={styles.carousel} id='carousel'>
