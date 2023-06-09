@@ -7,21 +7,43 @@ const playableAlbumCoverSlice = createSlice({
     callback: null,
   },
   reducers: {
-    checkForPlayingSong: (state, action) => {
+    getState: (state) => {
+      return {
+        ref: state.ref,
+        callback: state.callback,
+      };
+    },
+    clearState: () => {
+      return {
+        ref: null,
+        callback: null,
+      };
+    },
+    playSong: (state, action) => {
       if (state.ref !== null && state.ref !== undefined) {
         if (state.ref !== action.payload.ref) {
           state.ref.pause();
           state.callback();
         }
       }
-      return { ref: action.payload.ref, callback: action.payload.callback };
+      action.payload.ref.play();
+      return {
+        ref: action.payload.ref,
+        callback: action.payload.callback,
+      };
     },
-    getPlayingSongRef: (state, action) => {
-      return { ref: state.ref, callback: state.callback };
+    pauseSong: (state) => {
+      if (state.ref !== null && state.ref !== undefined) {
+        state.ref.pause();
+      }
+      return {
+        ref: null,
+        callback: null,
+      };
     },
   },
 });
 
-export const { checkForPlayingSong, getPlayingSongRef } =
+export const { playSong, pauseSong, getState, clearState } =
   playableAlbumCoverSlice.actions;
 export default playableAlbumCoverSlice.reducer;

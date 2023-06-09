@@ -4,7 +4,11 @@ import { Box, IconButton } from "@mui/material";
 import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { checkForPlayingSong } from "../slices/PlayableAlbumCoverSlice";
+import {
+  playSong,
+  pauseSong,
+  clearState,
+} from "../slices/PlayableAlbumCoverSlice";
 
 const styles = {
   container: {
@@ -46,20 +50,20 @@ export default function PlayableAlbumCover({
     setPaused(!paused);
     if (paused) {
       dispatch(
-        checkForPlayingSong({
+        playSong({
           ref: myRef.current,
           callback: () => {
             setPaused(true);
           },
         })
       );
-      myRef.current.play();
     } else {
-      myRef.current.pause();
+      dispatch(pauseSong());
     }
   };
 
   const handleSongEnded = () => {
+    dispatch(clearState());
     setPaused(!paused);
   };
 
