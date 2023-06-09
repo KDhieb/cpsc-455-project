@@ -42,7 +42,7 @@ export default function SongResults({
   };
 
   return (
-    <Box display='flex' justifyContent='center'>
+    <Box display='flex' justifyContent='center' sx={{ mb: 2 }}>
       <Paper
         className='results-container'
         elevation={3}
