@@ -45,7 +45,12 @@ export const Scoreboard = () => {
             </TableCell>
             <TableCell>
               <Typography className={classes.boldHeader}>
-                {SCOREBOARD_HEADERS.nameArtist}
+                {SCOREBOARD_HEADERS.name}
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography className={classes.boldHeader}>
+                {SCOREBOARD_HEADERS.artist}
               </Typography>
             </TableCell>
             <TableCell>

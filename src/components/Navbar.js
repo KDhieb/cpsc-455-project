@@ -1,33 +1,54 @@
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import {Typography} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    const pages = [
-        { text: 'Home', href: '/'},
-        { text: 'About', href: '/about'},
-        { text: 'Scoreboard', href: '/scoreboard'}
-    ]
+  const pages = [
+    { text: "Home", href: "/", key: 1 },
+    { text: "About", href: "/about", key: 2 },
+    { text: "Scoreboard", href: "/scoreboard", key: 3 },
+  ];
 
-    return (
-            <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Typography to="/" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Vibesphere
-                    </Typography>
-                    <div>
-                        {pages.map((page) => (
-                            <Button component={Link} to={page.href} color="inherit">{page.text}</Button>
-                        ))}
-                    </div>
-                </Toolbar>
-        </AppBar>
-        </Box>
-    )
-}
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='static'>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Button component={Link} to={"/"}>
+            <Box
+              component='img'
+              src='/static/logos/svg/logo-no-background.svg'
+              sx={{ width: "120px", height: "120px" }}
+            />
+          </Button>
 
-export default Navbar
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "right",
+              flexWrap: "wrap",
+            }}
+          >
+            {pages.map((page) => (
+              <Button
+                key={page.key}
+                component={Link}
+                to={page.href}
+                color='inherit'
+              >
+                {page.text}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};
+
+export default Navbar;

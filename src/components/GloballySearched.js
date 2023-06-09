@@ -1,11 +1,55 @@
 import Carousel from "react-material-ui-carousel";
-import { Card, Paper } from "@mui/material";
+import { Card, Paper, Typography, Container } from "@mui/material";
 import { sample_1_songs } from "../sample/sample";
-import "../styling/globallySearched.css";
 import PlayableAlbumCover from "./PlayableAlbumCover";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import { useRef } from "react";
 
-export default function GloballySearched({ songsPerGroup }) {
+const styles = {
+  carousel: {
+    width: "80%",
+    maxWidth: "1000px",
+    margin: "auto",
+    marginBottom: "50px",
+    minYidth: "300px",
+  },
+  carouselSongGroup: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  carouselSong: {
+    "&:hover": { backgroundColor: "#193044" },
+    wordWrap: "normal",
+    width: "240px",
+    height: "300px",
+    alignItems: "left",
+    padding: "0px 25px",
+    margin: "0px 0px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  carouselSongTitle: {
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    padding: "20px 0px",
+  },
+  carouselSongArtist: {
+    padding: "10px 0px",
+    color: "#b5bcc3",
+  },
+};
+
+export default function GloballySearched() {
   var songs = sample_1_songs.tracks.items;
+  const { width } = useWindowDimensions();
+
+  const carouselWidth = Math.min(1000, width * 0.8);
+
+  let songWidth =
+    parseInt(styles.carouselSong.padding) * 2 +
+    parseInt(styles.carouselSong.width);
+
+  const songsPerGroup = Math.floor(carouselWidth / songWidth);
 
   const nGroups = Math.floor(songs.length / 3);
 
@@ -21,9 +65,11 @@ export default function GloballySearched({ songsPerGroup }) {
   }
 
   return (
-    <div className='carousel-container'>
-      <h3 className='carousel-title'>Songs Searched for Globally</h3>
-      <Card id='carousel'>
+    <div>
+      <Typography noWrap={true} align='center' variant='h5'>
+        Songs Searched for Globally
+      </Typography>
+      <Card sx={styles.carousel} id='carousel'>
         <Carousel
           animation='slide'
           indicators={false}
@@ -42,7 +88,7 @@ export default function GloballySearched({ songsPerGroup }) {
 
 function SongGroup({ songs }) {
   return (
-    <Paper className='carousel-song-group'>
+    <Paper sx={styles.carouselSongGroup} className='carousel-song-group'>
       {songs.map((song, i) => {
         return <Song key={i} song={song} />;
       })}
@@ -51,21 +97,36 @@ function SongGroup({ songs }) {
 }
 
 function Song({ song }) {
+  const albumClickedRef = useRef(false);
+
   const songClickRedirect = () => {
-    // const url = song.external_urls.spotify;
-    // window.open(url, "_blank", "noreferrer");
+    if (albumClickedRef.current) {
+      albumClickedRef.current = false;
+    } else {
+      const url = song.external_urls.spotify;
+      window.open(url, "_blank", "noreferrer");
+    }
   };
 
   return (
-    <div className='carousel-song' onClick={songClickRedirect}>
-      <p className='carousel-song-title'>{song.name}</p>
-      <p className='carousel-song-artist'>{song.artists[0].name}</p>
+    <Container
+      sx={styles.carouselSong}
+      className='carousel-song'
+      onClick={songClickRedirect}
+    >
+      <Typography variant='p' sx={styles.carouselSongTitle}>
+        {song.name}
+      </Typography>
+      <Typography variant='p' sx={styles.carouselSongArtist}>
+        {song.artists[0].name}
+      </Typography>
       <PlayableAlbumCover
         url={song.preview_url}
         img={song.album.images[0].url}
         mini={false}
+        albumClickedCallback={() => (albumClickedRef.current = true)}
       />
       <p>{`📍 Canada`}</p>
-    </div>
+    </Container>
   );
 }
