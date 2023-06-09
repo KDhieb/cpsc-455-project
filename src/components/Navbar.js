@@ -2,7 +2,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -15,11 +14,26 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Typography to='/' variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Vibesphere
-          </Typography>
-          <div>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Button component={Link} to={"/"}>
+            <Box
+              component='img'
+              src='/static/logos/svg/logo-no-background.svg'
+              sx={{ width: "120px", height: "120px" }}
+            />
+          </Button>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "right",
+              flexWrap: "wrap",
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page.key}
@@ -30,7 +44,7 @@ const Navbar = () => {
                 {page.text}
               </Button>
             ))}
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
