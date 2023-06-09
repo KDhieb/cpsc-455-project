@@ -1,11 +1,27 @@
 // Component to display playable music button and album cover
 
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
-import "../styling/musicPlayer.css";
 import { useDispatch } from "react-redux";
 import { checkForPlayingSong } from "../slices/PlayableAlbumCoverSlice";
+
+const styles = {
+  container: {
+    position: "relative",
+    margin: "0 0",
+    padding: "0 0",
+  },
+  playButton: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    color: "green",
+    backgroundColor: "white",
+    "&:hover": { backgroundColor: "white" },
+  },
+};
 
 // **
 // * @param {string} url - url of the song to be played (optional)
@@ -56,23 +72,27 @@ export default function PlayableAlbumCover({
   };
 
   return (
-    <figure
-      style={{ width: size, height: size }}
-      className={
-        mini ? "music-player-container-mini" : "music-player-container"
-      }
+    <Box
+      sx={{
+        ...styles.container,
+        width: size,
+        height: size,
+      }}
       onMouseEnter={handleMouseEnterImage}
       onMouseLeave={handleMouseLeaveImage}
     >
-      <img
-        style={{ width: size, height: size }}
-        className={mini ? "album-image-mini" : "album-image"}
-        src={img}
+      <Box
         alt='album cover'
+        src={img}
+        component='img'
+        sx={{ width: size, height: size, margin: "0 0" }}
       />
-
       {(buttonVisible || !paused) && url ? (
-        <IconButton size={mini ? "small" : "large"} onClick={handleClick}>
+        <IconButton
+          sx={styles.playButton}
+          size={mini ? "small" : "large"}
+          onClick={handleClick}
+        >
           <audio ref={myRef} src={url} onEnded={handleSongEnded} />
           {paused ? (
             <PlayCircle fontSize={mini ? "small" : "large"} />
@@ -81,6 +101,6 @@ export default function PlayableAlbumCover({
           )}
         </IconButton>
       ) : null}
-    </figure>
+    </Box>
   );
 }
