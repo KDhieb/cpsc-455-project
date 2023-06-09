@@ -9,7 +9,7 @@ export default function ResultsSkeleton({
   numberOfRows = 6,
   displayText,
 }) {
-  const cards = Array.from(new Array(numberOfRows)).map((_, index) => {});
+  const cards = Array.from(new Array(numberOfRows)).map((_, index) => ({}));
   return (
     <>
       <Card
