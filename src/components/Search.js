@@ -1,13 +1,13 @@
 import { useState } from "react";
-import {TextField, Button, Grid} from "@mui/material";
+import { TextField, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { songSearch } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
 import { sample_1_songs, sample_2_songs } from "../sample/sample";
 import ResultsSkeleton from "./ResultsSkeleton";
-import {ThemeProvider} from "@mui/material/styles";
-import {lightTheme} from "../styling/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import { lightTheme } from "../styling/theme";
 
 function Search() {
   const [songName, setSongName] = useState("");
@@ -70,42 +70,42 @@ function Search() {
 
   return (
     <>
-    <ThemeProvider theme={lightTheme}>
-      <Grid
-        container
-        direction='row'
-        alignItems='center'
-        justifyContent='center'
-      >
-        <Grid item>
-          <label>Song Name:</label>
+      <ThemeProvider theme={lightTheme}>
+        <Grid
+          container
+          direction='row'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <Grid item>
+            <label>Song Name:</label>
+          </Grid>
+          <Grid item p={3}>
+            {/* Might switch this to MUI Autocomplete later */}
+            <TextField
+              id='outlined-basic'
+              variant='outlined'
+              size='small'
+              value={songName}
+              onChange={(e) => {
+                handleSearch(e);
+              }}
+            />
+          </Grid>
+          <Grid>
+            <Button
+              variant='contained'
+              color='success'
+              onClick={() => {
+                handleClickSearch();
+              }}
+              endIcon={<SearchIcon />}
+            >
+              Search
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item p={3}>
-          {/* Might switch this to MUI Autocomplete later */}
-          <TextField
-            id='outlined-basic'
-            variant='outlined'
-            size='small'
-            value={songName}
-            onChange={(e) => {
-              handleSearch(e);
-            }}
-          />
-        </Grid>
-        <Grid>
-          <Button
-            variant='contained'
-            color='success'
-            onClick={() => {
-              handleClickSearch();
-            }}
-            endIcon={<SearchIcon />}
-          >
-            Search
-          </Button>
-        </Grid>
-      </Grid>
-    </ThemeProvider>
+      </ThemeProvider>
 
       {loading ? (
         <>
