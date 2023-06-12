@@ -18,6 +18,7 @@ function Search() {
   const [displayResults, setDisplayResults] = useState(false);
   const [songResults, setSongResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedSong, setSelectedSong] = useState(null);
 
   const sample_recommended_songs = sample_2_songs.tracks.items;
 
@@ -50,21 +51,22 @@ function Search() {
       const songs = unwrapResult(response).results;
       setSongResults(songs.tracks.items);
       setLoading(false);
-      // call search api again - edge case: searching after recommendation results have been displayed
     }
   };
 
   const handleSongSelect = (song) => {
     if (isSearchResults) {
+      setSelectedSong(song);
+      alert(`Song selected: ${song.name} Id: ${song.id}`);
       setLoading(true);
+      // call ML recommendation api
       setTimeout(() => {
         setLoading(false);
       }, 4000);
       setIsSearchResults(false);
       setSongResults(sample_recommended_songs);
-      alert("Song selected: " + song.name);
     } else {
-      alert("Recommended song selected: " + song.name);
+      alert(`Recommended song selected: ${song.name} Id: ${song.id}`);
     }
   };
 
@@ -118,6 +120,7 @@ function Search() {
       ) : (
         displayResults && (
           <SongResults
+            selectedSong={selectedSong}
             isSearchResults={isSearchResults}
             songs={songResults}
             handleSongSelect={handleSongSelect}
