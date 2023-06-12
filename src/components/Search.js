@@ -8,6 +8,7 @@ import SongResults from "./SongResults";
 import ResultsSkeleton from "./ResultsSkeleton";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../styling/theme";
+import SongPopupView from "./SongPopupView";
 
 function Search() {
   const [songName, setSongName] = useState("");
@@ -17,7 +18,10 @@ function Search() {
   const [displayResults, setDisplayResults] = useState(false);
   const [songResults, setSongResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedSong, setSelectedSong] = useState(null);
+  const [selectedSongFromSearch, setSelectedSongFromSearch] = useState(null);
+  const [selectedSongFromRecommended, setSelectedSongFromRecommended] =
+    useState(null);
+  const [displayPopup, setDisplayPopup] = useState(false);
 
   // const sample_recommended_songs = sample_2_songs.tracks.items;
 
@@ -55,18 +59,24 @@ function Search() {
 
   const handleSongSelect = async (song) => {
     if (isSearchResults) {
-      setSelectedSong(song);
+      setSelectedSongFromSearch(song);
       setLoading(true);
       const response = await dispatch(
         fetchRecommendedSongs({ songId: song.id })
       );
       const songs = unwrapResult(response).recommendedSongs;
       setIsSearchResults(false);
+      console.log(songs);
       setSongResults(songs.tracks);
       setLoading(false);
     } else {
-      alert(`Recommended song selected: ${song.name} Id: ${song.id}`);
+      setSelectedSongFromRecommended(song);
+      setDisplayPopup(true);
     }
+  };
+
+  const handleClosePopup = () => {
+    setDisplayPopup(false);
   };
 
   return (
@@ -82,7 +92,6 @@ function Search() {
             <label>Song Name:</label>
           </Grid>
           <Grid item p={3}>
-            {/* Might switch this to MUI Autocomplete later */}
             <TextField
               id='outlined-basic'
               variant='outlined'
@@ -119,12 +128,19 @@ function Search() {
       ) : (
         displayResults && (
           <SongResults
-            selectedSong={selectedSong}
+            selectedSongFromSearch={selectedSongFromSearch}
             isSearchResults={isSearchResults}
             songs={songResults}
             handleSongSelect={handleSongSelect}
           />
         )
+      )}
+      {displayPopup && (
+        <SongPopupView
+          isDisplayed={displayPopup}
+          handleClose={handleClosePopup}
+          song={selectedSongFromRecommended}
+        />
       )}
     </>
   );

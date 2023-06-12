@@ -16,7 +16,7 @@ export default function SongResults({
   isSearchResults,
   songs,
   handleSongSelect,
-  selectedSong,
+  selectedSongFromSearch,
 }) {
   // https://mui.com/material-ui/react-list/
 
@@ -63,7 +63,7 @@ export default function SongResults({
           <ListSubheader sx={{ marginLeft: 2 }}>
             {isSearchResults
               ? "Search Results"
-              : `Songs similar to: ${selectedSong.name} by ${selectedSong.artists[0].name}`}
+              : `Songs similar to: ${selectedSongFromSearch.name} by ${selectedSongFromSearch.artists[0].name}`}
           </ListSubheader>
 
           {songs.map((song) => (
