@@ -5,17 +5,44 @@ export const searchSongs = createAsyncThunk(
   "songs/searchSongs",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload.searchString);
       const resp = await axios.get(
         `http://localhost:5000/songs/search/${payload.searchString}`
       );
       return {
         searchString: payload.searchString,
-        results: resp.data,
+        searchResults: resp.data,
+        recommendedSongs: thunkAPI.getState().recommendedSongs,
       };
     } catch (error) {
       console.error(error);
-      return { searchString: payload.searchString, results: [] };
+      return {
+        searchString: payload.searchString,
+        searchResults: [],
+        recommendedSongs: thunkAPI.getState().recommendedSongs,
+      };
+    }
+  }
+);
+
+export const fetchRecommendedSongs = createAsyncThunk(
+  "songs/fetchRecommendedSongs",
+  async (payload, thunkAPI) => {
+    try {
+      const resp = await axios.get(
+        `http://localhost:5000/songs/recommendations/generate/${payload.songId}`
+      );
+      return {
+        searchString: thunkAPI.getState().searchString,
+        searchResults: thunkAPI.getState().searchResults,
+        recommendedSongs: resp.data,
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        searchString: thunkAPI.getState().searchString,
+        searchResults: thunkAPI.getState().searchResults,
+        recommendedSongs: [],
+      };
     }
   }
 );
@@ -24,13 +51,15 @@ const songsSlice = createSlice({
   name: "songs",
   initialState: {
     searchString: "",
-    results: [],
+    searchResults: [],
+    recommendedSongs: [],
   },
   reducers: {},
   extraReducers(builder) {
     builder.addCase(searchSongs.fulfilled, (state, action) => {
-      console.log("fetchSongs.fulfilled");
-      console.log(action.payload);
+      state = action.payload;
+    });
+    builder.addCase(fetchRecommendedSongs.fulfilled, (state, action) => {
       state = action.payload;
     });
   },

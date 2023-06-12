@@ -2,10 +2,9 @@ import { useState } from "react";
 import { TextField, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { searchSongs } from "../slices/songSearchSlice";
+import { fetchRecommendedSongs, searchSongs } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
-import { sample_2_songs } from "../sample/sample";
 import ResultsSkeleton from "./ResultsSkeleton";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../styling/theme";
@@ -20,7 +19,7 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
 
-  const sample_recommended_songs = sample_2_songs.tracks.items;
+  // const sample_recommended_songs = sample_2_songs.tracks.items;
 
   const handleSearch = async (e) => {
     setSongName(e.target.value);
@@ -32,7 +31,7 @@ function Search() {
         const response = await dispatch(
           searchSongs({ searchString: e.target.value })
         );
-        const songs = unwrapResult(response).results;
+        const songs = unwrapResult(response).searchResults;
         setDisplayResults(true);
         setSongResults(songs.tracks.items);
         setLoading(false);
@@ -48,23 +47,23 @@ function Search() {
       setIsSearchResults(true);
       setLoading(true);
       const response = await dispatch(searchSongs({ searchString: songName }));
-      const songs = unwrapResult(response).results;
+      const songs = unwrapResult(response).searchResults;
       setSongResults(songs.tracks.items);
       setLoading(false);
     }
   };
 
-  const handleSongSelect = (song) => {
+  const handleSongSelect = async (song) => {
     if (isSearchResults) {
       setSelectedSong(song);
-      alert(`Song selected: ${song.name} Id: ${song.id}`);
       setLoading(true);
-      // call ML recommendation api
-      setTimeout(() => {
-        setLoading(false);
-      }, 4000);
+      const response = await dispatch(
+        fetchRecommendedSongs({ songId: song.id })
+      );
+      const songs = unwrapResult(response).recommendedSongs;
       setIsSearchResults(false);
-      setSongResults(sample_recommended_songs);
+      setSongResults(songs.tracks);
+      setLoading(false);
     } else {
       alert(`Recommended song selected: ${song.name} Id: ${song.id}`);
     }

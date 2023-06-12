@@ -30,6 +30,11 @@ async function get_token() {
   }
 }
 
+/**
+ *
+ * @param {*} searchString - the current search string
+ * @returns song search results
+ */
 async function search_songs(searchString) {
   try {
     if (token_store.token == null || token_store.expires < Date.now()) {
@@ -54,4 +59,41 @@ async function search_songs(searchString) {
   }
 }
 
-module.exports = { search_songs };
+/**
+ *
+ * @param {*} song_id - spotify song id
+ * @param {*} useSpotify - boolean to toggle use of spotify recommendation api or ML model
+ * @returns a list of recommended songs
+ */
+async function generate_recommendations(song_id, useSpotify) {
+  if (useSpotify) {
+    try {
+      if (token_store.token == null || token_store.expires < Date.now()) {
+        const token = await get_token();
+        token_store.token = token.access_token;
+        token_store.expires = Date.now() + token.expires_in * 1000;
+      }
+
+      const search_url = `https://api.spotify.com/v1/recommendations?seed_tracks=${song_id}`;
+
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${token_store.token}`,
+        },
+      };
+
+      const response = await axios.get(search_url, headers);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return { error: error };
+    }
+  } else {
+    // todo implement ML model
+    // call ML model for recommendations
+    const recommendations = { recommendations: "recommendations" };
+    return recommendations;
+  }
+}
+
+module.exports = { search_songs, generate_recommendations };
