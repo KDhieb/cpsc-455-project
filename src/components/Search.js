@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { TextField, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { songSearch } from "../slices/songSearchSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { searchSongs } from "../slices/songSearchSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import SongResults from "./SongResults";
-import { sample_1_songs, sample_2_songs } from "../sample/sample";
+import { sample_2_songs } from "../sample/sample";
 import ResultsSkeleton from "./ResultsSkeleton";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../styling/theme";
@@ -18,38 +19,37 @@ function Search() {
   const [songResults, setSongResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const sample_search_songs = sample_1_songs.tracks.items;
   const sample_recommended_songs = sample_2_songs.tracks.items;
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     setSongName(e.target.value);
     if (isSearchResults) {
       if (e.target.value === "") {
         setDisplayResults(false);
-      } else {
-        // todo call api here to fetch songs
+      } else if (e.target.value.length >= 3) {
         setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        const response = await dispatch(
+          searchSongs({ searchString: e.target.value })
+        );
+        const songs = unwrapResult(response).results;
         setDisplayResults(true);
-        setSongResults(sample_search_songs);
+        setSongResults(songs.tracks.items);
+        setLoading(false);
       }
     } else {
     }
   };
 
-  const handleClickSearch = () => {
+  const handleClickSearch = async () => {
     if (songName === "") {
       setDisplayResults(false);
     } else {
       setIsSearchResults(true);
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-      dispatch(songSearch(songName)); // decide if we want to use redux or not
-      setSongResults(sample_search_songs);
+      const response = await dispatch(searchSongs({ searchString: songName }));
+      const songs = unwrapResult(response).results;
+      setSongResults(songs.tracks.items);
+      setLoading(false);
       // call search api again - edge case: searching after recommendation results have been displayed
     }
   };
