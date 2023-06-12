@@ -1,12 +1,13 @@
+require("dotenv").config();
+
 var express = require("express");
+const { search_songs } = require("../api");
 var router = express.Router();
 
 /* GET song search results . */
-router.get("/:searchString", function (req, res, next) {
-  const searchString = req.params.searchString;
-  // call spotify api
-  const songs = { tracks: searchString };
-  return res.json(songs);
+router.get("/search/:searchString", async function (req, res, next) {
+  const resp = await search_songs(req.params.searchString);
+  return res.json(resp);
 });
 
 // GET generate song recommendations (maybe make this a PUT to cache the recommendations?)
@@ -16,7 +17,6 @@ router.get("/recommendations/generate", function (req, res, next) {
   // call ML model for recommendations
   const recommendations = { recommendations: "recommendations" };
   return res.json(recommendations);
-  res.send("respond with a resource");
 });
 
 // GET scoreboard data
