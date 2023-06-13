@@ -72,8 +72,9 @@ router.post("/globallysearched/add", function (req, res, next) {
 // PUT update like (for scoreboard)
 router.put("/likes/update", function (req, res, next) {
   const songID = req.body.songID;
-  const isLiked = req.body.like;
+  const isLiked = req.body.isLiked;
   // update database
+  console.log("wow");
   return res.status(201).json({ songID: songID, like: isLiked });
 });
 
