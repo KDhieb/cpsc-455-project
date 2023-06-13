@@ -23,8 +23,6 @@ function Search() {
     useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
 
-  // const sample_recommended_songs = sample_2_songs.tracks.items;
-
   const handleSearch = async (e) => {
     setSongName(e.target.value);
     if (isSearchResults) {
@@ -40,7 +38,6 @@ function Search() {
         setSongResults(songs.tracks.items);
         setLoading(false);
       }
-    } else {
     }
   };
 
@@ -61,9 +58,7 @@ function Search() {
     if (isSearchResults) {
       setSelectedSongFromSearch(song);
       setLoading(true);
-      const response = await dispatch(
-        fetchRecommendedSongs({ songId: song.id })
-      );
+      const response = await dispatch(fetchRecommendedSongs({ song: song }));
       const songs = unwrapResult(response).recommendedSongs;
       setIsSearchResults(false);
       console.log(songs);

@@ -89,7 +89,6 @@ async function generate_recommendations(song_id, useSpotify) {
     }
   } else {
     // todo implement ML model
-    // call ML model for recommendations
     const recommendations = { recommendations: "recommendations" };
     return recommendations;
   }

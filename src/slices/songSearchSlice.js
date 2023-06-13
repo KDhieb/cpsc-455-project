@@ -28,9 +28,19 @@ export const fetchRecommendedSongs = createAsyncThunk(
   "songs/fetchRecommendedSongs",
   async (payload, thunkAPI) => {
     try {
+      const approx_user_location = Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone.split("/")[1];
+
+      await axios.post(`http://localhost:5000/songs/globallysearched/add`, {
+        song: payload.song,
+        location: approx_user_location ?? "Unknown",
+      });
+
       const resp = await axios.get(
-        `http://localhost:5000/songs/recommendations/generate/${payload.songId}`
+        `http://localhost:5000/songs/recommendations/generate/${payload.song.id}`
       );
+
       return {
         searchString: thunkAPI.getState().searchString,
         searchResults: thunkAPI.getState().searchResults,
