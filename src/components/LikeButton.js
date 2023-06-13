@@ -7,7 +7,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { updateLikes } from "../slices/likesSlice";
 import { useSelector } from "react-redux";
 
-export default function LikeButton({ song, favoritedCallback }) {
+export default function LikeButton({ song, favoritedCallback = () => {} }) {
   const [favorited, setFavorited] = useState(false);
 
   const dispatch = useDispatch();

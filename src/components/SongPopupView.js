@@ -9,9 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import PlayableAlbumCover from "./PlayableAlbumCover";
-import { FavoriteBorderOutlined, Share } from "@mui/icons-material";
+import { Share } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
+import LikeButton from "./LikeButton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogActions-root": {
@@ -52,10 +53,6 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
   const handleSpotifyClick = () => {
     const url = song.external_urls.spotify;
     window.open(url, "_blank", "noreferrer");
-  };
-
-  const handleLike = () => {
-    // todo - add logic for like
   };
 
   const handleShare = () => {
@@ -106,9 +103,7 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
           >
             <FontAwesomeIcon size='md' icon={faSpotify} />
           </IconButton>
-          <IconButton onClick={handleLike}>
-            <FavoriteBorderOutlined />
-          </IconButton>
+          <LikeButton song={song} />
           <IconButton size={"large"} onClick={handleShare}>
             <Share fontSize="'large" />
           </IconButton>
