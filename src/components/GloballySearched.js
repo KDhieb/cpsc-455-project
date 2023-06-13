@@ -4,6 +4,8 @@ import { sample_1_songs } from "../sample/sample";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import { useRef } from "react";
+import SongPopupView from "./SongPopupView";
+import { useState } from "react";
 
 const styles = {
   carousel: {
@@ -43,6 +45,9 @@ export default function GloballySearched() {
   var songs = sample_1_songs.tracks.items;
   const { width } = useWindowDimensions();
 
+  const [selectedSong, setSelectedSong] = useState(null);
+  const [displayPopup, setDisplayPopup] = useState(false);
+
   const carouselWidth = Math.min(1000, width * 0.8);
 
   let songWidth =
@@ -64,9 +69,23 @@ export default function GloballySearched() {
     }
   }
 
+  const handleSelect = (song) => {
+    setSelectedSong(song);
+    setDisplayPopup(true);
+  };
+
+  const handleClose = () => {
+    setDisplayPopup(false);
+  };
+
   return (
     <div>
-      <Typography noWrap={true} align='center' variant='h5' style={{ margin: "25px" }}>
+      <Typography
+        noWrap={true}
+        align='center'
+        variant='h5'
+        style={{ margin: "25px" }}
+      >
         Songs Searched for Globally
       </Typography>
       <Card sx={styles.carousel} id='carousel'>
@@ -77,34 +96,47 @@ export default function GloballySearched() {
           autoPlay={true}
         >
           {songGroups.map((group, i) => {
-            return <SongGroup key={i} songs={group} />;
+            return (
+              <SongGroup
+                key={i}
+                songs={group}
+                handleSelect={handleSelect}
+                handleClose={handleClose}
+              />
+            );
           })}
           {}
         </Carousel>
       </Card>
+      {displayPopup && selectedSong && (
+        <SongPopupView
+          song={selectedSong}
+          handleClose={handleClose}
+          isDisplayed={displayPopup}
+        />
+      )}
     </div>
   );
 }
 
-function SongGroup({ songs }) {
+function SongGroup({ songs, handleSelect }) {
   return (
     <Paper sx={styles.carouselSongGroup} className='carousel-song-group'>
       {songs.map((song, i) => {
-        return <Song key={i} song={song} />;
+        return <Song key={i} song={song} handleSelect={handleSelect} />;
       })}
     </Paper>
   );
 }
 
-function Song({ song }) {
+function Song({ song, handleSelect }) {
   const albumClickedRef = useRef(false);
 
   const songClickRedirect = () => {
     if (albumClickedRef.current) {
       albumClickedRef.current = false;
     } else {
-      const url = song.external_urls.spotify;
-      window.open(url, "_blank", "noreferrer");
+      handleSelect(song);
     }
   };
 
