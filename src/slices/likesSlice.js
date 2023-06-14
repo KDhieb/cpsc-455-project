@@ -4,7 +4,6 @@ import axios from "axios";
 export const updateLikes = createAsyncThunk(
   "likes/updateLikes",
   async (payload, thunkAPI) => {
-    console.log("update likes");
     const songId = payload.songId;
     const isLiked = payload.isLiked;
 

@@ -64,7 +64,6 @@ router.post("/globallysearched/add", function (req, res, next) {
     location: location,
   };
   // update database
-  console.log(data.location);
   return res.status(201).json(data);
 });
 
@@ -74,7 +73,6 @@ router.put("/likes/update", function (req, res, next) {
   const songID = req.body.songID;
   const isLiked = req.body.isLiked;
   // update database
-  console.log("wow");
   return res.status(201).json({ songID: songID, like: isLiked });
 });
 

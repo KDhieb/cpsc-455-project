@@ -22,12 +22,10 @@ export default function LikeButton({ song, favoritedCallback = () => {} }) {
     favoritedCallback();
     // todo add logic for favorite
     setFavorited(!favorited);
-    console.log(song);
     const response = await dispatch(
       updateLikes({ songId: song.id, isLiked: !favorited })
     );
     const result = unwrapResult(response);
-    console.log(result);
   };
 
   return (
