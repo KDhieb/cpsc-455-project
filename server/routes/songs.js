@@ -34,21 +34,6 @@ router.get("/globallysearched", function (req, res, next) {
 });
 
 // todo
-// GET song liked status
-// Helpful - https://github.com/fingerprintjs/fingerprintjs for generating user session id on client side
-router.get("/liked/:useSessionId/:songId", function (req, res, next) {
-  const songId = req.params.songId;
-  const userSessionId = req.params.userSessionId;
-  const isLiked = true;
-  const songs = {
-    songID: songId,
-    userSessionId: userSessionId,
-    isLiked: isLiked,
-  };
-  return res.json(songs);
-});
-
-// todo
 // POST new song searched (for globally searched)
 router.post("/globallysearched/add", function (req, res, next) {
   const song = req.body.song;
