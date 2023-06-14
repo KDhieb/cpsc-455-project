@@ -61,7 +61,6 @@ function Search() {
       const response = await dispatch(fetchRecommendedSongs({ song: song }));
       const songs = unwrapResult(response).recommendedSongs;
       setIsSearchResults(false);
-      console.log(songs);
       setSongResults(songs.tracks);
       setLoading(false);
     } else {

@@ -3,7 +3,6 @@ import { IconButton } from "@mui/material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { updateLikes } from "../slices/likesSlice";
 import { useSelector } from "react-redux";
 
@@ -20,12 +19,8 @@ export default function LikeButton({ song, favoritedCallback = () => {} }) {
 
   const handleFavorite = async () => {
     favoritedCallback();
-    // todo add logic for favorite
     setFavorited(!favorited);
-    const response = await dispatch(
-      updateLikes({ songId: song.id, isLiked: !favorited })
-    );
-    const result = unwrapResult(response);
+    await dispatch(updateLikes({ songId: song.id, isLiked: !favorited }));
   };
 
   return (

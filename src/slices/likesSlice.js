@@ -18,8 +18,6 @@ export const updateLikes = createAsyncThunk(
 
     return {
       songsLiked: songsLiked,
-      currentSongId: songId,
-      currentSongLiked: isLiked,
     };
   }
 );
@@ -28,8 +26,6 @@ const likesSlice = createSlice({
   name: "likes",
   initialState: {
     songsLiked: {},
-    currentSongId: null,
-    currentSongLiked: false,
   },
   reducers: {},
   extraReducers(builder) {
