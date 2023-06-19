@@ -101,7 +101,7 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
             onClick={handleSpotifyClick}
             sx={{ padding: "10px 10px" }}
           >
-            <FontAwesomeIcon size='md' icon={faSpotify} />
+            <FontAwesomeIcon size='lg' icon={faSpotify} />
           </IconButton>
           <LikeButton song={song} />
           <IconButton size={"large"} onClick={handleShare}>

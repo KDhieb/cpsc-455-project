@@ -8,17 +8,20 @@ export const searchSongs = createAsyncThunk(
       const resp = await axios.get(
         `http://localhost:5000/songs/search/${payload.searchString}`
       );
+
       return {
         searchString: payload.searchString,
-        searchResults: resp.data,
-        recommendedSongs: thunkAPI.getState().recommendedSongs,
+        searchResults: resp.data.tracks.items,
+        selectedSongFromSearch: null,
+        recommendedSongs: thunkAPI.getState().songSearch.recommendedSongs,
       };
     } catch (error) {
       console.error(error);
       return {
         searchString: payload.searchString,
         searchResults: [],
-        recommendedSongs: thunkAPI.getState().recommendedSongs,
+        selectedSongFromSearch: null,
+        recommendedSongs: [],
       };
     }
   }
@@ -42,15 +45,17 @@ export const fetchRecommendedSongs = createAsyncThunk(
       );
 
       return {
-        searchString: thunkAPI.getState().searchString,
-        searchResults: thunkAPI.getState().searchResults,
-        recommendedSongs: resp.data,
+        searchString: thunkAPI.getState().songSearch.searchString,
+        searchResults: thunkAPI.getState().songSearch.searchResults,
+        selectedSongFromSearch: payload.song,
+        recommendedSongs: resp.data.tracks,
       };
     } catch (error) {
       console.error(error);
       return {
-        searchString: thunkAPI.getState().searchString,
-        searchResults: thunkAPI.getState().searchResults,
+        searchString: thunkAPI.getState().songSearch.searchString,
+        searchResults: thunkAPI.getState().songSearch.searchResults,
+        selectedSongFromSearch: payload.song,
         recommendedSongs: [],
       };
     }
@@ -62,15 +67,16 @@ const songsSlice = createSlice({
   initialState: {
     searchString: "",
     searchResults: [],
+    selectedSongFromSearch: null,
     recommendedSongs: [],
   },
   reducers: {},
   extraReducers(builder) {
     builder.addCase(searchSongs.fulfilled, (state, action) => {
-      state = action.payload;
+      return action.payload;
     });
     builder.addCase(fetchRecommendedSongs.fulfilled, (state, action) => {
-      state = action.payload;
+      return action.payload;
     });
   },
 });
