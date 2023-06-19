@@ -1,18 +1,85 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const songSearchSlice = createSlice({
-  name: 'songSearch',
+export const searchSongs = createAsyncThunk(
+  "songs/searchSongs",
+  async (payload, thunkAPI) => {
+    try {
+      const resp = await axios.get(
+        `http://localhost:5000/songs/search/${payload.searchString}`
+      );
+
+      return {
+        searchString: payload.searchString,
+        searchResults: resp.data.tracks.items,
+        selectedSongFromSearch: null,
+        recommendedSongs: thunkAPI.getState().songSearch.recommendedSongs,
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        searchString: payload.searchString,
+        searchResults: [],
+        selectedSongFromSearch: null,
+        recommendedSongs: [],
+      };
+    }
+  }
+);
+
+export const fetchRecommendedSongs = createAsyncThunk(
+  "songs/fetchRecommendedSongs",
+  async (payload, thunkAPI) => {
+    try {
+      const approx_user_location = Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone.split("/")[1];
+
+      await axios.post(`http://localhost:5000/songs/globallysearched/add`, {
+        song: payload.song,
+        location: approx_user_location ?? "Unknown",
+      });
+
+      const resp = await axios.get(
+        `http://localhost:5000/songs/recommendations/generate/${payload.song.id}`
+      );
+
+      return {
+        searchString: thunkAPI.getState().songSearch.searchString,
+        searchResults: thunkAPI.getState().songSearch.searchResults,
+        selectedSongFromSearch: payload.song,
+        recommendedSongs: resp.data.tracks,
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        searchString: thunkAPI.getState().songSearch.searchString,
+        searchResults: thunkAPI.getState().songSearch.searchResults,
+        selectedSongFromSearch: payload.song,
+        recommendedSongs: [],
+      };
+    }
+  }
+);
+
+const songsSlice = createSlice({
+  name: "songs",
   initialState: {
-    songName: ""
+    searchString: "",
+    searchResults: [],
+    selectedSongFromSearch: null,
+    recommendedSongs: [],
   },
-  reducers: {
-    songSearch: (state, action) => {
-        console.log('searching song... ' + action.payload);
-        state = action.payload;
-        return state;
-      },
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(searchSongs.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(fetchRecommendedSongs.fulfilled, (state, action) => {
+      return action.payload;
+    });
   },
 });
 
-export const { songSearch } = songSearchSlice.actions;
-export default songSearchSlice.reducer;
+export const { songs } = songsSlice.actions;
+export default songsSlice.reducer;
