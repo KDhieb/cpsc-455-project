@@ -49,7 +49,7 @@ export default function AboutUsCard({ developer }) {
   }));
 
   return (
-    <Container sx={{ padding: "10px", width: "fit-content" }}>
+    <Container sx={{ padding: "5px", width: "fit-content" }} disableGutters maxWidth={false}>
       <Card
         sx={{ display: "flex", background: "darkgray", width: "fit-content" }}
       >
@@ -108,7 +108,7 @@ export default function AboutUsCard({ developer }) {
       </Card>
       <Card
         sx={{
-          padding: "15px",
+          padding: "10px",
         }}
       >
         {slideIndex === 0 && <h3>{developer.description}</h3>}
