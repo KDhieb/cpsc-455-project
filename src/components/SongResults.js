@@ -2,15 +2,13 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  IconButton,
   Box,
   Paper,
   ListSubheader,
 } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import { useRef } from "react";
-import { Favorite } from "@mui/icons-material";
+import LikeButton from "./LikeButton";
 
 export default function SongResults({
   isSearchResults,
@@ -27,7 +25,7 @@ export default function SongResults({
     albumClickedRef.current = true;
   };
 
-  const handleFavorite = (song) => {
+  const handleFavoritedCallback = () => {
     // todo add logic for favorite
     favoritedRef.current = true;
   };
@@ -105,7 +103,11 @@ export default function SongResults({
                   fontWeight: "medium",
                 }}
               />
-              <IconButton
+              <LikeButton
+                song={song}
+                favoritedCallback={handleFavoritedCallback}
+              />
+              {/* <IconButton
                 onClick={(song) => {
                   handleFavorite(song);
                 }}
@@ -116,7 +118,7 @@ export default function SongResults({
                 ) : (
                   <FavoriteBorderOutlinedIcon />
                 )}
-              </IconButton>
+              </IconButton> */}
             </ListItemButton>
           ))}
         </List>
