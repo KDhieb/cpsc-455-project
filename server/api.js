@@ -30,25 +30,34 @@ async function get_token() {
 }
 
 /**
+ * A helper function to get the spotify api headers for making requests
+ * @returns spotify api headers
+ */
+async function getSpotifyHeaders() {
+  if (token_store.token == null || token_store.expires < Date.now()) {
+    const token = await get_token();
+    token_store.token = token.access_token;
+    token_store.expires = Date.now() + token.expires_in * 1000;
+  }
+
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token_store.token}`,
+    },
+  };
+  return headers;
+}
+
+/**
  *
  * @param {*} searchString - the current search string
  * @returns song search results
  */
 async function search_songs(searchString) {
   try {
-    if (token_store.token == null || token_store.expires < Date.now()) {
-      const token = await get_token();
-      token_store.token = token.access_token;
-      token_store.expires = Date.now() + token.expires_in * 1000;
-    }
+    const headers = await getSpotifyHeaders();
 
     const search_url = `https://api.spotify.com/v1/search?q=${searchString}&type=track&limit=20`;
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${token_store.token}`,
-      },
-    };
 
     const response = await axios.get(search_url, headers);
     return response.data;
@@ -118,17 +127,7 @@ async function generate_recommendations(song, useCustomMLModel) {
   try {
     const song_id = song.id;
 
-    if (token_store.token == null || token_store.expires < Date.now()) {
-      const token = await get_token();
-      token_store.token = token.access_token;
-      token_store.expires = Date.now() + token.expires_in * 1000;
-    }
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${token_store.token}`,
-      },
-    };
+    const headers = await getSpotifyHeaders();
 
     if (useCustomMLModel) {
       const track_features = await getTrackFeatures(song, headers);
