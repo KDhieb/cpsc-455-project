@@ -9,13 +9,10 @@ router.get("/search/:searchString", async function (req, res, next) {
 });
 
 // GET generate song recommendations (maybe make this a PUT to cache the recommendations?)
-router.get(
-  "/recommendations/generate/:songId",
-  async function (req, res, next) {
-    const resp = await generate_recommendations(req.params.songId, true); // todo - change to false when ML model is implemented
-    return res.json(resp);
-  }
-);
+router.post("/recommendations/generate", async function (req, res, next) {
+  const resp = await generate_recommendations(req.body.song, true);
+  return res.json(resp);
+});
 
 // todo
 // GET scoreboard data

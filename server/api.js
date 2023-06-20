@@ -60,37 +60,94 @@ async function search_songs(searchString) {
 
 /**
  *
+ * @param {*} song - spotify song object to get features for
+ * @param {*} headers - headers for spotify api request
+ * @returns  - spotify song features
+ */
+async function getTrackFeatures(song, headers) {
+  const song_id = song.id;
+
+  const track_features = `https://api.spotify.com/v1/audio-features/${song_id}`;
+  track_features_response = await axios.get(track_features, headers);
+
+  const response_data = track_features_response.data;
+  const data = {
+    acousticness: response_data.acousticness,
+    danceability: response_data.danceability,
+    energy: response_data.energy,
+    instrumentalness: response_data.instrumentalness,
+    liveness: response_data.liveness,
+    loudness: response_data.loudness,
+    speechiness: response_data.speechiness,
+    tempo: response_data.tempo,
+    valence: response_data.valence,
+    popularity: song.popularity ?? 0,
+    year: song.album.release_date.split("-")[0] ?? 0,
+  };
+
+  return data;
+}
+
+/**
+ *
+ * @param {*} recommended_song_ids - list of spotify song ids
+ * @param {*} headers - headers for spotify api request
+ * @returns - list of spotify song objects
+ */
+async function getTracksFromIds(recommended_song_ids, headers) {
+  let track_ids_url = "https://api.spotify.com/v1/tracks?ids=";
+
+  let first = true;
+  for (const id of recommended_song_ids) {
+    track_ids_url += first ? "" : "%2C";
+    first = false;
+    track_ids_url += id;
+  }
+
+  const tracks_response = await axios.get(track_ids_url, headers);
+  return tracks_response.data;
+}
+
+/**
+ *
  * @param {*} song_id - spotify song id
- * @param {*} useSpotify - boolean to toggle use of spotify recommendation api or ML model
+ * @param {*} useCustomMLModel - boolean to toggle use of spotify recommendation api or ML model
  * @returns a list of recommended songs
  */
-async function generate_recommendations(song_id, useSpotify) {
-  if (useSpotify) {
-    try {
-      if (token_store.token == null || token_store.expires < Date.now()) {
-        const token = await get_token();
-        token_store.token = token.access_token;
-        token_store.expires = Date.now() + token.expires_in * 1000;
-      }
+async function generate_recommendations(song, useCustomMLModel) {
+  try {
+    const song_id = song.id;
 
+    if (token_store.token == null || token_store.expires < Date.now()) {
+      const token = await get_token();
+      token_store.token = token.access_token;
+      token_store.expires = Date.now() + token.expires_in * 1000;
+    }
+
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token_store.token}`,
+      },
+    };
+
+    if (useCustomMLModel) {
+      const track_features = await getTrackFeatures(song, headers);
+
+      const recommendation_url = "http://127.0.0.1:5000/recommend";
+
+      const ml_model_response = await axios.post(
+        recommendation_url,
+        track_features
+      );
+
+      return await getTracksFromIds(ml_model_response.data, headers);
+    } else {
       const search_url = `https://api.spotify.com/v1/recommendations?seed_tracks=${song_id}`;
-
-      const headers = {
-        headers: {
-          Authorization: `Bearer ${token_store.token}`,
-        },
-      };
-
       const response = await axios.get(search_url, headers);
       return response.data;
-    } catch (error) {
-      console.error(error);
-      return { error: error };
     }
-  } else {
-    // todo implement ML model
-    const recommendations = { recommendations: "recommendations" };
-    return recommendations;
+  } catch (error) {
+    console.error(error);
   }
 }
 
