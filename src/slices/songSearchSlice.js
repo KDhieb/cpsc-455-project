@@ -6,7 +6,7 @@ export const searchSongs = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/songs/search/${payload.searchString}`
+        `http://localhost:5001/songs/search/${payload.searchString}`
       );
 
       return {
@@ -35,13 +35,16 @@ export const fetchRecommendedSongs = createAsyncThunk(
         .resolvedOptions()
         .timeZone.split("/")[1];
 
-      await axios.post(`http://localhost:5000/songs/globallysearched/add`, {
+      await axios.post(`http://localhost:5001/songs/globallysearched/add`, {
         song: payload.song,
         location: approx_user_location ?? "Unknown",
       });
 
-      const resp = await axios.get(
-        `http://localhost:5000/songs/recommendations/generate/${payload.song.id}`
+      const resp = await axios.post(
+        `http://localhost:5001/songs/recommendations/generate`,
+        {
+          song: payload.song,
+        }
       );
 
       return {
