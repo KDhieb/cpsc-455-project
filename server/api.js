@@ -110,8 +110,8 @@ async function getTracksFromIds(recommended_song_ids, headers) {
 
 /**
  *
- * @param {*} song_id - spotify song id
- * @param {*} useCustomMLModel - boolean to toggle use of spotify recommendation api or ML model
+ * @param {*} song - spotify song object to generate recommendations for
+ * @param {*} useCustomMLModel - boolean to toggle use of custom ML model or spotify recommendations api
  * @returns a list of recommended songs
  */
 async function generate_recommendations(song, useCustomMLModel) {
