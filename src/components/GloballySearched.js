@@ -157,7 +157,7 @@ function Song({ song, handleSelect }) {
       onClick={songClickRedirect}
     >
       <Typography variant='p' sx={styles.carouselSongTitle}>
-        {song.id}
+        {song.name}
       </Typography>
       <Typography variant='p' sx={styles.carouselSongArtist}>
         {song.artists[0].name}
