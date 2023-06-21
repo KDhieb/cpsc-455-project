@@ -1,6 +1,5 @@
 import Carousel from "react-material-ui-carousel";
 import { Card, Paper, Typography, Container } from "@mui/material";
-import { sample_1_songs } from "../sample/sample";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {useEffect, useRef} from "react";
@@ -67,7 +66,7 @@ export default function GloballySearched() {
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
 
-  const nGroups = Math.floor(songs.length / 1);
+  const nGroups = Math.floor(songs.length / 3);
 
   const songGroups = [];
 
