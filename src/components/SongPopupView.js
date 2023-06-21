@@ -51,7 +51,7 @@ BootstrapDialogTitle.propTypes = {
 
 export default function SongPopupView({ isDisplayed, handleClose, song }) {
   const handleSpotifyClick = () => {
-    const url = song.external_urls.spotify;
+    const url = song.externalUrl;
     window.open(url, "_blank", "noreferrer");
   };
 
@@ -74,17 +74,17 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
           onClose={handleClose}
         >
           <Typography sx={{ paddingBottom: "5px" }} variant='h5'>
-            {song.name}
+            {song.songName}
           </Typography>
           <Typography variant='p' sx={{ color: "lightgray" }}>
-            {song.artists[0].name}
+            {song.artistName}
           </Typography>
         </BootstrapDialogTitle>
 
         <DialogContent sx={{ margin: "auto" }}>
           <PlayableAlbumCover
-            img={song.album.images[0].url}
-            url={song.preview_url}
+            img={song.albumImgSrc}
+            url={song.songPreview}
             size={250}
             mini={false}
           />
