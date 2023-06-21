@@ -2,11 +2,14 @@ import Carousel from "react-material-ui-carousel";
 import { Card, Paper, Typography, Container } from "@mui/material";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import useWindowDimensions from "../hooks/useWindowDimensions";
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 import SongPopupView from "./SongPopupView";
 import { useState } from "react";
-import {fetchGloballySearchedSongs, getGloballySearched} from "../slices/globallySearchedSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {
+  fetchGloballySearchedSongs,
+  getGloballySearched,
+} from "../slices/globallySearchedSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
   carousel: {
@@ -43,17 +46,17 @@ const styles = {
 };
 
 export default function GloballySearched() {
-  const songs = useSelector(state => state.globallySearched.globallySearched)
-  const songsStatus = useSelector(state => state.globallySearched.status)
+  const songs = useSelector((state) => state.globallySearched.globallySearched);
+  const songsStatus = useSelector((state) => state.globallySearched.status);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     if (songsStatus === "idle") {
-      dispatch(fetchGloballySearchedSongs())
+      dispatch(fetchGloballySearchedSongs());
     }
-  }, [dispatch])
+  }, [dispatch]);
 
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
@@ -61,12 +64,12 @@ export default function GloballySearched() {
   const carouselWidth = Math.min(1000, width * 0.8);
 
   let songWidth =
-      parseInt(styles.carouselSong.padding) * 2 +
-      parseInt(styles.carouselSong.width);
+    parseInt(styles.carouselSong.padding) * 2 +
+    parseInt(styles.carouselSong.width);
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
 
-  const nGroups = Math.floor(songs.length / 3);
+  const nGroups = Math.floor(songs.length / songsPerGroup);
 
   const songGroups = [];
 
@@ -89,43 +92,43 @@ export default function GloballySearched() {
   };
 
   return (
-      <div>
-        <Typography
-            noWrap={true}
-            align='center'
-            variant='h5'
-            style={{margin: "25px"}}
+    <div>
+      <Typography
+        noWrap={true}
+        align='center'
+        variant='h5'
+        style={{ margin: "25px" }}
+      >
+        Songs Searched for Globally
+      </Typography>
+      <Card sx={styles.carousel} id='carousel'>
+        <Carousel
+          animation='slide'
+          indicators={false}
+          duration={500}
+          autoPlay={true}
         >
-          Songs Searched for Globally
-        </Typography>
-        <Card sx={styles.carousel} id='carousel'>
-          <Carousel
-              animation='slide'
-              indicators={false}
-              duration={500}
-              autoPlay={true}
-          >
-            {songGroups.map((group, i) => {
-              return (
-                  <SongGroup
-                      key={i}
-                      songs={group}
-                      handleSelect={handleSelect}
-                      handleClose={handleClose}
-                  />
-              );
-            })}
-            {}
-          </Carousel>
-        </Card>
-        {displayPopup && selectedSong && (
-            <SongPopupView
-                song={selectedSong}
+          {songGroups.map((group, i) => {
+            return (
+              <SongGroup
+                key={i}
+                songs={group}
+                handleSelect={handleSelect}
                 handleClose={handleClose}
-                isDisplayed={displayPopup}
-            />
-        )}
-      </div>
+              />
+            );
+          })}
+          {}
+        </Carousel>
+      </Card>
+      {displayPopup && selectedSong && (
+        <SongPopupView
+          song={selectedSong}
+          handleClose={handleClose}
+          isDisplayed={displayPopup}
+        />
+      )}
+    </div>
   );
 }
 
