@@ -12,7 +12,7 @@ app = Flask(__name__)
 scaler = load('./recommendation-model/scaler.joblib')
 kmeans = load('./recommendation-model/kmeans.joblib')
 nearest_neighbors = load('./recommendation-model/nearest_neighbors.joblib')
-song_names = pd.read_csv('./recommendation-model/song_names.csv')
+song_ids = pd.read_csv('./recommendation-model/song_ids.csv')
 data_scaled = pd.read_csv('./recommendation-model/data_scaled.csv')
 
 @app.route("/recommend", methods=['POST'])
@@ -33,15 +33,15 @@ def recommend():
         "year": 1920
     }
     """
-    # The above is the exact data for the song 'Keep A Song In Your Soul'. 
+    # The above is the exact data for the song 'Keep A Song In Your Soul' or id: "0cS0A1fUEUd1EW3FcF8AEI". 
     # The below is an example of the response. We should see the ML model recommend the same song to know NearestNeighbour is working
     """
     [
-        "Keep A Song In Your Soul",
-        "Neráida, tsámiko",
-        "Trombonology",
-        "Lullaby Of The Leaves",
-        "Black and Tan Fantasy"
+        "0cS0A1fUEUd1EW3FcF8AEI",
+        "13Cp2OYw0AXbb39kj4vony",
+        "2Ve5waZJJrExJDHajoxDb1",
+        "3H6wCLijWnyr4Wq9E3mmNi",
+        "0dFIPCkgtDTapTIN3PgQON"
     ]
     """
 
@@ -66,11 +66,11 @@ def recommend():
     distances, indices = nearest_neighbors.kneighbors(requested_song_scaled)
 
     # Get the names of the nearest songs
-    similar_songs = song_names.iloc[indices[0]]
+    similar_songs = song_ids.iloc[indices[0]]
 
     print(similar_songs)
 
     # Return the song names
-    result = jsonify(similar_songs['name'].to_list())
+    result = jsonify(similar_songs['id'].to_list())
 
     return result

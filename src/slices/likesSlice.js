@@ -11,7 +11,7 @@ export const updateLikes = createAsyncThunk(
     const songsLiked = { ...state.songsLiked };
     songsLiked[songId] = isLiked;
 
-    await axios.put(`http://localhost:5000/songs/likes/update`, {
+    await axios.put(`http://localhost:5001/songs/likes/update`, {
       songId: songId,
       isLiked: payload.isLiked,
     });
