@@ -157,14 +157,14 @@ function Song({ song, handleSelect }) {
       onClick={songClickRedirect}
     >
       <Typography variant='p' sx={styles.carouselSongTitle}>
-        {song.songName}
+        {song.id}
       </Typography>
       <Typography variant='p' sx={styles.carouselSongArtist}>
-        {song.artistName}
+        {song.artists[0].name}
       </Typography>
       <PlayableAlbumCover
-        url={song.songPreview}
-        img={song.albumImgSrc}
+        url={song.preview_url}
+        img={song.album.images[0].url}
         mini={false}
         albumClickedCallback={() => (albumClickedRef.current = true)}
       />
