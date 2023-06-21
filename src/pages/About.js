@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 export const About = () => {
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
             <Typography variant="h4" align="center" style={{ margin: "25px" }}>
                 About Vibesphere
             </Typography>

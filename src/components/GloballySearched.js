@@ -1,11 +1,12 @@
 import Carousel from "react-material-ui-carousel";
 import { Card, Paper, Typography, Container } from "@mui/material";
-import { sample_1_songs } from "../sample/sample";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import useWindowDimensions from "../hooks/useWindowDimensions";
-import { useRef } from "react";
+import {useEffect, useRef} from "react";
 import SongPopupView from "./SongPopupView";
 import { useState } from "react";
+import {fetchGloballySearchedSongs} from "../slices/globallySearchedSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const styles = {
   carousel: {
@@ -42,8 +43,17 @@ const styles = {
 };
 
 export default function GloballySearched() {
-  var songs = sample_1_songs.tracks.items;
-  const { width } = useWindowDimensions();
+  const songs = useSelector(state => state.globallySearched.globallySearched)
+  const songsStatus = useSelector(state => state.globallySearched.status)
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    if (songsStatus === "idle") {
+      dispatch(fetchGloballySearchedSongs())
+    }
+  }, [songsStatus, dispatch])
+
+  const {width} = useWindowDimensions();
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
@@ -51,8 +61,8 @@ export default function GloballySearched() {
   const carouselWidth = Math.min(1000, width * 0.8);
 
   let songWidth =
-    parseInt(styles.carouselSong.padding) * 2 +
-    parseInt(styles.carouselSong.width);
+      parseInt(styles.carouselSong.padding) * 2 +
+      parseInt(styles.carouselSong.width);
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
 
@@ -79,43 +89,43 @@ export default function GloballySearched() {
   };
 
   return (
-    <div>
-      <Typography
-        noWrap={true}
-        align='center'
-        variant='h5'
-        style={{ margin: "25px" }}
-      >
-        Songs Searched for Globally
-      </Typography>
-      <Card sx={styles.carousel} id='carousel'>
-        <Carousel
-          animation='slide'
-          indicators={false}
-          duration={500}
-          autoPlay={true}
+      <div>
+        <Typography
+            noWrap={true}
+            align='center'
+            variant='h5'
+            style={{margin: "25px"}}
         >
-          {songGroups.map((group, i) => {
-            return (
-              <SongGroup
-                key={i}
-                songs={group}
-                handleSelect={handleSelect}
+          Songs Searched for Globally
+        </Typography>
+        <Card sx={styles.carousel} id='carousel'>
+          <Carousel
+              animation='slide'
+              indicators={false}
+              duration={500}
+              autoPlay={true}
+          >
+            {songGroups.map((group, i) => {
+              return (
+                  <SongGroup
+                      key={i}
+                      songs={group}
+                      handleSelect={handleSelect}
+                      handleClose={handleClose}
+                  />
+              );
+            })}
+            {}
+          </Carousel>
+        </Card>
+        {displayPopup && selectedSong && (
+            <SongPopupView
+                song={selectedSong}
                 handleClose={handleClose}
-              />
-            );
-          })}
-          {}
-        </Carousel>
-      </Card>
-      {displayPopup && selectedSong && (
-        <SongPopupView
-          song={selectedSong}
-          handleClose={handleClose}
-          isDisplayed={displayPopup}
-        />
-      )}
-    </div>
+                isDisplayed={displayPopup}
+            />
+        )}
+      </div>
   );
 }
 
@@ -158,7 +168,7 @@ function Song({ song, handleSelect }) {
         mini={false}
         albumClickedCallback={() => (albumClickedRef.current = true)}
       />
-      <p>{`📍 Canada`}</p>
+      <p>{`📍 ${song.location}`}</p>
     </Container>
   );
 }

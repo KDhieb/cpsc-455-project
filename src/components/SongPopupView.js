@@ -77,7 +77,7 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
             {song.name}
           </Typography>
           <Typography variant='p' sx={{ color: "lightgray" }}>
-            {song.artists[0].name}
+            {song.album.name}
           </Typography>
         </BootstrapDialogTitle>
 
