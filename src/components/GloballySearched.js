@@ -5,7 +5,7 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 import {useEffect, useRef} from "react";
 import SongPopupView from "./SongPopupView";
 import { useState } from "react";
-import {fetchGloballySearchedSongs, getGloballySearched} from "../slices/globallySearchedSlice";
+import {fetchGloballySearchedSongs} from "../slices/globallySearchedSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 const styles = {
@@ -51,7 +51,7 @@ export default function GloballySearched() {
     if (songsStatus === "idle") {
       dispatch(fetchGloballySearchedSongs())
     }
-  }, [dispatch])
+  }, [songsStatus, dispatch])
 
   const {width} = useWindowDimensions();
 
