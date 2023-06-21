@@ -11,7 +11,7 @@ export const fetchGloballySearchedSongs = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             return await axios.get(
-                'http://localhost:5000/songs/globallysearched'
+                'http://localhost:5001/songs/globallysearched'
             );
         } catch (error) {
             console.error(error);
