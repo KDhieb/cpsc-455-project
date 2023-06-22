@@ -19,7 +19,7 @@ export default function LikeButton({ song, favoritedCallback = () => {} }) {
 
   const handleFavorite = async () => {
     favoritedCallback();
-    await dispatch(updateLikes({ songId: song.id, isLiked: !favorited }));
+    await dispatch(updateLikes({ song , isLiked: !favorited }));
   };
 
   return (
