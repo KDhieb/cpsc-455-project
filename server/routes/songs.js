@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const { search_songs, generate_recommendations } = require("../api");
-const scoreboardTestData = require("../data/scoreboardTestData");
 const LikedSongs = require("../models/likedSongs");
 
 // todo remove when we seed the db with the proper # of songs
