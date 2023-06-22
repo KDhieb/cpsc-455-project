@@ -13,7 +13,7 @@ export const ScoreboardSongCard = ({ song, ranking }) => {
         />
       </TableCell>
       <TableCell>{song.songName}</TableCell>
-      <TableCell>{song.artisName}</TableCell>
+      <TableCell>{song.artistName}</TableCell>
       <TableCell>{song.likes}</TableCell>
     </TableRow>
   );
