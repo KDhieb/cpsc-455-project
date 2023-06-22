@@ -55,7 +55,7 @@ export const Scoreboard = () => {
   const [totalPages, setTotalPages] = useState(1)
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/songs/scoreboard?page=${currentPage}`).then((response) => {
+    axios.get(`http://localhost:5001/songs/scoreboard?page=${currentPage}`).then((response) => {
       const { songs, totalPages } = response.data;
       setTotalPages(totalPages);
       setScoreboardData(songs);
