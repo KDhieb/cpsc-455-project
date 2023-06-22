@@ -7,7 +7,7 @@ export const ScoreboardSongCard = ({ song, ranking }) => {
       <TableCell>{ranking}</TableCell>
       <TableCell>
         <PlayableAlbumCover
-          url={song.preview_url}
+          url={song.previewURL}
           img={song.albumCover}
           mini={false}
         />
