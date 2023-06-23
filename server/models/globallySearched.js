@@ -33,7 +33,6 @@ const globallySearchedSchema = new mongoose.Schema(
     },
     preview_url: {
       type: String,
-      required: true,
     },
     external_urls: {
       spotify: {
@@ -50,7 +49,7 @@ const globallySearchedSchema = new mongoose.Schema(
 );
 
 const GloballySearched = mongoose.model(
-  "GloballySearched",
+  "globallySearchedSongs",
   globallySearchedSchema
 );
 module.exports = GloballySearched;

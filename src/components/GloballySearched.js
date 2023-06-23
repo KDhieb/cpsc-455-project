@@ -26,6 +26,7 @@ const styles = {
     width: "240px",
     height: "350px",
     alignItems: "left",
+    justifyContent: "center",
     padding: "0px 25px",
     margin: "0px 0px",
     display: "flex",
@@ -65,7 +66,7 @@ export default function GloballySearched() {
     parseInt(styles.carouselSong.width);
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
-  const nGroups = Math.floor(songs.length / 3);
+  const nGroups = Math.floor(songs.length / 4);
   const songGroups = [];
 
   for (let i = 0; i < nGroups; i++) {
