@@ -29,7 +29,7 @@ export const ScoreboardSongCard = ({ song, ranking }) => {
 
   return (
   <>
-    <TableRow onClick={handleClick}>
+    <TableRow onClick={handleClick} hover={true} >
       <TableCell>{ranking}</TableCell>
       <TableCell>
         <PlayableAlbumCover
