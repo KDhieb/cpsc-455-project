@@ -51,13 +51,14 @@ BootstrapDialogTitle.propTypes = {
 
 export default function SongPopupView({ isDisplayed, handleClose, song }) {
   const handleSpotifyClick = () => {
-    const url = song.external_urls.spotify;
+    const url = song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
     window.open(url, "_blank", "noreferrer");
   };
 
   const handleShare = () => {
     // todo - add logic for share
   };
+
 
   return (
     <div>
