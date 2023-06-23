@@ -276,10 +276,8 @@ router.put("/likes/update", async function (req, res) {
   try {
     let likedSong = await LikedSongs.findOne({ spotifyId: song.id });
     if (likedSong) {
-      if (isLiked) {
-        likedSong.likes++;
-        await likedSong.save();
-      }
+      isLiked ? likedSong.likes++ : likedSong.likes--;
+      await likedSong.save();
     } else {
       likedSong = new LikedSongs({
         albumCover: song.album.images[0].url,
