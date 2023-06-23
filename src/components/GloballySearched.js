@@ -66,7 +66,7 @@ export default function GloballySearched() {
     parseInt(styles.carouselSong.width);
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
-  const nGroups = Math.floor(songs.length / 4);
+  const nGroups = Math.floor(songs.length / songsPerGroup);
   const songGroups = [];
 
   for (let i = 0; i < nGroups; i++) {
