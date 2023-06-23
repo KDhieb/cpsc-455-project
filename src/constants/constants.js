@@ -1,5 +1,5 @@
 export const SCOREBOARD_HEADERS = {
-  ranking: "Ranking",
+  ranking: "",
   album: "Album",
   name: "Song Name",
   artist: "Artist",
