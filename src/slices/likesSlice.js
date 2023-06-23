@@ -4,15 +4,15 @@ import axios from "axios";
 export const updateLikes = createAsyncThunk(
   "likes/updateLikes",
   async (payload, thunkAPI) => {
-    const songId = payload.songId;
+    const song = payload.song;
     const isLiked = payload.isLiked;
 
     const state = thunkAPI.getState().likes;
     const songsLiked = { ...state.songsLiked };
-    songsLiked[songId] = isLiked;
+    songsLiked[song.id] = isLiked;
 
     await axios.put(`http://localhost:5001/songs/likes/update`, {
-      songId: songId,
+      song: song,
       isLiked: payload.isLiked,
     });
 

@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { search_songs, generate_recommendations } = require("../api");
+const LikedSongs = require("../models/likedSongs");
 
 // todo remove when we seed the db with the proper # of songs
 let globallySearchedSongs = [
@@ -194,12 +195,24 @@ router.post("/recommendations/generate", async function (req, res, next) {
   return res.json(resp);
 });
 
-// todo
 // GET scoreboard data
-router.get("/scoreboard", function (req, res, next) {
-  // call database
-  const scoreboard = { scoreboard: "scoreboard" };
-  return res.json(scoreboard);
+router.get("/scoreboard", async function (req, res, next) {
+  const page = parseInt(req.query.page) || 1;
+  const songsPerPage = 5; 
+
+  try {
+    const totalSongs = await LikedSongs.countDocuments();
+    const totalPages = Math.ceil(totalSongs / songsPerPage);
+
+    const songs = await LikedSongs.find()
+      .sort({ likes: -1 }) // Sort by likes in desc order
+      .skip((page - 1) * songsPerPage)
+      .limit(songsPerPage);
+
+    res.json({ songs, totalPages });
+  } catch (error) {
+    res.status(500).json({ message: 'Error getting liked songs' });
+  }
 });
 
 // GET globally searched songs
@@ -256,13 +269,30 @@ router.post("/globallysearched/add", function (req, res, next) {
   return res.status(201).json(data);
 });
 
-// todo
 // PUT update like (for scoreboard)
-router.put("/likes/update", function (req, res, next) {
-  const songID = req.body.songID;
-  const isLiked = req.body.isLiked;
-  // update database
-  return res.status(201).json({ songID: songID, like: isLiked });
+router.put("/likes/update", async function (req, res) {
+  const { song, isLiked } = req.body;
+
+  try {
+    let likedSong = await LikedSongs.findOne({ spotifyId: song.id });
+    if (likedSong) {
+      isLiked ? likedSong.likes++ : likedSong.likes--;
+      await likedSong.save();
+    } else {
+      likedSong = new LikedSongs({
+        albumCover: song.album.images[0].url,
+        songName: song.name,
+        artistName: song.artists[0].name,
+        likes: 1,
+        previewURL: song.preview_url,
+        spotifyId: song.id
+      });
+      await likedSong.save();
+    }
+    res.status(201).json({ song: likedSong, like: isLiked })
+  } catch (error) {
+    res.status(400).send();
+  }
 });
 
 module.exports = router;
