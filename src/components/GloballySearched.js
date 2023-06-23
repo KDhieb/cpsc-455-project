@@ -5,11 +5,8 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 import { useEffect, useRef } from "react";
 import SongPopupView from "./SongPopupView";
 import { useState } from "react";
-import {
-  fetchGloballySearchedSongs,
-  getGloballySearched,
-} from "../slices/globallySearchedSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {fetchGloballySearchedSongs} from "../slices/globallySearchedSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const styles = {
   carousel: {
@@ -54,7 +51,7 @@ export default function GloballySearched() {
     if (songsStatus === "idle") {
       dispatch(fetchGloballySearchedSongs());
     }
-  }, [dispatch]);
+  }, [songsStatus, dispatch])
 
   const { width } = useWindowDimensions();
 
@@ -160,14 +157,14 @@ function Song({ song, handleSelect }) {
       onClick={songClickRedirect}
     >
       <Typography variant='p' sx={styles.carouselSongTitle}>
-        {song.songName}
+        {song.name}
       </Typography>
       <Typography variant='p' sx={styles.carouselSongArtist}>
-        {song.artistName}
+        {song.artists[0].name}
       </Typography>
       <PlayableAlbumCover
-        url={song.songPreview}
-        img={song.albumImgSrc}
+        url={song.preview_url}
+        img={song.album.images[0].url}
         mini={false}
         albumClickedCallback={() => (albumClickedRef.current = true)}
       />
