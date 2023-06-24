@@ -74,11 +74,13 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
           id='customized-dialog-title'
           onClose={handleClose}
         >
-          <Typography sx={{ paddingBottom: "5px" }} variant='h5'>
-            {song.name}
-          </Typography>
-          <Typography variant='p' sx={{ color: "lightgray" }}>
-            {song.album.name}
+          <Typography component="div">
+            <Typography sx={{ paddingBottom: "5px" }} variant="h5">
+              {song.name}
+            </Typography>
+            <Typography variant="p" sx={{ color: "lightgray" }}>
+              {song.album.name}
+            </Typography>
           </Typography>
         </BootstrapDialogTitle>
 
