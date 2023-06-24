@@ -76,10 +76,10 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
         >
           <Typography component="div">
             <Typography sx={{ paddingBottom: "5px" }} variant="h5">
-              {song.name}
+              {song.name ?? song.songName}
             </Typography>
             <Typography variant="p" sx={{ color: "lightgray" }}>
-              {song.album.name}
+              {song.artists[0].name}
             </Typography>
           </Typography>
         </BootstrapDialogTitle>
