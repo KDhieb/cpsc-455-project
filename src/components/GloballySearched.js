@@ -5,8 +5,8 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 import { useEffect, useRef } from "react";
 import SongPopupView from "./SongPopupView";
 import { useState } from "react";
-import {fetchGloballySearchedSongs} from "../slices/globallySearchedSlice";
-import {useDispatch, useSelector} from "react-redux";
+import { fetchGloballySearchedSongs } from "../slices/globallySearchedSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
   carousel: {
@@ -24,8 +24,9 @@ const styles = {
     "&:hover": { backgroundColor: "#193044" },
     wordWrap: "normal",
     width: "240px",
-    height: "300px",
+    height: "350px",
     alignItems: "left",
+    justifyContent: "center",
     padding: "0px 25px",
     margin: "0px 0px",
     display: "flex",
@@ -51,7 +52,7 @@ export default function GloballySearched() {
     if (songsStatus === "idle") {
       dispatch(fetchGloballySearchedSongs());
     }
-  }, [songsStatus, dispatch])
+  }, [songsStatus, dispatch]);
 
   const { width } = useWindowDimensions();
 
@@ -65,9 +66,7 @@ export default function GloballySearched() {
     parseInt(styles.carouselSong.width);
 
   const songsPerGroup = Math.floor(carouselWidth / songWidth);
-
   const nGroups = Math.floor(songs.length / songsPerGroup);
-
   const songGroups = [];
 
   for (let i = 0; i < nGroups; i++) {
@@ -92,15 +91,15 @@ export default function GloballySearched() {
     <div>
       <Typography
         noWrap={true}
-        align='center'
-        variant='h5'
+        align="center"
+        variant="h5"
         style={{ margin: "25px" }}
       >
         Songs Searched for Globally
       </Typography>
-      <Card sx={styles.carousel} id='carousel'>
+      <Card sx={styles.carousel} id="carousel">
         <Carousel
-          animation='slide'
+          animation="slide"
           indicators={false}
           duration={500}
           autoPlay={true}
@@ -131,7 +130,7 @@ export default function GloballySearched() {
 
 function SongGroup({ songs, handleSelect }) {
   return (
-    <Paper sx={styles.carouselSongGroup} className='carousel-song-group'>
+    <Paper sx={styles.carouselSongGroup} className="carousel-song-group">
       {songs.map((song, i) => {
         return <Song key={i} song={song} handleSelect={handleSelect} />;
       })}
@@ -153,13 +152,13 @@ function Song({ song, handleSelect }) {
   return (
     <Container
       sx={styles.carouselSong}
-      className='carousel-song'
+      className="carousel-song"
       onClick={songClickRedirect}
     >
-      <Typography variant='p' sx={styles.carouselSongTitle}>
-        {song.name}
+      <Typography variant="p" sx={styles.carouselSongTitle}>
+        {song.songName}
       </Typography>
-      <Typography variant='p' sx={styles.carouselSongArtist}>
+      <Typography variant="p" sx={styles.carouselSongArtist}>
         {song.artists[0].name}
       </Typography>
       <PlayableAlbumCover

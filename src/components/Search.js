@@ -71,18 +71,18 @@ function Search() {
       <ThemeProvider theme={lightTheme}>
         <Grid
           container
-          direction='row'
-          alignItems='center'
-          justifyContent='center'
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
         >
           <Grid item>
             <label>Song Name:</label>
           </Grid>
           <Grid item p={3}>
             <TextField
-              id='outlined-basic'
-              variant='outlined'
-              size='small'
+              id="outlined-basic"
+              variant="outlined"
+              size="small"
               value={songSearchString}
               onChange={(e) => {
                 handleSearch(e);
@@ -91,8 +91,8 @@ function Search() {
           </Grid>
           <Grid>
             <Button
-              variant='contained'
-              color='success'
+              variant="contained"
+              color="success"
               onClick={() => {
                 handleClickSearch();
               }}
