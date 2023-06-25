@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -12,6 +12,7 @@ import PlayableAlbumCover from "./PlayableAlbumCover";
 import { Share } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
+import { Snackbar } from '@mui/material';
 import LikeButton from "./LikeButton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -50,13 +51,16 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function SongPopupView({ isDisplayed, handleClose, song }) {
+  const [openShare, setOpenShare] = useState(false);
+  const url = song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
+  
   const handleSpotifyClick = () => {
-    const url = song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
     window.open(url, "_blank", "noreferrer");
   };
 
   const handleShare = () => {
-    // todo - add logic for share
+    setOpenShare(true)
+    navigator.clipboard.writeText(url);
   };
 
 
@@ -108,6 +112,18 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
           <IconButton size={"large"} onClick={handleShare}>
             <Share fontSize="'large" />
           </IconButton>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            open={openShare}
+            onClose={() => setOpenShare(false)}
+            autoHideDuration={1500}
+            message="Copied Spotify link!"
+            ContentProps={{
+              style: {
+                backgroundColor: 'black',
+                color: 'white',
+              }}}
+          />
         </DialogActions>
       </BootstrapDialog>
     </div>

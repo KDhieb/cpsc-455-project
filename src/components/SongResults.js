@@ -26,7 +26,6 @@ export default function SongResults({
   };
 
   const handleFavoritedCallback = () => {
-    // todo add logic for favorite
     favoritedRef.current = true;
   };
 
