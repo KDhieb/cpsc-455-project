@@ -7,6 +7,7 @@ import SongPopupView from "./SongPopupView";
 import { useState } from "react";
 import { fetchGloballySearchedSongs } from "../slices/globallySearchedSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { createSpotifyFormattedSongObject } from "../utils/utils";
 
 const styles = {
   carousel: {
@@ -79,7 +80,8 @@ export default function GloballySearched() {
   }
 
   const handleSelect = (song) => {
-    setSelectedSong(song);
+    const songObject = createSpotifyFormattedSongObject(song.spotifyId, song.songName, song.artistName, song.albumName, song.albumCover, song.previewURL, null);
+    setSelectedSong(songObject);
     setDisplayPopup(true);
   };
 

@@ -44,6 +44,10 @@ const globallySearchedSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    spotifyId: {
+      type: String,
+      required: true,
+    }
   },
   { timestamps: true }
 );

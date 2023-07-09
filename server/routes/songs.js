@@ -68,6 +68,7 @@ router.post("/globallysearched/add", async function (req, res, next) {
       spotify: song.external_urls.spotify,
     },
     location: location,
+    spotifyId : song.id
   });
 
   const data = await globallySearchedSong.save();
