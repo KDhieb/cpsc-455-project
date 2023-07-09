@@ -41,7 +41,7 @@ router.get("/globallysearched", async function (req, res, next) {
   try {
     const globallySearchedSongs = await GloballySearchedSchema.find().sort({
       createdAt: -1,
-    });
+    }).limit(12);
 
     return res.json({ globallySearchedSongs });
   } catch (error) {
