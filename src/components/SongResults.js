@@ -60,7 +60,6 @@ export default function SongResults({
                     maxHeight: "500px",
                     overflow: "hidden",
                     overflowY: "scroll",
-                    // scrollbarColor: "rgb(5, 30, 52)",
                     "&::-webkit-scrollbar": {
                         width: "10px"
                     },
