@@ -39,30 +39,39 @@ export default function SongResults({
     }
   };
 
-  return (
+    return (
     <Box display='flex' justifyContent='center' sx={{ mb: 2 }}>
-      <Paper
-        className='results-container'
-        elevation={3}
-        sx={{ borderRadius: 2, overflow: "hidden", margin: "10px 10px" }}
-      >
-        <List
-          className='results-list'
-          sx={{
-            width: "100%",
-            maxWidth: "md",
-            bgcolor: "background.paper",
-            maxHeight: "500px",
-            overflow: "hidden",
-            overflowY: "scroll",
-          }}
+        <Paper
+            className='results-container'
+            elevation={3}
+            sx={{ borderRadius: 2, overflow: "hidden", margin: "10px 10px"}}
         >
-          <ListSubheader sx={{ marginLeft: 2 }}>
-            {isSearchResults
-              ? "Search Results"
-              : `Songs similar to: ${selectedSongFromSearch.name} by ${selectedSongFromSearch.artists[0].name}`}
-          </ListSubheader>
-
+            <ListSubheader sx={{ paddingLeft: 3 }}>
+                {isSearchResults
+                    ? "Search Results"
+                    : `Songs similar to: ${selectedSongFromSearch.name} by ${selectedSongFromSearch.artists[0].name}`}
+            </ListSubheader>
+            <List
+                className='results-list'
+                sx={{
+                    width: "100%",
+                    maxWidth: "md",
+                    bgcolor: "background.paper",
+                    maxHeight: "500px",
+                    overflow: "hidden",
+                    overflowY: "scroll",
+                    "&::-webkit-scrollbar": {
+                        width: "10px"
+                    },
+                    "&::-webkit-scrollbar-track": {
+                        background: "rgb(5, 30, 52)"
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                        background: "rgb(255, 255, 255,.8)",
+                        borderRadius: "10px"
+                    }
+                }}
+            >
           {songs.map((song) => (
             <ListItemButton
               key={song.id}
