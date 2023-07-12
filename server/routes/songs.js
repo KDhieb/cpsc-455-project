@@ -53,7 +53,6 @@ router.get("/globallysearched", async function (req, res, next) {
 router.post("/globallysearched/add", async function (req, res, next) {
   const song = req.body.song;
   const location = req.body.location;
-  const limit = 8;
 
   let globallySearchedSong = new GloballySearchedSchema({
     albumCover: song.album.images[0].url,
