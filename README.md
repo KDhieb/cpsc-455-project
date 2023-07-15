@@ -24,7 +24,6 @@ Vibesphere is a Spotify song recommender application that is aimed at music love
 - Recommending a list of songs similar to a single user inputted song
 - Liking/favouriting songs
 - User can play a preview of the song
-- Filter songs by certain metadata
 - Leaderboard for most liked songs
 - Displaying what songs have been searched globally on homepage
 
