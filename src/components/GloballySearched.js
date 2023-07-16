@@ -80,7 +80,15 @@ export default function GloballySearched() {
   }
 
   const handleSelect = (song) => {
-    const songObject = createSpotifyFormattedSongObject(song.spotifyId, song.songName, song.artistName, song.albumName, song.albumCover, song.previewURL, null);
+    const songObject = createSpotifyFormattedSongObject(
+      song.spotifyId,
+      song.songName,
+      song.artists[0].name,
+      song.albumName,
+      song.albumCover,
+      song.previewURL,
+      null
+    );
     setSelectedSong(songObject);
     setDisplayPopup(true);
   };
