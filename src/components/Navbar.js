@@ -4,8 +4,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import { signinUser } from "../slices/userSlice";
+import { useEffect } from "react";
 
-const Navbar = () => {
+export default function Navbar() {
   const pages = [
     { text: "Home", href: "/", key: 1 },
     { text: "About", href: "/about", key: 2 },
@@ -13,6 +16,13 @@ const Navbar = () => {
   ];
 
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      dispatch(signinUser(user));
+    }
+  }, [isAuthenticated, user, dispatch]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -72,6 +82,4 @@ const Navbar = () => {
       </AppBar>
     </Box>
   );
-};
-
-export default Navbar;
+}
