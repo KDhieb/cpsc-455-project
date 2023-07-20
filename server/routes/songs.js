@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 const { search_songs, generate_recommendations } = require("../api");
-const LikedSongs = require("../models/songSchema");
+const { Song, LikedSongs } = require("../models/songSchema");
 const GloballySearchedSchema = require("../models/globallySearched");
-const Song = require('../models/song'); // Import your Song model
-const auth = require('../middleware/auth'); // Assuming you have auth middleware
+const auth = require("../middleware/auth");
 
 // Create a new song - ChatGPT used in helping create this method
-router.post('/', auth, async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { spotifyId } = req.body;
   let song = await Song.findOne({ spotifyId });
 
@@ -57,9 +56,11 @@ router.get("/scoreboard", async function (req, res, next) {
 // GET globally searched songs
 router.get("/globallysearched", async function (req, res, next) {
   try {
-    const globallySearchedSongs = await GloballySearchedSchema.find().sort({
-      createdAt: -1,
-    }).limit(12);
+    const globallySearchedSongs = await GloballySearchedSchema.find()
+      .sort({
+        createdAt: -1,
+      })
+      .limit(12);
 
     return res.json({ globallySearchedSongs });
   } catch (error) {
@@ -85,7 +86,7 @@ router.post("/globallysearched/add", async function (req, res, next) {
       spotify: song.external_urls.spotify,
     },
     location: location,
-    spotifyId : song.id
+    spotifyId: song.id,
   });
 
   const data = await globallySearchedSong.save();
