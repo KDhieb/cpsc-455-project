@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const likedSongsSchema = new mongoose.Schema({
+
+const SongSchema = new mongoose.Schema({
     albumCover: {
         type: String,
         required: true,
@@ -25,5 +26,6 @@ const likedSongsSchema = new mongoose.Schema({
     }
 })
 
-const LikedSongs = mongoose.model("LikedSongs", likedSongsSchema);
+const LikedSongs = mongoose.model("LikedSongs", SongSchema);
+
 module.exports = LikedSongs;
