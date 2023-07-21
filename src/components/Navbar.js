@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { signinUser } from "../slices/userSlice";
+import { signinUser, clearUser } from "../slices/userSlice";
 import { useEffect } from "react";
 
 export default function Navbar() {
@@ -15,14 +15,22 @@ export default function Navbar() {
     { text: "Scoreboard", href: "/scoreboard", key: 3 },
   ];
 
-  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+  const {
+    loginWithRedirect,
+    user,
+    isAuthenticated,
+    logout,
+    getAccessTokenWithPopup,
+  } = useAuth0();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      dispatch(signinUser(user));
+      dispatch(signinUser({ user, getAccessTokenWithPopup }));
+    } else {
+      dispatch(clearUser());
     }
-  }, [isAuthenticated, user, dispatch]);
+  }, [isAuthenticated]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
