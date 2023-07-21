@@ -29,6 +29,14 @@ export const signinUser = createAsyncThunk(
   }
 );
 
+// Create user playlist - add playlist id response to state array
+
+// Add song to playlist - POST song first, then take playlist id from menu and song id from POST's response and PUT to "/:playlistId"
+
+// Remove song from playlist - send spotify ID in body and delete matching from playlist
+
+// Delete user playlist
+
 const userSlice = createSlice({
   name: "user",
   initialState: { user: null, loading: "idle", error: null },

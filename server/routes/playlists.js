@@ -31,4 +31,35 @@ router.get("/:playlistId/songs", async (req, res) => {
   res.send(playlist.songs);
 });
 
+// Remove a song from a playlist
+router.delete("/:playlistId/songs", auth, async (req, res) => {
+  const { playlistId } = req.params;
+  const { spotifyId } = req.body; // Receiving Spotify ID instead of songId
+
+  try {
+    const playlist = await Playlist.findById(playlistId);
+
+    if (!playlist) {
+      return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    const songIndex = playlist.songs.findIndex(
+      (song) => song.spotifyId === spotifyId
+    );
+
+    if (songIndex === -1) {
+      return res
+        .status(404)
+        .json({ message: "Song not found in the playlist" });
+    }
+
+    playlist.songs.splice(songIndex, 1);
+    await playlist.save();
+
+    res.json(playlist.songs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
