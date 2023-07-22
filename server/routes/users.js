@@ -19,14 +19,12 @@ router.post("/signin", auth, async (req, res) => {
     }
 
     // Populate playlists and songs inside each playlist
-    await user
-      .populate({
-        path: "playlists",
-        populate: {
-          path: "songs",
-        },
-      })
-      .execPopulate();
+    user = await User.findOne({ email }).populate({
+      path: "playlists",
+      populate: {
+        path: "songs",
+      },
+    });
 
     res.json(user);
   } catch (err) {
