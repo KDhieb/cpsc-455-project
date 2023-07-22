@@ -66,7 +66,7 @@ router.delete("/:playlistId/songs", auth, async (req, res) => {
   const { spotifyId } = req.body; // Receiving Spotify ID instead of songId
 
   try {
-    const playlist = await Playlist.findById(playlistId);
+    const playlist = await Playlist.findById(playlistId).populate("songs");
 
     if (!playlist) {
       return res.status(404).json({ message: "Playlist not found" });
@@ -85,7 +85,7 @@ router.delete("/:playlistId/songs", auth, async (req, res) => {
     playlist.songs.splice(songIndex, 1);
     await playlist.save();
 
-    res.status(204);
+    res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
