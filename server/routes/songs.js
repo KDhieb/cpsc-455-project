@@ -8,9 +8,9 @@ const auth = require("../middleware/auth");
 // Create a new song - ChatGPT used in helping create this method
 router.post("/", auth, async (req, res) => {
   const { spotifyId } = req.body;
-  let song = await Song.findOne({ spotifyId });
 
   try {
+    let song = await Song.findOne({ spotifyId });
     if (!song) {
       song = new Song(req.body);
       await song.save();

@@ -1,6 +1,7 @@
 // ChatGPT was used in helping create this file
 const express = require("express");
 const User = require("../models/userSchema");
+const Playlist = require("../models/playlistSchema");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
@@ -17,6 +18,16 @@ router.post("/signin", auth, async (req, res) => {
       await user.save();
     }
 
+    // Populate playlists and songs inside each playlist
+    await user
+      .populate({
+        path: "playlists",
+        populate: {
+          path: "songs",
+        },
+      })
+      .execPopulate();
+
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -29,7 +40,7 @@ router.get("/:email/playlists", async (req, res) => {
 
   try {
     const user = await User.findOne({ email }).populate("playlists");
-    res.json(user.playlists);
+    res.json(user.playlists); //TODO: Not sure if populating songs is needed here
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -50,7 +61,14 @@ router.post("/:email/playlists", auth, async (req, res) => {
     user.playlists.push(playlistId);
     await user.save();
 
-    res.json(user.playlists);
+    // Find the newly added playlist
+    const playlist = await Playlist.findById(playlistId).populate("songs");
+
+    if (!playlist) {
+      return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    res.json(playlist);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -71,7 +89,7 @@ router.delete("/:email/playlists", auth, async (req, res) => {
     user.playlists.pull(playlistId);
     await user.save();
 
-    res.json(user.playlists);
+    res.status(204);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
