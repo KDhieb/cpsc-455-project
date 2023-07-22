@@ -15,7 +15,6 @@ const SongSchema = new mongoose.Schema({
   },
   likes: {
     type: Number,
-    required: true,
   },
   previewURL: {
     type: String,
@@ -27,6 +26,6 @@ const SongSchema = new mongoose.Schema({
 });
 
 const LikedSongs = mongoose.model("LikedSongs", SongSchema);
-const Song = mongoose.model("Songs", SongSchema);
+const Song = mongoose.model("Song", SongSchema);
 
-(module.exports = Song), LikedSongs;
+module.exports = { Song, LikedSongs };
