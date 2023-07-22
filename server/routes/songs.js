@@ -7,12 +7,18 @@ const auth = require("../middleware/auth");
 
 // Create a new song - ChatGPT used in helping create this method
 router.post("/", auth, async (req, res) => {
-  const { spotifyId } = req.body;
+  const rawSong = req.body;
 
   try {
-    let song = await Song.findOne({ spotifyId });
+    let song = await Song.findOne({ spotifyId: rawSong.id });
     if (!song) {
-      song = new Song(req.body);
+      song = new Song({
+        albumCover: rawSong.album.images[0].url,
+        songName: rawSong.name,
+        artistName: rawSong.artists[0].name,
+        previewURL: rawSong.preview_url,
+        spotifyId: rawSong.id,
+      });
       await song.save();
     }
     res.json(song);

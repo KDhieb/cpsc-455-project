@@ -17,11 +17,12 @@ import { useRef, useState } from "react";
 import LikeButton from "./LikeButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useAuth0 } from "@auth0/auth0-react";
-
-let playlists = [
-  { id: 1, name: "Playlist 1" },
-  // add more playlist data
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createUserPlaylist,
+  addSongToPlaylist,
+  removeSongFromPlaylist,
+} from "../slices/userSlice";
 
 export default function SongResults({
   isSearchResults,
@@ -38,7 +39,10 @@ export default function SongResults({
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [newPlaylistName, setNewPlaylistName] = useState("");
 
-  const { isAuthenticated } = useAuth0();
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
+  const { isAuthenticated, getAccessTokenWithPopup } = useAuth0();
 
   // Playlist Callbacks
 
@@ -54,8 +58,24 @@ export default function SongResults({
     setNewPlaylistName("");
   };
 
-  const addToPlaylist = (playlist) => {
-    console.log(`Adding song ${currentSong.name} to playlist ${playlist.name}`);
+  const addRemoveSongPlaylist = (playlist, add) => {
+    if (add) {
+      dispatch(
+        addSongToPlaylist({
+          playlistId: playlist._id,
+          songData: currentSong,
+          getAccessTokenWithPopup,
+        })
+      );
+    } else {
+      dispatch(
+        removeSongFromPlaylist({
+          playlistId: playlist._id,
+          spotifyId: currentSong.id,
+          getAccessTokenWithPopup,
+        })
+      );
+    }
     handleClose();
   };
 
@@ -65,9 +85,13 @@ export default function SongResults({
 
   const handleSavePlaylist = () => {
     if (newPlaylistName) {
-      const newPlaylist = { id: playlists.length + 1, name: newPlaylistName };
-      playlists.push(newPlaylist);
-      console.log(`Created new playlist: ${newPlaylist.name}`);
+      dispatch(
+        createUserPlaylist({
+          email: user.email,
+          playlistName: newPlaylistName,
+          getAccessTokenWithPopup,
+        })
+      );
       setNewPlaylistName("");
       setCreatingPlaylist(false);
       handleClose();
@@ -212,11 +236,35 @@ export default function SongResults({
           </Box>
         )}
         {!creatingPlaylist &&
-          playlists.map((playlist) => (
-            <MenuItem key={playlist.id} onClick={() => addToPlaylist(playlist)}>
-              {playlist.name}
-            </MenuItem>
-          ))}
+          user.playlists.map((playlist) => {
+            const songInPlaylist = currentSong
+              ? playlist.songs.some((song) => song.spotifyId === currentSong.id)
+              : false;
+
+            if (songInPlaylist) {
+              // show a background indicating it's already been added
+              return (
+                <MenuItem
+                  key={playlist._id}
+                  onClick={() => addRemoveSongPlaylist(playlist, false)}
+                  sx={{ backgroundColor: "secondary.main" }}
+                >
+                  {playlist.name}
+                </MenuItem>
+              );
+            } else {
+              // show regular background to show it can be added
+              return (
+                <MenuItem
+                  key={playlist._id}
+                  onClick={() => addRemoveSongPlaylist(playlist, true)}
+                  // sx={{ backgroundColor: "primary.main" }}
+                >
+                  {playlist.name}
+                </MenuItem>
+              );
+            }
+          })}
       </Menu>
     </Box>
   );

@@ -87,7 +87,7 @@ router.delete("/:email/playlists", auth, async (req, res) => {
     user.playlists.pull(playlistId);
     await user.save();
 
-    res.status(204);
+    res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
