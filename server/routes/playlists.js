@@ -54,7 +54,7 @@ router.get("/:playlistId/songs", async (req, res) => {
       return res.status(404).json({ error: "Playlist not found" });
     }
 
-    res.send(playlist.songs); // TODO: Decide to send back to the whole playlist and not just songs?
+    res.send(playlist);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
