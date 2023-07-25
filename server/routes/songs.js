@@ -13,6 +13,7 @@ router.post("/", auth, async (req, res) => {
     let song = await Song.findOne({ spotifyId: rawSong.id });
     if (!song) {
       song = new Song({
+        albumName: rawSong.album.name,
         albumCover: rawSong.album.images[0].url,
         songName: rawSong.name,
         artistName: rawSong.artists[0].name,
@@ -110,7 +111,9 @@ router.put("/likes/update", async function (req, res) {
       isLiked ? likedSong.likes++ : likedSong.likes--;
       await likedSong.save();
     } else {
+      console.log(song.album.name);
       likedSong = new LikedSongs({
+        albumName: song.album.name,
         albumCover: song.album.images[0].url,
         songName: song.name,
         artistName: song.artists[0].name,
@@ -122,6 +125,7 @@ router.put("/likes/update", async function (req, res) {
     }
     res.status(201).json({ song: likedSong, like: isLiked });
   } catch (error) {
+    console.log(error);
     res.status(400).send();
   }
 });

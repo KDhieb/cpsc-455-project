@@ -19,7 +19,7 @@ export default function LikeButton({ song, favoritedCallback = () => {} }) {
 
   const handleFavorite = async () => {
     favoritedCallback();
-    await dispatch(updateLikes({ song , isLiked: !favorited }));
+    await dispatch(updateLikes({ song, isLiked: !favorited }));
   };
 
   return (
@@ -29,7 +29,7 @@ export default function LikeButton({ song, favoritedCallback = () => {} }) {
       }}
       sx={{ marginLeft: 2 }}
     >
-      {favorited ? <Favorite color='error' /> : <FavoriteBorderOutlinedIcon />}
+      {favorited ? <Favorite color="error" /> : <FavoriteBorderOutlinedIcon />}
     </IconButton>
   );
 }
