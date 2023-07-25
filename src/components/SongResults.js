@@ -42,7 +42,7 @@ export default function SongResults({
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
-  const { isAuthenticated, getAccessTokenWithPopup } = useAuth0();
+  const { getAccessTokenWithPopup } = useAuth0();
 
   // Playlist Callbacks
 
@@ -198,7 +198,7 @@ export default function SongResults({
                 song={song}
                 favoritedCallback={handleFavoritedCallback}
               />
-              {isAuthenticated && (
+              {user && (
                 <IconButton
                   aria-label="more"
                   aria-controls="long-menu"
@@ -212,60 +212,66 @@ export default function SongResults({
           ))}
         </List>
       </Paper>
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: 48 * 4.5,
-            width: "20ch",
-          },
-        }}
-      >
-        <MenuItem onClick={handleCreatePlaylist}>Create new playlist</MenuItem>
-        {creatingPlaylist && (
-          <Box display="flex" flexDirection="column">
-            <TextField
-              label="New playlist name"
-              value={newPlaylistName}
-              onChange={handleInputChange}
-            />
-            <Button onClick={handleSavePlaylist}>Save</Button>
-          </Box>
-        )}
-        {!creatingPlaylist &&
-          user.playlists.map((playlist) => {
-            const songInPlaylist = currentSong
-              ? playlist.songs.some((song) => song.spotifyId === currentSong.id)
-              : false;
+      {user && (
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: 48 * 4.5,
+              width: "20ch",
+            },
+          }}
+        >
+          <MenuItem onClick={handleCreatePlaylist}>
+            Create new playlist
+          </MenuItem>
+          {creatingPlaylist && (
+            <Box display="flex" flexDirection="column">
+              <TextField
+                label="New playlist name"
+                value={newPlaylistName}
+                onChange={handleInputChange}
+              />
+              <Button onClick={handleSavePlaylist}>Save</Button>
+            </Box>
+          )}
+          {!creatingPlaylist &&
+            user.playlists.map((playlist) => {
+              const songInPlaylist = currentSong
+                ? playlist.songs.some(
+                    (song) => song.spotifyId === currentSong.id
+                  )
+                : false;
 
-            if (songInPlaylist) {
-              // show a background indicating it's already been added
-              return (
-                <MenuItem
-                  key={playlist._id}
-                  onClick={() => addRemoveSongPlaylist(playlist, false)}
-                  sx={{ backgroundColor: "secondary.main" }}
-                >
-                  {playlist.name}
-                </MenuItem>
-              );
-            } else {
-              // show regular background to show it can be added
-              return (
-                <MenuItem
-                  key={playlist._id}
-                  onClick={() => addRemoveSongPlaylist(playlist, true)}
-                  // sx={{ backgroundColor: "primary.main" }}
-                >
-                  {playlist.name}
-                </MenuItem>
-              );
-            }
-          })}
-      </Menu>
+              if (songInPlaylist) {
+                // show a background indicating it's already been added
+                return (
+                  <MenuItem
+                    key={playlist._id}
+                    onClick={() => addRemoveSongPlaylist(playlist, false)}
+                    sx={{ backgroundColor: "secondary.main" }}
+                  >
+                    {playlist.name}
+                  </MenuItem>
+                );
+              } else {
+                // show regular background to show it can be added
+                return (
+                  <MenuItem
+                    key={playlist._id}
+                    onClick={() => addRemoveSongPlaylist(playlist, true)}
+                    // sx={{ backgroundColor: "primary.main" }}
+                  >
+                    {playlist.name}
+                  </MenuItem>
+                );
+              }
+            })}
+        </Menu>
+      )}
     </Box>
   );
 }
