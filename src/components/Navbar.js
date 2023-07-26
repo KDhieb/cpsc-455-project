@@ -1,12 +1,17 @@
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {
+  AppBar,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  TextField,
+  Toolbar,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
-import { signinUser, clearUser } from "../slices/userSlice";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signinUser, clearUser, createUserPlaylist } from "../slices/userSlice";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const pages = [
@@ -15,6 +20,43 @@ export default function Navbar() {
     { text: "Scoreboard", href: "/scoreboard", key: 3 },
   ];
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [creatingPlaylist, setCreatingPlaylist] = useState(false);
+  const [newPlaylistName, setNewPlaylistName] = useState("");
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setCreatingPlaylist(false);
+    setNewPlaylistName("");
+  };
+
+  const handleCreatePlaylist = () => {
+    setCreatingPlaylist(true);
+  };
+
+  const handleSavePlaylist = () => {
+    if (newPlaylistName) {
+      dispatch(
+        createUserPlaylist({
+          email: user.email,
+          playlistName: newPlaylistName,
+          getAccessTokenWithPopup,
+        })
+      );
+      setNewPlaylistName("");
+      setCreatingPlaylist(false);
+      handleClose();
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setNewPlaylistName(event.target.value);
+  };
+
   const {
     loginWithRedirect,
     user,
@@ -22,7 +64,9 @@ export default function Navbar() {
     logout,
     getAccessTokenWithPopup,
   } = useAuth0();
+
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user.user);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -64,6 +108,9 @@ export default function Navbar() {
                 Hello, {user.email}
               </Button>
             )}
+            {isAuthenticated && (
+              <Button onClick={(event) => handleClick(event)}>Playlists</Button>
+            )}
             {pages.map((page) => (
               <Button
                 key={page.key}
@@ -88,6 +135,46 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
+      {userState && (
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: 48 * 4.5,
+              width: "20ch",
+            },
+          }}
+        >
+          <MenuItem onClick={handleCreatePlaylist}>
+            Create new playlist
+          </MenuItem>
+          {creatingPlaylist && (
+            <Box display="flex" flexDirection="column">
+              <TextField
+                label="New playlist name"
+                value={newPlaylistName}
+                onChange={handleInputChange}
+              />
+              <Button onClick={handleSavePlaylist}>Save</Button>
+            </Box>
+          )}
+          {!creatingPlaylist &&
+            userState.playlists.map((playlist) => {
+              return (
+                <MenuItem
+                  key={playlist._id}
+                  component={Link}
+                  to={`/playlist/${playlist._id}`}
+                >
+                  {playlist.name}
+                </MenuItem>
+              );
+            })}
+        </Menu>
+      )}
     </Box>
   );
 }

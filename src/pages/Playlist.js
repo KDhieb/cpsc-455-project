@@ -42,11 +42,13 @@ function Playlist() {
   return (
     <SongResults
       // TODO: Modify isSearchResults to take an enum with 3 cases searchResults, recommend, and playlist
-      //       Change the text for each and if playlist display the playlist name in response.data.name
+      //       Change the text for each and if playlist display nothing?
+      //       Add a text component displaying response.data.name above the search results
       isSearchResults={true}
       songs={songs}
       handleSongSelect={() => {}}
     />
+    // TODO: Add a delete playlist button
   );
 }
 
