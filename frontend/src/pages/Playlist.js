@@ -61,16 +61,24 @@ function Playlist() {
     navigate("/"); // navigate to home route
   };
 
+  const createDeleteHandler = () => {
+    if (user) {
+      if (user.playlists.some((playlist) => playlist._id === playlistId)) {
+        return handleDelete;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  };
+
   return (
     <SongResults
       subtitleText={playlistName}
       songs={songs}
       handleSongSelect={() => {}}
-      handleDelete={
-        user.playlists.some((playlist) => playlist._id === playlistId)
-          ? handleDelete
-          : null
-      }
+      handleDelete={createDeleteHandler}
     />
   );
 }
