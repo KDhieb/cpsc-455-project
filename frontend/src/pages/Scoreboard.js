@@ -56,7 +56,9 @@ export const Scoreboard = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/songs/scoreboard?page=${currentPage}`)
+      .get(
+        `https://cpsc455-jkrap-backend.onrender.com/songs/scoreboard?page=${currentPage}`
+      )
       .then((response) => {
         const { songs, totalPages } = response.data;
         setTotalPages(totalPages);

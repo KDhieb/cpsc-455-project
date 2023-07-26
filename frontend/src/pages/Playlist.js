@@ -26,7 +26,7 @@ function Playlist() {
     const fetchPlaylistSongs = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/playlists/${playlistId}/songs`
+          `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}/songs`
         );
         const formattedSongs = response.data.songs.map((song) => {
           return createSpotifyFormattedSongObject(

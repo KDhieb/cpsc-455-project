@@ -18,7 +18,7 @@ export const signinUser = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       };
       const response = await axios.post(
-        `http://localhost:5001/users/signin`,
+        `https://cpsc455-jkrap-backend.onrender.com/users/signin`,
         data,
         { headers }
       );
@@ -48,7 +48,7 @@ export const createUserPlaylist = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       };
       const createPlaylistResponse = await axios.post(
-        `http://localhost:5001/playlists`,
+        `https://cpsc455-jkrap-backend.onrender.com/playlists`,
         createPlaylistData,
         { headers }
       );
@@ -59,7 +59,7 @@ export const createUserPlaylist = createAsyncThunk(
       };
 
       const response = await axios.post(
-        `http://localhost:5001/users/${email}/playlists`,
+        `https://cpsc455-jkrap-backend.onrender.com/users/${email}/playlists`,
         addPlaylistToUserData,
         { headers }
       );
@@ -88,14 +88,14 @@ export const addSongToPlaylist = createAsyncThunk(
       };
       // POST song
       const songResponse = await axios.post(
-        `http://localhost:5001/songs`,
+        `https://cpsc455-jkrap-backend.onrender.com/songs`,
         songData,
         { headers }
       );
 
       // POST to "/:playlistId"
       const response = await axios.post(
-        `http://localhost:5001/playlists/${playlistId}`,
+        `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}`,
         { songId: songResponse.data._id },
         { headers }
       );
@@ -123,7 +123,7 @@ export const removeSongFromPlaylist = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       };
       await axios.delete(
-        `http://localhost:5001/playlists/${playlistId}/songs`,
+        `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}/songs`,
         { data: { spotifyId }, headers }
       );
       const ids = { playlistId, spotifyId };
@@ -149,10 +149,13 @@ export const deleteUserPlaylist = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      await axios.delete(`http://localhost:5001/users/${email}/playlists`, {
-        data: { playlistId },
-        headers,
-      });
+      await axios.delete(
+        `https://cpsc455-jkrap-backend.onrender.com/users/${email}/playlists`,
+        {
+          data: { playlistId },
+          headers,
+        }
+      );
       return playlistId;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });

@@ -11,10 +11,13 @@ export const updateLikes = createAsyncThunk(
     const songsLiked = { ...state.songsLiked };
     songsLiked[song.id] = isLiked;
 
-    await axios.put(`http://localhost:5001/songs/likes/update`, {
-      song: song,
-      isLiked: payload.isLiked,
-    });
+    await axios.put(
+      `https://cpsc455-jkrap-backend.onrender.com/songs/likes/update`,
+      {
+        song: song,
+        isLiked: payload.isLiked,
+      }
+    );
 
     return {
       songsLiked: songsLiked,
