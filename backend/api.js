@@ -132,7 +132,7 @@ async function generate_recommendations(song, useCustomMLModel) {
     if (useCustomMLModel) {
       const track_features = await getTrackFeatures(song, headers);
 
-      const recommendation_url = "http://127.0.0.1:5000/recommend";
+      const recommendation_url = "https://cpsc455-flask.onrender.com/recommend";
 
       const ml_model_response = await axios.post(
         recommendation_url,
