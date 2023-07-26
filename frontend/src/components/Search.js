@@ -115,14 +115,18 @@ function Search() {
       ) : (
         displayResults && (
           <SongResults
-            selectedSongFromSearch={selectedSongFromSearch}
-            isSearchResults={isSearchResults}
+            subtitleText={
+              isSearchResults
+                ? "Search Results"
+                : `Songs similar to: ${selectedSongFromSearch.name} by ${selectedSongFromSearch.artists[0].name}`
+            }
             songs={
               isSearchResults
                 ? songsState.searchResults
                 : songsState.recommendedSongs
             }
             handleSongSelect={handleSongSelect}
+            handleDelete={null}
           />
         )
       )}

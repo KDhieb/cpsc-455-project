@@ -1,8 +1,32 @@
 var express = require("express");
 var router = express.Router();
 const { search_songs, generate_recommendations } = require("../api");
-const LikedSongs = require("../models/likedSongs");
+const { Song, LikedSongs } = require("../models/songSchema");
 const GloballySearchedSchema = require("../models/globallySearched");
+const auth = require("../middleware/auth");
+
+// Create a new song - ChatGPT used in helping create this method
+router.post("/", auth, async (req, res) => {
+  const rawSong = req.body;
+
+  try {
+    let song = await Song.findOne({ spotifyId: rawSong.id });
+    if (!song) {
+      song = new Song({
+        albumName: rawSong.album.name,
+        albumCover: rawSong.album.images[0].url,
+        songName: rawSong.name,
+        artistName: rawSong.artists[0].name,
+        previewURL: rawSong.preview_url,
+        spotifyId: rawSong.id,
+      });
+      await song.save();
+    }
+    res.json(song);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 /* GET song search results . */
 router.get("/search/:searchString", async function (req, res, next) {
@@ -39,9 +63,11 @@ router.get("/scoreboard", async function (req, res, next) {
 // GET globally searched songs
 router.get("/globallysearched", async function (req, res, next) {
   try {
-    const globallySearchedSongs = await GloballySearchedSchema.find().sort({
-      createdAt: -1,
-    }).limit(12);
+    const globallySearchedSongs = await GloballySearchedSchema.find()
+      .sort({
+        createdAt: -1,
+      })
+      .limit(12);
 
     return res.json({ globallySearchedSongs });
   } catch (error) {
@@ -67,7 +93,7 @@ router.post("/globallysearched/add", async function (req, res, next) {
       spotify: song.external_urls.spotify,
     },
     location: location,
-    spotifyId : song.id
+    spotifyId: song.id,
   });
 
   const data = await globallySearchedSong.save();
@@ -85,7 +111,9 @@ router.put("/likes/update", async function (req, res) {
       isLiked ? likedSong.likes++ : likedSong.likes--;
       await likedSong.save();
     } else {
+      console.log(song.album.name);
       likedSong = new LikedSongs({
+        albumName: song.album.name,
         albumCover: song.album.images[0].url,
         songName: song.name,
         artistName: song.artists[0].name,
@@ -97,6 +125,7 @@ router.put("/likes/update", async function (req, res) {
     }
     res.status(201).json({ song: likedSong, like: isLiked });
   } catch (error) {
+    console.log(error);
     res.status(400).send();
   }
 });
