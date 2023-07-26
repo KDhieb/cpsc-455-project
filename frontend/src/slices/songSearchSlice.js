@@ -6,7 +6,7 @@ export const searchSongs = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const resp = await axios.get(
-        `http://localhost:5001/songs/search/${payload.searchString}`
+        `https://cpsc455-jkrap-backend.onrender.com/songs/search/${payload.searchString}`
       );
 
       return {
@@ -35,13 +35,16 @@ export const fetchRecommendedSongs = createAsyncThunk(
         .resolvedOptions()
         .timeZone.split("/")[1];
 
-      await axios.post(`http://localhost:5001/songs/globallysearched/add`, {
-        song: payload.song,
-        location: approx_user_location ?? "Unknown",
-      });
+      await axios.post(
+        `https://cpsc455-jkrap-backend.onrender.com/songs/globallysearched/add`,
+        {
+          song: payload.song,
+          location: approx_user_location ?? "Unknown",
+        }
+      );
 
       const resp = await axios.post(
-        `http://localhost:5001/songs/recommendations/generate`,
+        `https://cpsc455-jkrap-backend.onrender.com/songs/recommendations/generate`,
         {
           song: payload.song,
         }

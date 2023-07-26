@@ -10,7 +10,9 @@ export const fetchGloballySearchedSongs = createAsyncThunk(
   "songs/globallySearched",
   async (payload, thunkAPI) => {
     try {
-      return await axios.get("http://localhost:5001/songs/globallysearched");
+      return await axios.get(
+        "https://cpsc455-jkrap-backend.onrender.com/songs/globallysearched"
+      );
     } catch (error) {
       console.error(error);
     }
