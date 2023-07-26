@@ -1,17 +1,26 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SongResults from "../components/SongResults";
 import { createSpotifyFormattedSongObject } from "../utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
+import { deleteUserPlaylist } from "../slices/userSlice";
 
 function Playlist() {
   const { playlistId } = useParams();
   const [songs, setSongs] = useState([]);
+  const [playlistName, setPlaylistName] = useState("");
+  const user = useSelector((state) => state.user.user);
 
   // Consider that a playlist can be accessed by someone not signed in and there has no user object
   // Instead have this make an axios request directly and stored only on this page
   // Reformat the response from the backend such that every song object is in the original Spotify format
   // Feed that reformatted response into SongList
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { getAccessTokenWithPopup } = useAuth0();
 
   useEffect(() => {
     const fetchPlaylistSongs = async () => {
@@ -31,24 +40,38 @@ function Playlist() {
           );
         });
         setSongs(formattedSongs);
+        setPlaylistName(response.data.name);
       } catch (error) {
         console.error("Error fetching playlist songs:", error);
       }
     };
 
     fetchPlaylistSongs();
-  }, [playlistId]);
+  }, [playlistId, user]);
+
+  const handleDelete = () => {
+    dispatch(
+      deleteUserPlaylist({
+        email: user.email,
+        playlistId,
+        getAccessTokenWithPopup,
+      })
+    );
+
+    navigate("/"); // navigate to home route
+  };
 
   return (
     <SongResults
-      // TODO: Modify isSearchResults to take an enum with 3 cases searchResults, recommend, and playlist
-      //       Change the text for each and if playlist display nothing?
-      //       Add a text component displaying response.data.name above the search results
-      isSearchResults={true}
+      subtitleText={playlistName}
       songs={songs}
       handleSongSelect={() => {}}
+      handleDelete={
+        user.playlists.some((playlist) => playlist._id === playlistId)
+          ? handleDelete
+          : null
+      }
     />
-    // TODO: Add a delete playlist button
   );
 }
 

@@ -1,17 +1,21 @@
 // Some sections of the code relating to Playlists are attrbuted to help from ChatGPT
 import {
   List,
+  ListItem,
+  ListItemIcon,
   ListItemButton,
   ListItemText,
   Box,
   Paper,
-  ListSubheader,
   IconButton,
   Menu,
   MenuItem,
   TextField,
   Button,
+  Divider,
 } from "@mui/material";
+import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PlayableAlbumCover from "./PlayableAlbumCover";
 import { useRef, useState } from "react";
 import LikeButton from "./LikeButton";
@@ -25,10 +29,10 @@ import {
 } from "../slices/userSlice";
 
 export default function SongResults({
-  isSearchResults,
+  subtitleText,
   songs,
   handleSongSelect,
-  selectedSongFromSearch,
+  handleDelete,
 }) {
   // https://mui.com/material-ui/react-list/
 
@@ -129,11 +133,27 @@ export default function SongResults({
         elevation={3}
         sx={{ borderRadius: 2, overflow: "hidden", margin: "10px 10px" }}
       >
-        <ListSubheader sx={{ paddingLeft: 3 }}>
-          {isSearchResults
-            ? "Search Results"
-            : `Songs similar to: ${selectedSongFromSearch.name} by ${selectedSongFromSearch.artists[0].name}`}
-        </ListSubheader>
+        {/* https://codesandbox.io/s/great-johnson-72lzdd?file=/Demo.tsx:2370-2392 */}
+        <ListItem component="div" disablePadding>
+          <ListItem sx={{ height: 56 }}>
+            <ListItemIcon
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <LibraryMusicIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={subtitleText}
+              primaryTypographyProps={{
+                color: "primary",
+                fontWeight: "medium",
+              }}
+            />
+          </ListItem>
+        </ListItem>
+        <Divider />
         <List
           className="results-list"
           sx={{
@@ -210,6 +230,38 @@ export default function SongResults({
               )}
             </ListItemButton>
           ))}
+          {user && handleDelete && (
+            <>
+              <Divider />
+              <ListItem component="div" disablePadding>
+                <ListItem />
+                <IconButton
+                  size="small"
+                  onClick={() => handleDelete()}
+                  sx={{
+                    "& svg": {
+                      color: "rgba(255,255,255,0.8)",
+                      transition: "0.2s",
+                      transform: "translateX(0) rotate(0)",
+                    },
+                    "&:hover, &:focus": {
+                      bgcolor: "unset",
+                      "& svg:first-of-type": {
+                        transform: "translateX(-4px) rotate(-20deg)",
+                      },
+                      "& svg:last-of-type": {
+                        right: 0,
+                        opacity: 1,
+                      },
+                    },
+                    pr: "25px",
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItem>
+            </>
+          )}
         </List>
       </Paper>
       {user && (
@@ -263,7 +315,6 @@ export default function SongResults({
                   <MenuItem
                     key={playlist._id}
                     onClick={() => addRemoveSongPlaylist(playlist, true)}
-                    // sx={{ backgroundColor: "primary.main" }}
                   >
                     {playlist.name}
                   </MenuItem>
