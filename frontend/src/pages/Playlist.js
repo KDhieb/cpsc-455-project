@@ -78,7 +78,7 @@ function Playlist() {
       subtitleText={playlistName}
       songs={songs}
       handleSongSelect={() => {}}
-      handleDelete={createDeleteHandler}
+      handleDelete={createDeleteHandler()}
     />
   );
 }
