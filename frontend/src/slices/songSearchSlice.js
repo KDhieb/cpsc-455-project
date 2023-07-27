@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 export const searchSongs = createAsyncThunk(
   "songs/searchSongs",
   async (payload, thunkAPI) => {
     try {
       const resp = await axios.get(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/search/${payload.searchString}`
+        backend_url + `/songs/search/${payload.searchString}`
       );
 
       return {

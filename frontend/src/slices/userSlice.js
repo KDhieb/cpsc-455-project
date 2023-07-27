@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 export const signinUser = createAsyncThunk(
   "user/signin",
   async (payload, thunkAPI) => {
@@ -17,11 +19,9 @@ export const signinUser = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const response = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/users/signin`,
-        data,
-        { headers }
-      );
+      const response = await axios.post(backend_url + `/users/signin`, data, {
+        headers,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -48,7 +48,7 @@ export const createUserPlaylist = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       };
       const createPlaylistResponse = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/playlists`,
+        backend_url + `/playlists`,
         createPlaylistData,
         { headers }
       );
@@ -59,7 +59,7 @@ export const createUserPlaylist = createAsyncThunk(
       };
 
       const response = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/users/${email}/playlists`,
+        backend_url + `/users/${email}/playlists`,
         addPlaylistToUserData,
         { headers }
       );
@@ -87,15 +87,13 @@ export const addSongToPlaylist = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       };
       // POST song
-      const songResponse = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/songs`,
-        songData,
-        { headers }
-      );
+      const songResponse = await axios.post(backend_url + `/songs`, songData, {
+        headers,
+      });
 
       // POST to "/:playlistId"
       const response = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}`,
+        backend_url + `/playlists/${playlistId}`,
         { songId: songResponse.data._id },
         { headers }
       );
@@ -122,10 +120,10 @@ export const removeSongFromPlaylist = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      await axios.delete(
-        `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}/songs`,
-        { data: { spotifyId }, headers }
-      );
+      await axios.delete(backend_url + `/playlists/${playlistId}/songs`, {
+        data: { spotifyId },
+        headers,
+      });
       const ids = { playlistId, spotifyId };
       return ids;
     } catch (error) {
@@ -139,7 +137,8 @@ export const deleteUserPlaylist = createAsyncThunk(
   "user/deleteUserPlaylist",
   async (payload, thunkAPI) => {
     try {
-      const { email, playlistId, getAccessTokenWithPopup } = payload;
+      const { email, playlistId, playlistName, getAccessTokenWithPopup } =
+        payload;
       const token = await getAccessTokenWithPopup({
         authorizationParams: {
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
@@ -149,13 +148,10 @@ export const deleteUserPlaylist = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      await axios.delete(
-        `https://cpsc455-jkrap-backend.onrender.com/users/${email}/playlists`,
-        {
-          data: { playlistId },
-          headers,
-        }
-      );
+      await axios.delete(backend_url + `users/${email}/playlists`, {
+        data: { playlistId, playlistName },
+        headers,
+      });
       return playlistId;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });

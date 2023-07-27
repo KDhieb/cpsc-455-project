@@ -304,7 +304,7 @@ export default function SongResults({
                   <MenuItem
                     key={playlist._id}
                     onClick={() => addRemoveSongPlaylist(playlist, false)}
-                    sx={{ backgroundColor: "secondary.main" }}
+                    sx={{ backgroundColor: "primary.main" }}
                   >
                     {playlist.name}
                   </MenuItem>

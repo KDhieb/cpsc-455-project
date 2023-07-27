@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { deleteUserPlaylist } from "../slices/userSlice";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 function Playlist() {
   const { playlistId } = useParams();
   const [songs, setSongs] = useState([]);
@@ -26,7 +28,7 @@ function Playlist() {
     const fetchPlaylistSongs = async () => {
       try {
         const response = await axios.get(
-          `https://cpsc455-jkrap-backend.onrender.com/playlists/${playlistId}/songs`
+          backend_url + `/playlists/${playlistId}/songs`
         );
         const formattedSongs = response.data.songs.map((song) => {
           return createSpotifyFormattedSongObject(
@@ -54,6 +56,7 @@ function Playlist() {
       deleteUserPlaylist({
         email: user.email,
         playlistId,
+        playlistName,
         getAccessTokenWithPopup,
       })
     );

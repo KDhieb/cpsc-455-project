@@ -75,15 +75,22 @@ router.post("/:email/playlists", auth, async (req, res) => {
 // Remove a playlist from a user
 router.delete("/:email/playlists", auth, async (req, res) => {
   const { email } = req.params;
-  const { playlistId } = req.body;
+  const { playlistId, playlistName } = req.body;
 
   try {
     const user = await User.findOne({ email });
+    const playlist = await Playlist.findOne({ playlistName });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
+    if (!playlist) {
+      return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    playlist.name.pull(playlistId);
+    await playlist.save();
     user.playlists.pull(playlistId);
     await user.save();
 
