@@ -136,9 +136,11 @@ export const removeSongFromPlaylist = createAsyncThunk(
 export const deleteUserPlaylist = createAsyncThunk(
   "user/deleteUserPlaylist",
   async (payload, thunkAPI) => {
+    console.log("trying to delete an entire playlist");
     try {
       const { email, playlistId, playlistName, getAccessTokenWithPopup } =
         payload;
+
       const token = await getAccessTokenWithPopup({
         authorizationParams: {
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
@@ -148,7 +150,7 @@ export const deleteUserPlaylist = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      await axios.delete(backend_url + `users/${email}/playlists`, {
+      await axios.delete(backend_url + `/users/${email}/playlists`, {
         data: { playlistId, playlistName },
         headers,
       });

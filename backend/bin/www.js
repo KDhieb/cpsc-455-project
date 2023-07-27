@@ -2,7 +2,6 @@
 
 const env = process.env.NODE_ENV || "development";
 
-// Load the appropriate environment file based on the current environment
 if (env === "development") {
   require("dotenv").config();
 }
