@@ -136,7 +136,6 @@ export const removeSongFromPlaylist = createAsyncThunk(
 export const deleteUserPlaylist = createAsyncThunk(
   "user/deleteUserPlaylist",
   async (payload, thunkAPI) => {
-    console.log("trying to delete an entire playlist");
     try {
       const { email, playlistId, playlistName, getAccessTokenWithPopup } =
         payload;
