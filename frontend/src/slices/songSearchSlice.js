@@ -37,16 +37,13 @@ export const fetchRecommendedSongs = createAsyncThunk(
         .resolvedOptions()
         .timeZone.split("/")[1];
 
-      await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/globallysearched/add`,
-        {
-          song: payload.song,
-          location: approx_user_location ?? "Unknown",
-        }
-      );
+      await axios.post(backend_url + `/songs/globallysearched/add`, {
+        song: payload.song,
+        location: approx_user_location ?? "Unknown",
+      });
 
       const resp = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/recommendations/generate`,
+        backend_url + `/songs/recommendations/generate`,
         {
           song: payload.song,
         }
