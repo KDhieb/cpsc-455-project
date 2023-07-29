@@ -83,6 +83,9 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user.user);
 
+  console.log("user state");
+  console.log(userState);
+
   useEffect(() => {
     if (isAuthenticated && user) {
       if (token_type === "getAccessTokenWithPopup") {
