@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 const initialState = {
   globallySearched: [],
   status: "idle",
@@ -10,9 +12,7 @@ export const fetchGloballySearchedSongs = createAsyncThunk(
   "songs/globallySearched",
   async (payload, thunkAPI) => {
     try {
-      return await axios.get(
-        "https://cpsc455-jkrap-backend.onrender.com/songs/globallysearched"
-      );
+      return await axios.get(backend_url + "/songs/globallysearched");
     } catch (error) {
       console.error(error);
     }

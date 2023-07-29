@@ -16,6 +16,8 @@ import { SCOREBOARD_HEADERS } from "../constants/constants";
 import { ScoreboardSongCard } from "../components/ScoreboardSongCard";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 const useStyles = makeStyles({
   tableContainer: {
     maxWidth: 1000,
@@ -56,9 +58,7 @@ export const Scoreboard = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/scoreboard?page=${currentPage}`
-      )
+      .get(backend_url + `/songs/scoreboard?page=${currentPage}`)
       .then((response) => {
         const { songs, totalPages } = response.data;
         setTotalPages(totalPages);
