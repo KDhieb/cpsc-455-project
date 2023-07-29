@@ -28,9 +28,6 @@ export const About = () => {
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
-          // width: "fit-content",
-          // marginLeft: "auto",
-          // marginRight: "auto"
         }}
       >
         {developerData.map((developer, index) => (
