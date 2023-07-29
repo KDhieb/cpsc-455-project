@@ -21,7 +21,6 @@ export default function Navbar() {
   ];
 
   let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
-  console.log(token_type);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
