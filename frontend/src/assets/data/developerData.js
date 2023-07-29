@@ -2,7 +2,7 @@ export const developerData = [
     {
         name: "Amy Chen",
         img: "https://media.licdn.com/dms/image/C5603AQFH9bHALjhoag/profile-displayphoto-shrink_400_400/0/1650570975279?e=1695859200&v=beta&t=Nl4xNV296wHFWamxGYq6ZJSel6Z9WYJU99DEXVsggw4",
-        description: "description for Amy",
+        description: "Amy is an avid fan of grocery shopping, Drag Race, and little walks. Also a newbie sourdough baker and sewist - message her if you have any tips!",
         song: {
             songName: "Do not touch",
             songArtist: "MISAMO",
@@ -14,7 +14,7 @@ export const developerData = [
     {
         name: "Jerome Ting",
         img: "https://media.licdn.com/dms/image/C4D03AQG3HgcTRcfktw/profile-displayphoto-shrink_800_800/0/1630976920495?e=1695859200&v=beta&t=zATruUdWLhW0G2R0v_4qWXRHMuI7T0SGJ5hPzih95wU",
-        description: "description for Jerome description for Jerome description for Jerome description for Jerome",
+        description: "Jerome spends his time exploring different street dances, seeing the world, and taking care of his tropical plants. Anthuriums are his favourite genus at the moment.",
         song: {
             songName: "Super Shy",
             songArtist: "NewJeans",
@@ -26,7 +26,7 @@ export const developerData = [
     {
         name: "Khalid Dhieb",
         img: "https://media.licdn.com/dms/image/C5603AQEta2AWinHcDQ/profile-displayphoto-shrink_400_400/0/1653875019510?e=1695859200&v=beta&t=RPpU8wrrv0EYAkDEiXkRWOTZwlbvhht2vkHfc6jd6As",
-        description: "description for Khalid",
+        description: "Khalid is a dynamic individual known for their exceptional abilities and unwavering determination. They continue to inspire and make a difference in their chosen pursuits.",
         song: {
             songName: "",
             songArtist: "",
@@ -38,7 +38,7 @@ export const developerData = [
     {
         name: "Parmvir Shergill",
         img: "https://media.licdn.com/dms/image/D5603AQELA7X1BDbnPw/profile-displayphoto-shrink_400_400/0/1676247346849?e=1695859200&v=beta&t=PHjWpst8wj4Y4G03qat8UIj9banzK9y7k-09QcMgssc",
-        description: "description for Parmvir",
+        description: "Parmvir is a remarkable individual whose life is a testament to resilience and innovation. they have fearlessly embraced challenges, leaving an indelible mark on both their personal journey and the world around them.",
         song: {
             songName: "",
             songArtist: "",
@@ -50,7 +50,7 @@ export const developerData = [
     {
         name: "Richard Chen",
         img: "https://media.licdn.com/dms/image/D5603AQGuepgQpeqC1A/profile-displayphoto-shrink_400_400/0/1684006195934?e=1695859200&v=beta&t=cMEDzemuarTGqODp2_RJ2c7A_A_9A2YjB5FhR0_uS3A",
-        description: "description for Richard",
+        description: "Richard shines as a beacon of passion and purpose. They have charted a remarkable course, making waves in their endeavors and leaving an inspiring legacy in their wake.",
         song: {
             songName: "Bu De Bu Ai 不得不爱",
             songArtist: "Inquisitive, Hannah Ying",
