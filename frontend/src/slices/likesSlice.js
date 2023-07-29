@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 export const updateLikes = createAsyncThunk(
   "likes/updateLikes",
   async (payload, thunkAPI) => {
@@ -11,13 +13,10 @@ export const updateLikes = createAsyncThunk(
     const songsLiked = { ...state.songsLiked };
     songsLiked[song.id] = isLiked;
 
-    await axios.put(
-      `https://cpsc455-jkrap-backend.onrender.com/songs/likes/update`,
-      {
-        song: song,
-        isLiked: payload.isLiked,
-      }
-    );
+    await axios.put(backend_url + `/songs/likes/update`, {
+      song: song,
+      isLiked: payload.isLiked,
+    });
 
     return {
       songsLiked: songsLiked,

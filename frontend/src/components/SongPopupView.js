@@ -52,6 +52,11 @@ BootstrapDialogTitle.propTypes = {
 
 export default function SongPopupView({ isDisplayed, handleClose, song }) {
   const [openShare, setOpenShare] = useState(false);
+
+  if (!song) {
+    return null;
+  }
+  
   const url = song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
   
   const handleSpotifyClick = () => {

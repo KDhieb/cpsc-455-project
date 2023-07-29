@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+var backend_url = process.env.REACT_APP_BACKEND_SERVER;
+
 export const searchSongs = createAsyncThunk(
   "songs/searchSongs",
   async (payload, thunkAPI) => {
     try {
       const resp = await axios.get(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/search/${payload.searchString}`
+        backend_url + `/songs/search/${payload.searchString}`
       );
 
       return {
@@ -35,16 +37,13 @@ export const fetchRecommendedSongs = createAsyncThunk(
         .resolvedOptions()
         .timeZone.split("/")[1];
 
-      await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/globallysearched/add`,
-        {
-          song: payload.song,
-          location: approx_user_location ?? "Unknown",
-        }
-      );
+      await axios.post(backend_url + `/songs/globallysearched/add`, {
+        song: payload.song,
+        location: approx_user_location ?? "Unknown",
+      });
 
       const resp = await axios.post(
-        `https://cpsc455-jkrap-backend.onrender.com/songs/recommendations/generate`,
+        backend_url + `/songs/recommendations/generate`,
         {
           song: payload.song,
         }

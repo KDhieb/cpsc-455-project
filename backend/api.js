@@ -1,9 +1,9 @@
 const axios = require("axios");
 const qs = require("qs");
-require("dotenv").config();
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+var flask_url = process.env.REACT_APP_FLASK_SERVER;
 var token_store = { token: null, expires: null };
 
 async function get_token() {
@@ -132,7 +132,7 @@ async function generate_recommendations(song, useCustomMLModel) {
     if (useCustomMLModel) {
       const track_features = await getTrackFeatures(song, headers);
 
-      const recommendation_url = "https://cpsc455-flask.onrender.com/recommend";
+      const recommendation_url = flask_url + "/recommend";
 
       const ml_model_response = await axios.post(
         recommendation_url,
