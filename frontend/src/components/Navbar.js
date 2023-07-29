@@ -86,14 +86,16 @@ export default function Navbar() {
   useEffect(() => {
     if (isAuthenticated && user) {
       if (token_type === "getAccessTokenWithPopup") {
+        console.log("navbar - popup");
         dispatch(signinUser({ user, getAccessTokenWithPopup }));
       } else {
+        console.log("navbar - silent");
         dispatch(signinUser({ user, getAccessTokenSilently }));
       }
     } else {
       dispatch(clearUser());
     }
-  }, [isAuthenticated]);  
+  }, [isAuthenticated, token_type]);  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
