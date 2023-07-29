@@ -49,7 +49,9 @@ export default function SongResults({
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
-  const { getAccessTokenWithPopup } = useAuth0();
+  let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
+
+  const { getAccessTokenWithPopup, getAccessTokenSilently } = useAuth0();
 
   // Playlist Callbacks
 
@@ -67,21 +69,40 @@ export default function SongResults({
 
   const addRemoveSongPlaylist = (playlist, add) => {
     if (add) {
+      if (token_type === "getAccessTokenWithPopup") {
       dispatch(
         addSongToPlaylist({
           playlistId: playlist._id,
           songData: currentSong,
           getAccessTokenWithPopup,
         })
-      );
+      )} else {
+        dispatch(
+          addSongToPlaylist({
+            playlistId: playlist._id,
+            songData: currentSong,
+            getAccessTokenSilently,
+          })
+        )
+      };
     } else {
-      dispatch(
-        removeSongFromPlaylist({
-          playlistId: playlist._id,
-          spotifyId: currentSong.id,
-          getAccessTokenWithPopup,
-        })
-      );
+      if (token_type === "getAccessTokenWithPopup") {
+        dispatch(
+          removeSongFromPlaylist({
+            playlistId: playlist._id,
+            spotifyId: currentSong.id,
+            getAccessTokenWithPopup,
+          })
+        );
+      } else {
+        dispatch(
+          removeSongFromPlaylist({
+            playlistId: playlist._id,
+            spotifyId: currentSong.id,
+            getAccessTokenSilently,
+          })
+        );
+      }
     }
     handleClose();
   };
@@ -92,13 +113,23 @@ export default function SongResults({
 
   const handleSavePlaylist = () => {
     if (newPlaylistName) {
-      dispatch(
-        createUserPlaylist({
-          email: user.email,
-          playlistName: newPlaylistName,
-          getAccessTokenWithPopup,
-        })
-      );
+      if (token_type === "getAccessTokenWithPopup") {
+        dispatch(
+          createUserPlaylist({
+            email: user.email,
+            playlistName: newPlaylistName,
+            getAccessTokenWithPopup
+          })
+        );
+      } else {
+        dispatch(
+          createUserPlaylist({
+            email: user.email,
+            playlistName: newPlaylistName,
+            getAccessTokenSilently
+          })
+        );
+      }
       setNewPlaylistName("");
       setCreatingPlaylist(false);
       handleClose();

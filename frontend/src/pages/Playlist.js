@@ -22,7 +22,9 @@ function Playlist() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { getAccessTokenWithPopup } = useAuth0();
+
+  let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
+  const { getAccessTokenWithPopup, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const fetchPlaylistSongs = async () => {
@@ -52,14 +54,26 @@ function Playlist() {
   }, [playlistId, user]);
 
   const handleDelete = () => {
-    dispatch(
-      deleteUserPlaylist({
-        email: user.email,
-        playlistId,
-        playlistName,
-        getAccessTokenWithPopup,
-      })
-    );
+    if (token_type === "getAccessTokenWithPopup") {
+      dispatch(
+        deleteUserPlaylist({
+          email: user.email,
+          playlistId,
+          playlistName,
+          getAccessTokenWithPopup,
+        })
+      );
+    } else {
+      dispatch(
+        deleteUserPlaylist({
+          email: user.email,
+          playlistId,
+          playlistName,
+          getAccessTokenSilently,
+        })
+      );
+    }
+
 
     navigate("/"); // navigate to home route
   };
