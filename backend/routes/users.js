@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Create or retrieve a user
 router.post("/signin", auth, async (req, res) => {
+  console.log("in user.js api reqs");
   const { email } = req.body;
 
   try {

@@ -14,19 +14,25 @@ export const signinUser = createAsyncThunk(
           scope: "read:posts",
         },
       });
-
+      console.log("after token");
       const data = {
         email: payload.user.email,
       };
+      console.log("after data");
       const headers = {
         Authorization: `Bearer ${token}`,
       };
+      console.log("after headers");
       const response = await axios.post(backend_url + `/users/signin`, data, {
         headers,
       });
+      console.log("after response");
+      console.log(response);
+      console.log("NO ERROR~~");
       return response.data;
     } catch (error) {
       console.log("ERROR~~~");
+      console.log(error);
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   }
@@ -221,6 +227,8 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(signinUser.rejected, (state, action) => {
+        console.log("rejected user signin");
+        console.log(action.payload);
         state.error = action.payload;
       })
       .addCase(createUserPlaylist.fulfilled, (state, action) => {
