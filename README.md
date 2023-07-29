@@ -6,7 +6,7 @@ Group Members: Amy Chen, Jerome Ting, Khalid Dhieb, Parmvir Shergill, Richard Ch
 # Project Progress 1 - Vibesphere
 
 ## Project Description:
-Vibesphere is a Spotify song recommender application that is aimed at music lovers who want to discover new, but similar music to the songs they already like. It will store user inputted songs, retrieve results from the Spotify API, and recommend songs that will be delivered to our users. Users will be able to like songs, view history of previous songs inputted, then share these songs and the recommendations with their friends. Some additional functionality, given time constraints, will include: public playlists, a user profile, and recommendations based on entire playlists instead of individual songs.
+Vibesphere is a nifty Spotify song recommender application tailored for music enthusiasts seeking to unearth new tracks that mirror their existing preferences. The app, leveraging the Spotify API, stores user-inputted songs, generates precise song recommendations, and offers a robust platform to like, play, and share these music pieces. With additional features like public playlists, user profiles, and playlist-based recommendations, Vibesphere is a haven for music discovery and social sharing.
 
 ## Project Task Requirements:
 ### Minimal Requirements:
