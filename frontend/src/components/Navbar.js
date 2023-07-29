@@ -20,6 +20,8 @@ export default function Navbar() {
     { text: "Scoreboard", href: "/scoreboard", key: 3 },
   ];
 
+  let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [creatingPlaylist, setCreatingPlaylist] = useState(false);
   const [newPlaylistName, setNewPlaylistName] = useState("");
@@ -38,15 +40,26 @@ export default function Navbar() {
     setCreatingPlaylist(true);
   };
 
-  const handleSavePlaylist = () => {
+  const handleSavePlaylist = () => {    
     if (newPlaylistName) {
-      dispatch(
-        createUserPlaylist({
-          email: user.email,
-          playlistName: newPlaylistName,
-          getAccessTokenWithPopup,
-        })
-      );
+      if (token_type === "getAccessTokenWithPopup") {
+        dispatch(
+          createUserPlaylist({
+            email: user.email,
+            playlistName: newPlaylistName,
+            getAccessTokenWithPopup,
+          })
+        );
+      } else {
+        dispatch(
+          createUserPlaylist({
+            email: user.email,
+            playlistName: newPlaylistName,
+            getAccessTokenSilently,
+          })
+        );
+      }
+
       setNewPlaylistName("");
       setCreatingPlaylist(false);
       handleClose();
@@ -63,6 +76,7 @@ export default function Navbar() {
     isAuthenticated,
     logout,
     getAccessTokenWithPopup,
+    getAccessTokenSilently
   } = useAuth0();
 
   const dispatch = useDispatch();
@@ -70,11 +84,15 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      dispatch(signinUser({ user, getAccessTokenWithPopup }));
+      if (token_type === "getAccessTokenWithPopup") {
+        dispatch(signinUser({ user, getAccessTokenWithPopup, token_type }));
+      } else {
+        dispatch(signinUser({ user, getAccessTokenSilently, token_type }));
+      }
     } else {
       dispatch(clearUser());
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated]);  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
