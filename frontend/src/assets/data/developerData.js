@@ -28,10 +28,10 @@ export const developerData = [
         img: "https://media.licdn.com/dms/image/C5603AQEta2AWinHcDQ/profile-displayphoto-shrink_400_400/0/1653875019510?e=1695859200&v=beta&t=RPpU8wrrv0EYAkDEiXkRWOTZwlbvhht2vkHfc6jd6As",
         description: "Khalid is a dynamic individual known for their exceptional abilities and unwavering determination. They continue to inspire and make a difference in their chosen pursuits.",
         song: {
-            songName: "",
-            songArtist: "",
-            previewURL: "",
-            albumCover: "",
+            songName: "Billie Jean",
+            songArtist: "Michael Jackson",
+            previewURL: "https://p.scdn.co/mp3-preview/0f6b8a3524ec410020457da4cdd7717f9addce2f?cid=dfbad83961704eb386537d2102bb3aa4",
+            albumCover: "https://i.scdn.co/image/ab67616d00001e024121faee8df82c526cbab2be",
         },
         linkedin: "https://www.linkedin.com/in/kdhieb/"
     },
@@ -40,10 +40,10 @@ export const developerData = [
         img: "https://media.licdn.com/dms/image/D5603AQELA7X1BDbnPw/profile-displayphoto-shrink_400_400/0/1676247346849?e=1695859200&v=beta&t=PHjWpst8wj4Y4G03qat8UIj9banzK9y7k-09QcMgssc",
         description: "Parmvir is a remarkable individual whose life is a testament to resilience and innovation. they have fearlessly embraced challenges, leaving an indelible mark on both their personal journey and the world around them.",
         song: {
-            songName: "",
-            songArtist: "",
-            previewURL: "",
-            albumCover: "",
+            songName: "Billie Jean",
+            songArtist: "Michael Jackson",
+            previewURL: "https://p.scdn.co/mp3-preview/0f6b8a3524ec410020457da4cdd7717f9addce2f?cid=dfbad83961704eb386537d2102bb3aa4",
+            albumCover: "https://i.scdn.co/image/ab67616d00001e024121faee8df82c526cbab2be",
         },
         linkedin: "https://www.linkedin.com/in/parmvir-shergill-84208538/"
     },
