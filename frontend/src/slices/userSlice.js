@@ -7,23 +7,13 @@ let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
 export const signinUser = createAsyncThunk(
   "user/signin",
   async (payload, thunkAPI) => {
-    try {
-      let token;
-      if (token_type === "getAccessTokenWithPopup") {
-        token = await payload.getAccessTokenWithPopup({
-          authorizationParams: {
-            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-            scope: "read:posts",
-          },
-        });
-      } else {
-        token = await payload.getAccessTokenSilently({
-          authorizationParams: {
-            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-            scope: "read:posts",
-          },
-        });
-      }
+      const token = await payload.getAccessTokenWithPopup({
+        authorizationParams: {
+          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+          scope: "read:posts",
+        },
+      });
+  
       const data = {
         email: payload.user.email,
       };

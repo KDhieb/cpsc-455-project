@@ -47,14 +47,16 @@ export default function Navbar() {
         dispatch(
           createUserPlaylist({
             email: user.email,
-            playlistName: newPlaylistName, getAccessTokenWithPopup
+            playlistName: newPlaylistName,
+            getAccessTokenWithPopup,
           })
         );
       } else {
         dispatch(
           createUserPlaylist({
             email: user.email,
-            playlistName: newPlaylistName, getAccessTokenSilently
+            playlistName: newPlaylistName,
+            getAccessTokenSilently,
           })
         );
       }
