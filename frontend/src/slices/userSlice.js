@@ -14,7 +14,7 @@ export const signinUser = createAsyncThunk(
           scope: "read:posts",
         },
       });
-      
+
       const data = {
         email: payload.user.email,
       };
@@ -26,6 +26,7 @@ export const signinUser = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      console.log("ERROR~~~");
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   }
@@ -215,6 +216,8 @@ const userSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(signinUser.fulfilled, (state, action) => {
+        console.log("signed in");
+        console.log(action.payload);
         state.user = action.payload;
       })
       .addCase(signinUser.rejected, (state, action) => {

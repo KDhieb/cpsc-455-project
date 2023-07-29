@@ -83,8 +83,10 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user.user);
 
-  console.log("user state");
+  console.log("user state:");
   console.log(userState);
+  console.log("user:");
+  console.log(user);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -98,7 +100,7 @@ export default function Navbar() {
     } else {
       dispatch(clearUser());
     }
-  }, [isAuthenticated, token_type]);  
+  }, [isAuthenticated]);  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
