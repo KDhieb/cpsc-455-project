@@ -8,26 +8,33 @@ export const signinUser = createAsyncThunk(
   "user/signin",
   async (payload, thunkAPI) => {
     try {
-      const token = await payload.getAccessTokenWithPopup({
-        authorizationParams: {
-          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-          scope: "read:posts",
-        },
-      });
-      console.log("after token");
+      let token;
+      if (payload.token_type === "getAccessTokenWithPopup") {
+        token = await payload.getAccessTokenWithPopup({
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+            scope: "read:posts",
+          },
+        });
+      } else {
+        token = await payload.getAccessTokenSilently({
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+            scope: "read:posts",
+          },
+        });
+      }
+
       const data = {
         email: payload.user.email,
       };
-      console.log("after data");
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      console.log("after headers");
       const response = await axios.post(backend_url + `/users/signin`, data, {
         headers,
       });
-      console.log("after response");
-      console.log(response);
+
       console.log("NO ERROR~~");
       return response.data;
     } catch (error) {

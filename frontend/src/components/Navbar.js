@@ -92,10 +92,10 @@ export default function Navbar() {
     if (isAuthenticated && user) {
       if (token_type === "getAccessTokenWithPopup") {
         console.log("navbar - popup");
-        dispatch(signinUser({ user, getAccessTokenWithPopup }));
+        dispatch(signinUser({ user, getAccessTokenWithPopup, token_type }));
       } else {
         console.log("navbar - silent");
-        dispatch(signinUser({ user, getAccessTokenSilently }));
+        dispatch(signinUser({ user, getAccessTokenSilently, token_type }));
       }
     } else {
       dispatch(clearUser());
