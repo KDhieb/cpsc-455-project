@@ -83,18 +83,11 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user.user);
 
-  console.log("user state:");
-  console.log(userState);
-  console.log("user:");
-  console.log(user);
-
   useEffect(() => {
     if (isAuthenticated && user) {
       if (token_type === "getAccessTokenWithPopup") {
-        console.log("navbar - popup");
         dispatch(signinUser({ user, getAccessTokenWithPopup, token_type }));
       } else {
-        console.log("navbar - silent");
         dispatch(signinUser({ user, getAccessTokenSilently, token_type }));
       }
     } else {
