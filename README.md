@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# cpsc-455-project
+The main repo for our CPSC 455 project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Group Members: Amy Chen, Jerome Ting, Khalid Dhieb, Parmvir Shergill, Richard Chen
 
-## Available Scripts
+# Project Progress 1 - Vibesphere
 
-In the project directory, you can run:
+## Project Description:
+Vibesphere is a nifty Spotify song recommender application tailored for music enthusiasts seeking to unearth new tracks that mirror their existing preferences. The app, leveraging the Spotify API, stores user-inputted songs, generates precise song recommendations, and offers a robust platform to like, play, and share these music pieces. With additional features like public playlists, user profiles, and playlist-based recommendations, Vibesphere is a haven for music discovery and social sharing.
 
-### `npm start`
+## Project Task Requirements:
+### Minimal Requirements:
+- Search a song in Spotify API
+  - Basic input textbook/form
+  - API call to Spotify backend to get the user's song in the form of Spotify results
+- Return a list of songs from Spotify API matching search
+  - Show a list of songs that match entered characters
+  - Should be able to select one of those songs
+- Navigate site
+  - React router setup
+  - Homepage, About, Scoreboard
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Standard Requirements:
+- Recommending a list of songs similar to a single user inputted song
+- Liking/favouriting songs
+- User can play a preview of the song
+- Leaderboard for most liked songs
+- Displaying what songs have been searched globally on homepage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Stretch Requirements:
+- Public playlists -> everyone can create/add to them in the playlist section of app
+- Recommending a list of songs based on a playlist of songs
+- User authentication/user profiles
+- Search API call on each character entered (or wait a few ms or seconds) - prepopulate search results
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img width="1136" alt="home_prototype" src="https://github.com/KDhieb/cpsc-455-project/assets/75541965/295cd341-b8d5-474f-9a48-ccd621ca1279">
+<img width="1110" alt="scoreboard_prototype" src="https://github.com/KDhieb/cpsc-455-project/assets/75541965/3953286f-94a4-4b10-af6b-d6088a7dbb04">
