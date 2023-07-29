@@ -1,7 +1,6 @@
 // ChatGPT was used in helping create this file
 const { expressjwt: jwt } = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
-require("dotenv").config();
 
 // Middleware for checking the JWT
 const checkJwt = jwt({

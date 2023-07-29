@@ -111,7 +111,6 @@ router.put("/likes/update", async function (req, res) {
       isLiked ? likedSong.likes++ : likedSong.likes--;
       await likedSong.save();
     } else {
-      console.log(song.album.name);
       likedSong = new LikedSongs({
         albumName: song.album.name,
         albumCover: song.album.images[0].url,
