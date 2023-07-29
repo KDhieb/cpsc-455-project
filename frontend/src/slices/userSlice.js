@@ -7,13 +7,14 @@ let token_type = process.env.REACT_APP_AUTH0_TOKEN_TYPE;
 export const signinUser = createAsyncThunk(
   "user/signin",
   async (payload, thunkAPI) => {
+    try {
       const token = await payload.getAccessTokenWithPopup({
         authorizationParams: {
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
           scope: "read:posts",
         },
       });
-  
+      
       const data = {
         email: payload.user.email,
       };
