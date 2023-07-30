@@ -112,7 +112,7 @@ router.put("/likes/update", async function (req, res) {
       await likedSong.save();
     } else {
       likedSong = new LikedSongs({
-        albumName: song.album.name,
+        albumName: song.album.name ?? "Unknown",
         albumCover: song.album.images[0].url,
         songName: song.name,
         artistName: song.artists[0].name,
