@@ -84,7 +84,7 @@ export default function GloballySearched() {
       song.spotifyId,
       song.songName,
       song.artists[0].name,
-      song.album.name,
+      song.album.name ?? "Unknown",
       song.albumCover,
       song.preview_url,
       null
