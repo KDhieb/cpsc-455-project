@@ -89,7 +89,6 @@ export default function GloballySearched() {
       song.preview_url,
       null
     );
-    console.log(songObject)
     setSelectedSong(songObject);
     setDisplayPopup(true);
   };

@@ -131,7 +131,6 @@ export default function AboutUsCard({ developer }) {
                 justify="center"
                 alignItems="center"
             >
-              {/*<Stack direction="row">*/}
                   <Grid
                       xs={6}
                       sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -155,7 +154,6 @@ export default function AboutUsCard({ developer }) {
                   </Typography>
                   </Stack>
                 </Grid>
-              {/*</Stack>*/}
             </Grid>}
         {slideIndex === 2 &&
             <Box sx={{direction: "column", alignItems: "center", justifyContent: "center"}}>
