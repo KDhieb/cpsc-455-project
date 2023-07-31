@@ -95,8 +95,8 @@ export default function AboutUsCard({ developer }) {
                 <SkipPreviousIcon />
               )}
             </IconButton>
-            <IconButton aria-label='play/pause'>
-              <PlayArrowIcon sx={{ height: 38, width: 38 }} onClick={handleNextSlide} />
+            <IconButton aria-label='play/pause' onClick={handleNextSlide}>
+              <PlayArrowIcon sx={{ height: 38, width: 38 }} />
             </IconButton>
             <IconButton aria-label='next' onClick={handleNextSlide}>
               {darkTheme.direction === "rtl" ? (
@@ -132,6 +132,7 @@ export default function AboutUsCard({ developer }) {
                 alignItems="center"
             >
                   <Grid
+                      item={true}
                       xs={6}
                       sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                 <PlayableAlbumCover
@@ -143,6 +144,7 @@ export default function AboutUsCard({ developer }) {
                 />
                   </Grid>
                 <Grid
+                    item={true}
                     xs={6}
                     sx={{display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
                   <Stack direction="column">
