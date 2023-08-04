@@ -37,7 +37,11 @@ _Group Members: Amy Chen, Jerome Ting, Khalid Dhieb, Parmvir Shergill, Richard C
 
 ## Above and Beyond
 
-// todo
+Vibesphere incorporates a custom machine learning algorithm for its recommendation system, utilizing the power of both K-means clustering and K-nearest neighbors (KNN). The model is trained on a dataset of approximately 175,000 tracks, which we preprocess. To determine the optimal number of clusters (k) for our system, we employ two techniques: the elbow method and the silhouette method. These methods help us strike the right balance between model complexity and data fit.
+
+Our algorithm starts by employing K-means to organize the data into clusters, enabling efficient grouping of similar songs. Subsequently, KNN comes into play, using Euclidean distance to identify the nearest songs to the user's input track. This ensures that we recommend songs that closely match the user's preferences. One of the key reasons for adopting this approach is the paramount importance of response time for a seamless user experience. By reducing the search space through clustering, we achieve significant speed gains in our recommendation system. Additionally, this method offers excellent scalability, making it suitable for large-scale deployments.
+
+Furthermore, our approach addresses the cold start problem, enabling the application to provide valuable recommendations even when we have limited prior knowledge about the user's preferences.
 
 ## Next Steps
 To further improve our application, we can refine our machine learning search recommendation algorithm even more by using a larger quantity of training data, and allowing the user to rate it with "thumbs up" or "thumbs down" via a modal to improve the algorithm. 
