@@ -70,7 +70,7 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
   };
 
   return (
-    <div>
+    <>
       <BootstrapDialog
         fullWidth={true}
         maxWidth={"xs"}
@@ -134,6 +134,6 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
           />
         </DialogActions>
       </BootstrapDialog>
-    </div>
+    </>
   );
 }
