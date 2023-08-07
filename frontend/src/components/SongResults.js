@@ -172,7 +172,7 @@ export default function SongResults({
           borderRadius: 2,
           overflow: "hidden",
           margin: "10px 10px",
-          minWidth: "40%",
+          // minWidth: "40%",
         }}
       >
         {/* https://codesandbox.io/s/great-johnson-72lzdd?file=/Demo.tsx:2370-2392 */}
@@ -231,68 +231,70 @@ export default function SongResults({
           ) : (
             songs.map((song) => (
               <>
-                <ListItemButton
-                  key={song.id}
-                  sx={{
-                    py: 0,
-                    minHeight: 75,
-                    color: "rgba(255,255,255,.8)",
-                  }}
-                  onClick={() => handleSongClick(song)}
-                >
-                  <PlayableAlbumCover
-                    img={song.album.images[0].url}
-                    url={song.preview_url}
-                    size={50}
-                    mini={true}
-                    albumClickedCallback={handleAlbumClick}
-                  />
-                  <ListItemText
+                <div key={`div-${song.id}`}>
+                  <ListItemButton
+                    key={song.id}
                     sx={{
-                      minWidth: "35%",
-                      maxWidth: "35%",
-                      margin: "0px 10px",
-                      wordWrap: "break-word",
-                      overflow: "hidden",
+                      py: 0,
+                      minHeight: 75,
+                      color: "rgba(255,255,255,.8)",
                     }}
-                    className="results-list-item-text-name"
-                    primary={song.name}
-                    secondary={song.artists[0].name}
-                    primaryTypographyProps={{
-                      fontSize: 14,
-                      fontWeight: "medium",
-                    }}
-                  />
+                    onClick={() => handleSongClick(song)}
+                  >
+                    <PlayableAlbumCover
+                      img={song.album.images[0].url}
+                      url={song.preview_url}
+                      size={50}
+                      mini={true}
+                      albumClickedCallback={handleAlbumClick}
+                    />
+                    <ListItemText
+                      sx={{
+                        minWidth: "35%",
+                        maxWidth: "35%",
+                        margin: "0px 10px",
+                        wordWrap: "break-word",
+                        overflow: "hidden",
+                      }}
+                      className="results-list-item-text-name"
+                      primary={song.name}
+                      secondary={song.artists[0].name}
+                      primaryTypographyProps={{
+                        fontSize: 14,
+                        fontWeight: "medium",
+                      }}
+                    />
 
-                  <ListItemText
-                    sx={{ margin: "0px 20px" }}
-                    className="results-list-item-text-album"
-                    primary={song.album.name}
-                    primaryTypographyProps={{
-                      fontSize: 14,
-                      fontWeight: "medium",
-                    }}
+                    <ListItemText
+                      sx={{ margin: "0px 20px" }}
+                      className="results-list-item-text-album"
+                      primary={song.album.name}
+                      primaryTypographyProps={{
+                        fontSize: 14,
+                        fontWeight: "medium",
+                      }}
+                    />
+                    <LikeButton
+                      song={song}
+                      favoritedCallback={handleFavoritedCallback}
+                    />
+                    {user && (
+                      <IconButton
+                        aria-label="more"
+                        aria-controls="long-menu"
+                        aria-haspopup="true"
+                        onClick={(event) => handleClick(event, song)}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                    )}
+                  </ListItemButton>
+                  <SongPopupView
+                    song={popupSong}
+                    isDisplayed={displayPopup}
+                    handleClose={handlePopupClose}
                   />
-                  <LikeButton
-                    song={song}
-                    favoritedCallback={handleFavoritedCallback}
-                  />
-                  {user && (
-                    <IconButton
-                      aria-label="more"
-                      aria-controls="long-menu"
-                      aria-haspopup="true"
-                      onClick={(event) => handleClick(event, song)}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                  )}
-                </ListItemButton>
-                <SongPopupView
-                  song={popupSong}
-                  isDisplayed={displayPopup}
-                  handleClose={handlePopupClose}
-                />
+                </div>
               </>
             ))
           )}
