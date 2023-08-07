@@ -28,8 +28,8 @@ export default function ResultsSkeleton({
               <p style={{ textAlign: "center" }}>{displayText}</p>
             ) : (
               <Skeleton
-                animation='wave'
-                variant='text'
+                animation="wave"
+                variant="text"
                 width={100}
                 height={20}
               />
@@ -42,8 +42,8 @@ export default function ResultsSkeleton({
               key={index}
               avatar={
                 <Skeleton
-                  animation='wave'
-                  variant='square'
+                  animation="wave"
+                  variant="square"
                   width={40}
                   height={40}
                 />
@@ -51,7 +51,7 @@ export default function ResultsSkeleton({
               action={
                 <IconButton
                   style={{ color: "light-gray" }}
-                  aria-label='favorite'
+                  aria-label="favorite"
                 >
                   <FavoriteBorderOutlinedIcon />
                 </IconButton>
@@ -59,14 +59,14 @@ export default function ResultsSkeleton({
               title={
                 <>
                   <Skeleton
-                    animation='wave'
+                    animation="wave"
                     height={10}
-                    width='95%'
+                    width="95%"
                     style={{ marginBottom: 6 }}
                   />
                 </>
               }
-              subheader={<Skeleton animation='wave' height={10} width='50%' />}
+              subheader={<Skeleton animation="wave" height={10} width="50%" />}
             />
           );
         })}
