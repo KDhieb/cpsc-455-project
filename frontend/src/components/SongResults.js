@@ -168,7 +168,12 @@ export default function SongResults({
       <Paper
         className="results-container"
         elevation={3}
-        sx={{ borderRadius: 2, overflow: "hidden", margin: "10px 10px" }}
+        sx={{
+          borderRadius: 2,
+          overflow: "hidden",
+          margin: "10px 10px",
+          minWidth: "40%",
+        }}
       >
         {/* https://codesandbox.io/s/great-johnson-72lzdd?file=/Demo.tsx:2370-2392 */}
         <ListItem component="div" disablePadding>
@@ -228,7 +233,11 @@ export default function SongResults({
               <>
                 <ListItemButton
                   key={song.id}
-                  sx={{ py: 0, minHeight: 75, color: "rgba(255,255,255,.8)" }}
+                  sx={{
+                    py: 0,
+                    minHeight: 75,
+                    color: "rgba(255,255,255,.8)",
+                  }}
                   onClick={() => handleSongClick(song)}
                 >
                   <PlayableAlbumCover
