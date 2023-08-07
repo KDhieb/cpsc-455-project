@@ -12,7 +12,7 @@ import PlayableAlbumCover from "./PlayableAlbumCover";
 import { Share } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
-import { Snackbar } from '@mui/material';
+import { Snackbar } from "@mui/material";
 import LikeButton from "./LikeButton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -29,7 +29,7 @@ function BootstrapDialogTitle(props) {
       {children}
       {onClose ? (
         <IconButton
-          aria-label='close'
+          aria-label="close"
           onClick={onClose}
           sx={{
             position: "absolute",
@@ -56,18 +56,18 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
   if (!song) {
     return null;
   }
-  
-  const url = song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
-  
+
+  const url =
+    song.external_urls.spotify ?? `https://open.spotify.com/track/${song.id}`;
+
   const handleSpotifyClick = () => {
     window.open(url, "_blank", "noreferrer");
   };
 
   const handleShare = () => {
-    setOpenShare(true)
+    setOpenShare(true);
     navigator.clipboard.writeText(url);
   };
-
 
   return (
     <div>
@@ -76,20 +76,21 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
         maxWidth={"xs"}
         sx={{ margin: "auto" }}
         onClose={handleClose}
-        aria-labelledby='customized-dialog-title'
+        aria-labelledby="customized-dialog-title"
         open={isDisplayed}
       >
         <BootstrapDialogTitle
-          id='customized-dialog-title'
+          id="customized-dialog-title"
           onClose={handleClose}
         >
-            <Typography sx={{ paddingBottom: "5px", fontSize: "1.5rem",
-    fontWeight: 500 }}>
-              {song.name ?? song.songName}
-            </Typography>
-            <Typography variant="p" sx={{ color: "lightgray" }}>
-              {song.artists[0].name}
-            </Typography>
+          <Typography
+            sx={{ paddingBottom: "5px", fontSize: "1.5rem", fontWeight: 500 }}
+          >
+            {song.name ?? song.songName}
+          </Typography>
+          <Typography variant="p" sx={{ color: "lightgray" }}>
+            {song.artists[0].name}
+          </Typography>
         </BootstrapDialogTitle>
 
         <DialogContent sx={{ margin: "auto" }}>
@@ -112,23 +113,24 @@ export default function SongPopupView({ isDisplayed, handleClose, song }) {
             onClick={handleSpotifyClick}
             sx={{ padding: "10px 10px" }}
           >
-            <FontAwesomeIcon size='lg' icon={faSpotify} />
+            <FontAwesomeIcon size="lg" icon={faSpotify} />
           </IconButton>
           <LikeButton song={song} />
           <IconButton size={"large"} onClick={handleShare}>
             <Share fontSize="'large" />
           </IconButton>
           <Snackbar
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             open={openShare}
             onClose={() => setOpenShare(false)}
             autoHideDuration={1500}
             message="Copied Spotify link!"
             ContentProps={{
               style: {
-                backgroundColor: 'black',
-                color: 'white',
-              }}}
+                backgroundColor: "black",
+                color: "white",
+              },
+            }}
           />
         </DialogActions>
       </BootstrapDialog>

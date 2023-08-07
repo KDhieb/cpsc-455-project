@@ -15,11 +15,6 @@ function Playlist() {
   const [playlistName, setPlaylistName] = useState("");
   const user = useSelector((state) => state.user.user);
 
-  // Consider that a playlist can be accessed by someone not signed in and there has no user object
-  // Instead have this make an axios request directly and stored only on this page
-  // Reformat the response from the backend such that every song object is in the original Spotify format
-  // Feed that reformatted response into SongList
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -73,7 +68,6 @@ function Playlist() {
         })
       );
     }
-
 
     navigate("/"); // navigate to home route
   };

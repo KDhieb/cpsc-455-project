@@ -1,4 +1,4 @@
-// Some sections of the code relating to Playlists are attrbuted to help from ChatGPT
+// Some sections of the code relating to Playlists are attributed to help from ChatGPT
 import {
   List,
   ListItem,
@@ -35,8 +35,6 @@ export default function SongResults({
   handleSongSelect,
   handleDelete,
 }) {
-  // https://mui.com/material-ui/react-list/
-
   const albumClickedRef = useRef(false);
   const favoritedRef = useRef(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -54,7 +52,6 @@ export default function SongResults({
   const { getAccessTokenWithPopup, getAccessTokenSilently } = useAuth0();
 
   // Playlist Callbacks
-
   const handleClick = (event, song) => {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
@@ -70,21 +67,22 @@ export default function SongResults({
   const addRemoveSongPlaylist = (playlist, add) => {
     if (add) {
       if (token_type === "getAccessTokenWithPopup") {
-      dispatch(
-        addSongToPlaylist({
-          playlistId: playlist._id,
-          songData: currentSong,
-          getAccessTokenWithPopup,
-        })
-      )} else {
+        dispatch(
+          addSongToPlaylist({
+            playlistId: playlist._id,
+            songData: currentSong,
+            getAccessTokenWithPopup,
+          })
+        );
+      } else {
         dispatch(
           addSongToPlaylist({
             playlistId: playlist._id,
             songData: currentSong,
             getAccessTokenSilently,
           })
-        )
-      };
+        );
+      }
     } else {
       if (token_type === "getAccessTokenWithPopup") {
         dispatch(
@@ -118,7 +116,7 @@ export default function SongResults({
           createUserPlaylist({
             email: user.email,
             playlistName: newPlaylistName,
-            getAccessTokenWithPopup
+            getAccessTokenWithPopup,
           })
         );
       } else {
@@ -126,7 +124,7 @@ export default function SongResults({
           createUserPlaylist({
             email: user.email,
             playlistName: newPlaylistName,
-            getAccessTokenSilently
+            getAccessTokenSilently,
           })
         );
       }
@@ -141,7 +139,6 @@ export default function SongResults({
   };
 
   // Song Callbacks
-
   const handleAlbumClick = () => {
     albumClickedRef.current = true;
   };

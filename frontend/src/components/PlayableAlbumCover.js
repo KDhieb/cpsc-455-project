@@ -1,5 +1,4 @@
 // Component to display playable music button and album cover
-
 import { Box, IconButton } from "@mui/material";
 import { PlayCircle, PauseCircle } from "@mui/icons-material";
 import { useState, useRef } from "react";
@@ -86,9 +85,9 @@ export default function PlayableAlbumCover({
       onMouseLeave={handleMouseLeaveImage}
     >
       <Box
-        alt='album cover'
+        alt="album cover"
         src={img}
-        component='img'
+        component="img"
         sx={{ width: size, height: size, margin: "0 0" }}
       />
       {(buttonVisible || !paused) && url ? (
