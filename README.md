@@ -33,20 +33,25 @@ _Group Members: Amy Chen, Jerome Ting, Khalid Dhieb, Parmvir Shergill, Richard C
 
 ## Utilizes Technology
 
-HTML, CSS, JS
-Vibesphere uses HTML in the same manner as any other React project, with JavaScript components that manipulates the DOM to output the desired HTML. Like wise, our project uses CSS through the popular Material UI framework. By describing CSS in JS 'sx props', CSS styles are applied to various componenets without having to write vanilla CSS, enabling us to more easily maintain a global theme. Lastly, since React is a JavaScript framework, we make full use of Javascript on our front-end as well as in our NodeJS/Express backend. 
+**HTML, CSS, JS**
 
-React & Redux
-To facilitate a smooth user experience and the main purpose of Vibesphere which is to deliver quality recommendations for songs user's like, Vibephere uses React to create a single page application made up of logically divided components, such as our song search and song results box. Redux is used to maintain a global state providing a single source of truth, containing songs, their according recommendations, and user playlists from our backend.
+Vibesphere leverages React to generate HTML content, utilizing JavaScript components that interact with the DOM. Our project adopts CSS through the renowned Material UI framework. With the help of 'sx props', CSS in JS, we apply styles across various components without traditional CSS, facilitating efficient global theme management. Given that React is fundamentally JavaScript, we extensively use JavaScript in both our frontend and NodeJS/Express backend.
 
-Node & Express
-Vibephere uses Node & Express to communicate with our MongoDB database, acting as a REST API for the storing and retrieval of songs and playlists, a gateway to the Spotify API so that users do not need to authenticate with their Spotify account, and to retrieve song recommendations powered by our second backend, Python Flask machine learning server.
+**React & Redux**
 
-MongoDB
-As Vibesphere is also intended to be a social application in addition to providing quality recommendations, we use a MongoDB NoSQL backend to track user's and songs saved to playlists they create, as well as maintaining a store of globally searched songs and the most popular songs liked by users.
+Vibesphere's prime objective is to deliver high-quality, user-specific song recommendations, which is facilitated by React's capabilities to create a single page application with logically segregated components like our song search and song results box. Redux plays a critical role in maintaining a global state that serves as a single source of truth. It contains the data related to songs, their corresponding recommendations, and user playlists from our backend.
 
-Deployment
-Vibesphere is currently deployed on Render in three segments, the front-end website which can be found at https://vibesphere.onrender.com/, and our two backend servers, NodeJS & Express and Flask respectively also on Render.
+**Node & Express**
+
+Node & Express are pivotal to Vibesphere's communication with our MongoDB database, serving as a REST API for storing and retrieving songs and playlists. It also functions as a gateway to the Spotify API, sparing users the need for Spotify account authentication and facilitating the retrieval of song recommendations from our secondary backend—a Python Flask machine learning server.
+
+**MongoDB**
+
+As Vibesphere doubles as a social application, we employ a MongoDB NoSQL backend to track user-created playlists and saved songs. It also keeps a record of globally searched songs and tracks the most popular songs liked by users.
+
+**Deployment**
+
+Vibesphere is deployed on Render, segmented into three parts—the frontend website, accessible at https://vibesphere.onrender.com/, and our two backend servers—NodeJS & Express and Flask, respectively, also hosted on Render.
 
 ## Above and Beyond
 
