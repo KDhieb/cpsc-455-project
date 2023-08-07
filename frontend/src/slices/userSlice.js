@@ -46,7 +46,12 @@ export const createUserPlaylist = createAsyncThunk(
   "user/createPlaylist",
   async (payload, thunkAPI) => {
     try {
-      const { email, playlistName, getAccessTokenSilently, getAccessTokenWithPopup } = payload;
+      const {
+        email,
+        playlistName,
+        getAccessTokenSilently,
+        getAccessTokenWithPopup,
+      } = payload;
       let token;
       if (token_type === "getAccessTokenWithPopup") {
         token = await getAccessTokenWithPopup({
@@ -99,7 +104,12 @@ export const addSongToPlaylist = createAsyncThunk(
   "user/addSongToPlaylist",
   async (payload, thunkAPI) => {
     try {
-      const { playlistId, songData, getAccessTokenSilently, getAccessTokenWithPopup } = payload;
+      const {
+        playlistId,
+        songData,
+        getAccessTokenSilently,
+        getAccessTokenWithPopup,
+      } = payload;
       let token;
       if (token_type === "getAccessTokenWithPopup") {
         token = await getAccessTokenWithPopup({
@@ -120,6 +130,7 @@ export const addSongToPlaylist = createAsyncThunk(
       const headers = {
         Authorization: `Bearer ${token}`,
       };
+
       // POST song
       const songResponse = await axios.post(backend_url + `/songs`, songData, {
         headers,
@@ -144,7 +155,12 @@ export const removeSongFromPlaylist = createAsyncThunk(
   "user/removeSongFromPlaylist",
   async (payload, thunkAPI) => {
     try {
-      const { playlistId, spotifyId, getAccessTokenSilently, getAccessTokenWithPopup } = payload;
+      const {
+        playlistId,
+        spotifyId,
+        getAccessTokenSilently,
+        getAccessTokenWithPopup,
+      } = payload;
       let token;
       if (token_type === "getAccessTokenWithPopup") {
         token = await getAccessTokenWithPopup({
@@ -182,15 +198,21 @@ export const deleteUserPlaylist = createAsyncThunk(
   "user/deleteUserPlaylist",
   async (payload, thunkAPI) => {
     try {
-      const { email, playlistId, playlistName, getAccessTokenSilently, getAccessTokenWithPopup } = payload;
+      const {
+        email,
+        playlistId,
+        playlistName,
+        getAccessTokenSilently,
+        getAccessTokenWithPopup,
+      } = payload;
       let token;
       if (token_type === "getAccessTokenWithPopup") {
         token = await getAccessTokenWithPopup({
-        authorizationParams: {
-          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-          scope: "read:posts",
-        },
-      });
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+            scope: "read:posts",
+          },
+        });
       } else {
         token = await getAccessTokenSilently({
           authorizationParams: {
@@ -199,7 +221,7 @@ export const deleteUserPlaylist = createAsyncThunk(
           },
         });
       }
-      
+
       const headers = {
         Authorization: `Bearer ${token}`,
       };

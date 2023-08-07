@@ -28,15 +28,15 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-/* GET song search results . */
+// GET song search results
 router.get("/search/:searchString", async function (req, res, next) {
   const resp = await search_songs(req.params.searchString);
   return res.json(resp);
 });
 
-// GET generate song recommendations (maybe make this a PUT to cache the recommendations?)
+// GET generate song recommendations
 router.post("/recommendations/generate", async function (req, res, next) {
-  const resp = await generate_recommendations(req.body.song, true);
+  const resp = await generate_recommendations(req.body.song, false);
   return res.json(resp);
 });
 
@@ -124,7 +124,6 @@ router.put("/likes/update", async function (req, res) {
     }
     res.status(201).json({ song: likedSong, like: isLiked });
   } catch (error) {
-    console.log(error);
     res.status(400).send();
   }
 });

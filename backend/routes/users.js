@@ -37,7 +37,7 @@ router.get("/:email/playlists", async (req, res) => {
 
   try {
     const user = await User.findOne({ email }).populate("playlists");
-    res.json(user.playlists); //TODO: Not sure if populating songs is needed here
+    res.json(user.playlists);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
