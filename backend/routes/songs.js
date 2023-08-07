@@ -36,7 +36,7 @@ router.get("/search/:searchString", async function (req, res, next) {
 
 // GET generate song recommendations
 router.post("/recommendations/generate", async function (req, res, next) {
-  const resp = await generate_recommendations(req.body.song, false);
+  const resp = await generate_recommendations(req.body.song, true);
   return res.json(resp);
 });
 
