@@ -172,7 +172,6 @@ export default function SongResults({
           borderRadius: 2,
           overflow: "hidden",
           margin: "10px 10px",
-          // minWidth: "40%",
         }}
       >
         {/* https://codesandbox.io/s/great-johnson-72lzdd?file=/Demo.tsx:2370-2392 */}
@@ -225,6 +224,9 @@ export default function SongResults({
                   fontSize: 16,
                   fontWeight: "medium",
                   textAlign: "center",
+                }}
+                sx={{
+                  minWidth: "300px",
                 }}
               />
             </ListItemButton>
