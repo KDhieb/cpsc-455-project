@@ -62,7 +62,7 @@ Our algorithm starts by employing K-means to organize the data into clusters, en
 Furthermore, our approach addresses the cold start problem, enabling the application to provide valuable recommendations even when we have limited prior knowledge about the user's preferences.
 
 ## Next Steps
-To further improve our application, we can refine our machine learning search recommendation algorithm even more by using a larger quantity of training data, and allowing the user to rate it with "thumbs up" or "thumbs down" via a modal to improve the algorithm. 
+To further improve our application, we can refine our machine learning search recommendation algorithm even more by using a larger quantity of training data, and allowing the user to rate it with "thumbs up" or "thumbs down" via a modal to improve the algorithm, explore further feature engineering for our model, or incorporating more complicated machine learning models such as neural networks. 
 
 Another potential addition is to introduce an ability to recommend songs based on an existing playlist of songs, as it may provide a more accurate overall recommendation. We can also enhance the social aspect of the website by adding a chat feature to the site, or allow users to add comments on songs.
 
