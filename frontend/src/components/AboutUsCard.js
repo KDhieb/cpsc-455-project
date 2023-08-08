@@ -94,7 +94,7 @@ export default function AboutUsCard({ developer }) {
           <CustomSlider
             value={slideIndex}
             min={minIndex}
-            max={maxIndex} // Adjust the maximum value based on the number of slides
+            max={maxIndex}
             step={1}
           />
           <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
