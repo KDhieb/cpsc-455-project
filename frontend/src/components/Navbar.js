@@ -40,7 +40,7 @@ export default function Navbar() {
     setCreatingPlaylist(true);
   };
 
-  const handleSavePlaylist = () => {    
+  const handleSavePlaylist = () => {
     if (newPlaylistName) {
       if (token_type === "getAccessTokenWithPopup") {
         dispatch(
@@ -76,7 +76,7 @@ export default function Navbar() {
     isAuthenticated,
     logout,
     getAccessTokenWithPopup,
-    getAccessTokenSilently
+    getAccessTokenSilently,
   } = useAuth0();
 
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ export default function Navbar() {
     } else {
       dispatch(clearUser());
     }
-  }, [isAuthenticated]);  
+  }, [isAuthenticated]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

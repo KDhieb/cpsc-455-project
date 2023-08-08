@@ -45,8 +45,6 @@ def recommend():
     ]
     """
 
-    # TODO: We could do some filtering so by chance we don't recommend the same song that was put in, but it's very unlikely.
-    
     data = request.json
 
     # Pre-process the requested song parameters 
@@ -67,8 +65,6 @@ def recommend():
 
     # Get the names of the nearest songs
     similar_songs = song_ids.iloc[indices[0]]
-
-    print(similar_songs)
 
     # Return the song names
     result = jsonify(similar_songs['id'].to_list())

@@ -101,15 +101,15 @@ export default function GloballySearched() {
     <div>
       <Typography
         noWrap={true}
-        align='center'
-        variant='h5'
+        align="center"
+        variant="h5"
         style={{ margin: "25px" }}
       >
         Songs Searched for Globally
       </Typography>
-      <Card sx={styles.carousel} id='carousel'>
+      <Card sx={styles.carousel} id="carousel">
         <Carousel
-          animation='slide'
+          animation="slide"
           indicators={false}
           duration={500}
           autoPlay={true}
@@ -140,7 +140,7 @@ export default function GloballySearched() {
 
 function SongGroup({ songs, handleSelect }) {
   return (
-    <Paper sx={styles.carouselSongGroup} className='carousel-song-group'>
+    <Paper sx={styles.carouselSongGroup} className="carousel-song-group">
       {songs.map((song, i) => {
         return <Song key={i} song={song} handleSelect={handleSelect} />;
       })}
@@ -162,13 +162,13 @@ function Song({ song, handleSelect }) {
   return (
     <Container
       sx={styles.carouselSong}
-      className='carousel-song'
+      className="carousel-song"
       onClick={songClickRedirect}
     >
-      <Typography variant='p' sx={styles.carouselSongTitle}>
+      <Typography variant="p" sx={styles.carouselSongTitle}>
         {song.songName}
       </Typography>
-      <Typography variant='p' sx={styles.carouselSongArtist}>
+      <Typography variant="p" sx={styles.carouselSongArtist}>
         {song.artists[0].name}
       </Typography>
       <PlayableAlbumCover
